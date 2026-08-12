@@ -50,6 +50,8 @@ export default function App() {
         const routes: Routes = await routesRes.json();
         const meta = lookupRoute(routes, path);
         if (!meta) {
+          // No 404 page — send unknown URLs to the home page.
+          if (!cancelled && path !== '/') window.location.replace(BASE);
           if (!cancelled) setStatus('notfound');
           return;
         }
@@ -99,23 +101,6 @@ export default function App() {
       {status === 'loading' && (
         <div style={{ padding: '80px 20px', textAlign: 'center' }}>
           Loading…
-        </div>
-      )}
-      {status === 'notfound' && (
-        <div
-          style={{
-            padding: '120px 20px',
-            textAlign: 'center',
-            fontFamily: 'Poppins-Regular, Arial, sans-serif',
-          }}
-        >
-          <h1 style={{ fontSize: 42, marginBottom: 16 }}>404</h1>
-          <p style={{ marginBottom: 24 }}>
-            The page you are looking for could not be found.
-          </p>
-          <a href={BASE} style={{ color: '#8dc63f', fontWeight: 700 }}>
-            Back to Home
-          </a>
         </div>
       )}
     </>
