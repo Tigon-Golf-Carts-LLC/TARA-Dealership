@@ -15,13 +15,13 @@ const FORM_STYLE = `
 .tara-inquiry-row textarea { min-height: 120px; resize: vertical; }
 .tara-inquiry-row input:focus,
 .tara-inquiry-row select:focus,
-.tara-inquiry-row textarea:focus { outline: none; border-color: #8dc63f; }
+.tara-inquiry-row textarea:focus { outline: none; border-color: #cf2e2e; }
 .tara-inquiry-submit {
   display: inline-block; padding: 12px 40px; border: none; border-radius: 4px;
-  background: #8dc63f; color: #fff; font-size: 16px; font-weight: 700;
+  background: #cf2e2e; color: #fff; font-size: 16px; font-weight: 700;
   cursor: pointer; transition: background .2s;
 }
-.tara-inquiry-submit:hover { background: #7ab32f; }
+.tara-inquiry-submit:hover { background: #a32222; }
 .tara-inquiry-submit[disabled] { opacity: .6; cursor: default; }
 .tara-inquiry-error { margin-bottom: 10px; color: #c0392b; }
 .tara-inquiry-success { margin-bottom: 10px; color: #27ae60; font-weight: 700; }

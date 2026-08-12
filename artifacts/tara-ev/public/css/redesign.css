@@ -39,9 +39,9 @@
   --cl-white:       #ffffff;
   --cl-surface:     #f5f8f4;   /* very light sage tint */
   --cl-surface-2:   #eaf2e6;   /* card hover / alternating bg */
-  --cl-green:       #3e8e5a;   /* primary accent */
-  --cl-green-dk:    #2f6e44;   /* darker green for hover */
-  --cl-green-lt:    #e6f2eb;   /* light green tint */
+  --cl-green:       #c0392b;   /* primary accent */
+  --cl-green-dk:    #96281c;   /* darker green for hover */
+  --cl-green-lt:    #fbeaea;   /* light green tint */
   --cl-ink:         #1e2a24;   /* body text */
   --cl-ink-2:       #4a5e50;   /* secondary text */
   --cl-ink-3:       #8a9e91;   /* muted / meta text */
@@ -261,14 +261,14 @@ em { font-style: normal; }
 .hero-btn-primary {
   background: var(--cl-green) !important;
   color: #fff !important;
-  box-shadow: 0 4px 16px rgba(62, 142, 90, .4);
+  box-shadow: 0 4px 16px rgba(192, 57, 43, .4);
 }
 
 .hero-btn-primary:hover {
   background: var(--cl-green-dk) !important;
   color: #fff !important;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(62, 142, 90, .5);
+  box-shadow: 0 6px 20px rgba(192, 57, 43, .5);
 }
 
 .hero-btn-outline {
@@ -386,7 +386,7 @@ button.sys-btn,
   display: inline-block;
   cursor: pointer;
   transition: var(--cl-transition);
-  box-shadow: 0 2px 8px rgba(62,142,90,.25) !important;
+  box-shadow: 0 2px 8px rgba(192,57,43,.25) !important;
 }
 
 .sys-btn:hover,
@@ -396,7 +396,7 @@ a.sys-btn:hover,
   background: var(--cl-green-dk) !important;
   color: #fff !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(62,142,90,.35) !important;
+  box-shadow: 0 4px 14px rgba(192,57,43,.35) !important;
 }
 
 /* Ghost/outline variant */
@@ -837,7 +837,7 @@ a.sys-btn:hover,
 .inquiry-form-wrap input:focus,
 .inquiry-form-wrap textarea:focus {
   border-color: var(--cl-green) !important;
-  box-shadow: 0 0 0 3px rgba(62, 142, 90, .15) !important;
+  box-shadow: 0 0 0 3px rgba(192, 57, 43, .15) !important;
   outline: none !important;
 }
 
@@ -852,7 +852,7 @@ a.sys-btn:hover,
   padding: 12px 28px !important;
   cursor: pointer;
   transition: var(--cl-transition);
-  box-shadow: 0 2px 8px rgba(62, 142, 90, .3) !important;
+  box-shadow: 0 2px 8px rgba(192, 57, 43, .3) !important;
 }
 
 .inquiry-form-wrap button:hover,
@@ -1014,7 +1014,7 @@ hr {
 .dealer-cta,
 .cta-section,
 .index-dealer {
-  background: linear-gradient(135deg, var(--cl-green) 0%, #2f7848 100%) !important;
+  background: linear-gradient(135deg, var(--cl-green) 0%, #96281c 100%) !important;
   color: #fff !important;
   border-radius: 0 !important;
 }
