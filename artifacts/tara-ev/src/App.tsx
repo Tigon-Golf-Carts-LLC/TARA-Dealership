@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { mountInquiryForm } from './inquiryForm';
 
 const BASE = import.meta.env.BASE_URL; // e.g. "/"
 
@@ -33,6 +34,9 @@ function lookupRoute(routes: Routes, path: string): RouteMeta | null {
   }
   return null;
 }
+
+/** Pages that should show the self-hosted inquiry form. */
+const FORM_PAGES = new Set(['/contact/']);
 
 export default function App() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -70,8 +74,7 @@ export default function App() {
         containerRef.current.innerHTML = html;
         setStatus('ready');
 
-        // Load the site's original behavior script (menus, sliders, tabs)
-        // and the inquiry-form generator, exactly as the original site does.
+        // Load the site's original behavior script (menus, sliders, tabs).
         const siteScript = document.createElement('script');
         siteScript.src = `${BASE}js/jquery.min_index.js`;
         siteScript.async = false;
@@ -83,6 +86,22 @@ export default function App() {
           window.dispatchEvent(new Event('load'));
         };
         document.body.appendChild(siteScript);
+
+        // On contact (and similar) pages, inject the self-hosted inquiry form
+        // after the article content. The original Mautic embed was removed at
+        // the client's request; this replaces it with a form routed through
+        // the project's api-server → Gmail.
+        if (FORM_PAGES.has(path) && containerRef.current) {
+          const article = containerRef.current.querySelector(
+            'article.entry, .web_main .layout',
+          );
+          if (article) {
+            const slot = document.createElement('div');
+            slot.id = 'tara-inquiry-form';
+            article.insertAdjacentElement('afterend', slot);
+            mountInquiryForm(slot);
+          }
+        }
       } catch (err) {
         console.error(err);
         if (!cancelled) setStatus('notfound');

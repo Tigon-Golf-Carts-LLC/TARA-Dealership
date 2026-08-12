@@ -11,7 +11,7 @@ Full rebuild (clone) of the client's website taragolfcart.com for TARA Electric 
 
 - pnpm workspaces, React + Vite (artifact `tara-ev`)
 - The site is a static content mirror: extracted page HTML lives in `artifacts/tara-ev/public/content/*.html` (one file per page, slugs use `__` for `/`), routed by `public/content/routes.json` (path → file, title, bodyClass)
-- `src/App.tsx` fetches the content file for `location.pathname`, injects it, then loads the site's original behavior script `public/js/jquery.min_index.js` (menus, sliders, tabs); the external inquiry-form script was removed at the client's request (see "Client-requested removals")
+- `src/App.tsx` fetches the content file for `location.pathname`, injects it, then loads the site's original behavior script `public/js/jquery.min_index.js` (menus, sliders, tabs); the external Mautic inquiry-form script was removed at the client's request and replaced with a self-hosted form on the contact page (see "Client-requested removals")
 - Original site CSS: `public/css/site.css` (rewritten from the live site's stylesheet, all assets localized), `public/css/menu-image.css`
 - All 400+ images in `public/images/`, fonts (Poppins, FontAwesome) in `public/fonts/`
 
@@ -45,7 +45,16 @@ The client asked for these to be deleted site-wide. A past merge accidentally re
 
 Guard script: `artifacts/tara-ev/scripts/verify-removals.sh` (registered as validation step `verify-removals`) fails if any of these reappear.
 
+## Contact form (self-hosted replacement)
+
+The contact page (`/contact/`) now uses a self-hosted inquiry form instead of the removed Mautic embed:
+
+- Frontend: `artifacts/tara-ev/src/inquiryForm.ts` — renders the form and posts to the API server
+- Backend: `artifacts/api-server/src/routes/inquiries.ts` — validates and delivers via Gmail
+- Email delivery: `artifacts/api-server/src/lib/email.ts` — uses the Gmail Replit connector (`google-mail`)
+- Recipient: `sales@taragolfcart.com`
+
 ## Gotchas
 
 - Do not edit `public/content/*.html` image URLs back to cdn.globalso.com — all assets are localized
-- Backend (`api-server`) is unused by this site
+- The self-hosted inquiry form mounts into `#tara-inquiry-form` (injected by App.tsx after the article element on form pages) — this is separate from the removed `inquiry-form-wrap` section
