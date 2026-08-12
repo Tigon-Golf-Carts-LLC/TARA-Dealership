@@ -8,3 +8,6 @@
 
 /* footer removed per client request */
 .web-footer { display: none !important; }
+
+/* inquiry form removed per client request */
+.inquiry-form-wrap { display: none !important; }

@@ -70,15 +70,17 @@ export default function App() {
 
         // Load the site's original behavior script (menus, sliders, tabs)
         // and the inquiry-form generator, exactly as the original site does.
-        for (const src of [
-          `${BASE}js/jquery.min_index.js`,
-          'https://formcs.globalso.com/form/generate.js?id=1425',
-        ]) {
-          const s = document.createElement('script');
-          s.src = src;
-          s.async = false;
-          document.body.appendChild(s);
-        }
+        const siteScript = document.createElement('script');
+        siteScript.src = `${BASE}js/jquery.min_index.js`;
+        siteScript.async = false;
+        // The site script attaches its menu/slider handlers on
+        // DOMContentLoaded / load, which already fired before we injected
+        // the page content — so re-dispatch them once the script is ready.
+        siteScript.onload = () => {
+          document.dispatchEvent(new Event('DOMContentLoaded'));
+          window.dispatchEvent(new Event('load'));
+        };
+        document.body.appendChild(siteScript);
       } catch (err) {
         console.error(err);
         if (!cancelled) setStatus('notfound');
