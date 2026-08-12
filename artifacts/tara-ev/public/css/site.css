@@ -20,3 +20,18 @@
 .adv-items-3col .adv-item { width: calc((100% - 60px) / 3); margin: 0 !important; }
 @media (max-width: 991px) { .adv-items-3col .adv-item { width: calc((100% - 30px) / 2); } }
 @media (max-width: 640px) { .adv-items-3col .adv-item { width: 100%; } }
+
+/* Mobile-friendly lineup/series card sections */
+@media screen and (max-width: 767px) {
+  .adv-layer .adv-items { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 0; letter-spacing: normal; }
+  .adv-layer .adv-item { width: 100% !important; max-width: 340px; min-height: 0 !important; margin: 0 !important; padding: 20px 15px 70px; }
+  .adv-layer .adv-item .item-img { width: 100% !important; max-width: 260px; height: auto !important; margin: 0 auto 12px; }
+  .adv-layer .adv-item .item-img img { width: 100% !important; height: auto !important; position: static; }
+  .adv-layer .adv-item .item-title { font-size: 17px; }
+  .adv-layer .adv-item .item-desc { font-size: 14px; line-height: 1.5; }
+  .adv-layer .adv-item .item-more { position: absolute; left: 15px; right: 15px; bottom: 15px; }
+  .adv-layer .index-title { font-size: 26px; }
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .adv-layer .adv-item { min-height: 0 !important; }
+}
