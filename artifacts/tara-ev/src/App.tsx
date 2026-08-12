@@ -83,6 +83,12 @@ export default function App() {
           window.dispatchEvent(new Event('load'));
         };
         document.body.appendChild(siteScript);
+
+        // Self-hosted inquiry-form generator (replaces the external CDN).
+        const formScript = document.createElement('script');
+        formScript.src = `${BASE}js/form-generate.js`;
+        formScript.async = false;
+        document.body.appendChild(formScript);
       } catch (err) {
         console.error(err);
         if (!cancelled) setStatus('notfound');
