@@ -14,3 +14,9 @@
 
 /* cookie banner removed per client request */
 #cmplz-cookiebanner-container { display: none !important; }
+
+/* T1 Series section: 3 cards per row, centered */
+.adv-items-3col { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; letter-spacing: normal; }
+.adv-items-3col .adv-item { width: calc((100% - 60px) / 3); margin: 0 !important; }
+@media (max-width: 991px) { .adv-items-3col .adv-item { width: calc((100% - 30px) / 2); } }
+@media (max-width: 640px) { .adv-items-3col .adv-item { width: 100%; } }
