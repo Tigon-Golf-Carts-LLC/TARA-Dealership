@@ -35,3 +35,11 @@
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .adv-layer .adv-item { min-height: 0 !important; }
 }
+
+/* Product color picker: one image per selected color */
+.pro_img .swiper-wrapper { display: block !important; transform: none !important; }
+.pro_img .swiper-slide { display: none !important; width: 100% !important; }
+.pro_img .swiper-slide.color-active { display: block !important; }
+.pro_color li { cursor: pointer; }
+.pro_color li img { border-radius: 50%; transition: box-shadow .2s ease; }
+.pro_color li.color-active img { box-shadow: 0 0 0 3px #a1c22e; }

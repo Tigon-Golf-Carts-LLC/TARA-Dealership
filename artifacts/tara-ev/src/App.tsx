@@ -38,6 +38,20 @@ function lookupRoute(routes: Routes, path: string): RouteMeta | null {
 /** Pages that should show the self-hosted inquiry form. */
 const FORM_PAGES = new Set(['/contact/']);
 
+/** Wire the product color list to the vehicle image slides (one image per color). */
+function initProductColorPicker(root: HTMLElement) {
+  const slides = root.querySelectorAll<HTMLElement>('.pro_img .swiper-slide');
+  const colors = root.querySelectorAll<HTMLElement>('.pro_color li');
+  if (slides.length === 0) return;
+
+  const select = (idx: number) => {
+    slides.forEach((s, i) => s.classList.toggle('color-active', i === idx));
+    colors.forEach((c, i) => c.classList.toggle('color-active', i === idx));
+  };
+  select(0);
+  colors.forEach((li, i) => li.addEventListener('click', () => select(i)));
+}
+
 export default function App() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState<'loading' | 'ready' | 'notfound'>(
@@ -86,6 +100,11 @@ export default function App() {
           window.dispatchEvent(new Event('load'));
         };
         document.body.appendChild(siteScript);
+
+        // Product pages: show one vehicle image per selected color.
+        // The original site used a Swiper synced to the color list; the
+        // cloned bundle doesn't initialize it, so wire it up directly.
+        initProductColorPicker(containerRef.current);
 
         // On contact (and similar) pages, inject the self-hosted inquiry form
         // after the article content. The original Mautic embed was removed at
