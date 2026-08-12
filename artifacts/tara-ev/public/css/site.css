@@ -11,3 +11,6 @@
 
 /* inquiry form removed per client request */
 .inquiry-form-wrap { display: none !important; }
+
+/* cookie banner removed per client request */
+#cmplz-cookiebanner-container { display: none !important; }

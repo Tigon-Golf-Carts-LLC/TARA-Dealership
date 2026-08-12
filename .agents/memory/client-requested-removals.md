@@ -10,6 +10,8 @@ The client explicitly deleted these from the tara-ev site; do NOT restore them, 
 - Floating WhatsApp widget `div#whatsapp.footer-whatsapp` / `#whatsappMain`.
 - Site footer `<footer class="web-footer">`.
 - Custom 404 view in App.tsx (unknown URLs redirect to home instead).
+- Cookie consent banner (`#cmplz-cookiebanner-container`) — its generator was section 4 of `public/js/jquery.min_index.js`, now cut from the bundle; `site.css` hides the container as a safeguard.
+- Hero "watermark" background-text spans (`span.tit-bg`) on home.html.
 
 **Why:** the offline-localization task agent vendored external assets wholesale and re-added the form scripts and widget markup on ~630 pages; had to strip them again.
 **How to apply:** guard script `artifacts/tara-ev/scripts/verify-removals.sh` (validation step `verify-removals`) now fails when these reappear — run it after merges. Manually, grep for `mauticform|form-generate|right_nav|inquiry-pop-bd|footer-whatsapp|web-footer">` before declaring done. `site.css` has `display:none` safeguards for these selectors — keep them.
