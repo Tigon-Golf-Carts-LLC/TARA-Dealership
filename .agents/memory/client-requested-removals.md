@@ -12,6 +12,6 @@ The client explicitly deleted these from the tara-ev site; do NOT restore them, 
 - Custom 404 view in App.tsx (unknown URLs redirect to home instead).
 
 **Why:** the offline-localization task agent vendored external assets wholesale and re-added the form scripts and widget markup on ~630 pages; had to strip them again.
-**How to apply:** after any merge touching `public/content/` or `App.tsx`, grep for `mauticform|form-generate|right_nav|inquiry-pop-bd|footer-whatsapp|web-footer">` before declaring done. `site.css` has `display:none` safeguards for these selectors — keep them.
+**How to apply:** guard script `artifacts/tara-ev/scripts/verify-removals.sh` (validation step `verify-removals`) now fails when these reappear — run it after merges. Manually, grep for `mauticform|form-generate|right_nav|inquiry-pop-bd|footer-whatsapp|web-footer">` before declaring done. `site.css` has `display:none` safeguards for these selectors — keep them.
 
 Also: Press section was replaced by `/blog/` (12 original posts, files `content/blog*.html`); all `/news/`* routes were deleted — don't reintroduce them.

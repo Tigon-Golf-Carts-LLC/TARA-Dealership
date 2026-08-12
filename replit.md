@@ -11,7 +11,7 @@ Full rebuild (clone) of the client's website taragolfcart.com for TARA Electric 
 
 - pnpm workspaces, React + Vite (artifact `tara-ev`)
 - The site is a static content mirror: extracted page HTML lives in `artifacts/tara-ev/public/content/*.html` (one file per page, slugs use `__` for `/`), routed by `public/content/routes.json` (path → file, title, bodyClass)
-- `src/App.tsx` fetches the content file for `location.pathname`, injects it, then loads the site's original behavior script `public/js/jquery.min_index.js` (menus, sliders, tabs) and the external inquiry-form script (formcs.globalso.com, the client's form account)
+- `src/App.tsx` fetches the content file for `location.pathname`, injects it, then loads the site's original behavior script `public/js/jquery.min_index.js` (menus, sliders, tabs); the external inquiry-form script was removed at the client's request (see "Client-requested removals")
 - Original site CSS: `public/css/site.css` (rewritten from the live site's stylesheet, all assets localized), `public/css/menu-image.css`
 - All 400+ images in `public/images/`, fonts (Poppins, FontAwesome) in `public/fonts/`
 
@@ -33,6 +33,17 @@ Marketing site for TARA electric golf carts and utility vehicles: home, vehicle 
 ## User preferences
 
 - This is a clone/migration of the client's own site — keep content identical to the original unless asked.
+
+## Client-requested removals (do NOT restore)
+
+The client asked for these to be deleted site-wide. A past merge accidentally restored them once — never bring them back when regenerating or restoring page content:
+
+- Mautic inquiry form: any `mauticform` markup, the external form script from `formcs.globalso.com`, vendored `public/js/form-generate.js` / `public/js/mautic-form.js`, and `<section class="inquiry-form-wrap">`
+- Floating contact sidebar: `<ul class="right_nav">` and inquiry popup `<div class="inquiry-pop-bd">`
+- WhatsApp widget: `#whatsapp` / `#whatsappMain`
+- Footer: `<footer class="web-footer">`
+
+Guard script: `artifacts/tara-ev/scripts/verify-removals.sh` (registered as validation step `verify-removals`) fails if any of these reappear.
 
 ## Gotchas
 
