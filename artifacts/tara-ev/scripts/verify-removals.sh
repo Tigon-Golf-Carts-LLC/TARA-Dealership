@@ -4,15 +4,33 @@
 # widget, web footer, or inquiry form section. See replit.md
 # "Client-requested removals". These have been restored accidentally by
 # past merges (e.g. offline localization) — this script guards against that.
+# Scans source files, and also the production build output (dist/public)
+# when it exists, so a build step or vendored dependency can't reintroduce
+# removed content into the published site. Pass --require-dist to fail if
+# dist/public is missing (used by the production build before publish).
 set -euo pipefail
 cd "$(dirname "$0")/.."
+
+require_dist=0
+if [ "${1:-}" = "--require-dist" ]; then
+  require_dist=1
+fi
+
+scan_dirs=(public/content/ src/ index.html public/js/)
+if [ -d dist/public ]; then
+  scan_dirs+=(dist/public/)
+elif [ "$require_dist" -eq 1 ]; then
+  echo "ERROR: dist/public not found — build output must exist for pre-publish verification"
+  exit 1
+fi
 
 fail=0
 
 check() {
   local label="$1" pattern="$2"
+  shift 2
   local hits
-  hits=$(grep -rlE "$pattern" public/content/ src/ index.html public/js/ 2>/dev/null | sort -u || true)
+  hits=$(grep -rlE "$@" "$pattern" "${scan_dirs[@]}" 2>/dev/null | sort -u || true)
   if [ -n "$hits" ]; then
     echo "REMOVED CONTENT REAPPEARED — $label:"
     echo "$hits" | head -20
@@ -21,15 +39,20 @@ check() {
 }
 
 # Vendored Mautic form scripts must not exist at all
-for f in public/js/form-generate.js public/js/mautic-form.js; do
+for f in public/js/form-generate.js public/js/mautic-form.js \
+         dist/public/js/form-generate.js dist/public/js/mautic-form.js; do
   if [ -e "$f" ]; then
     echo "REMOVED FILE REAPPEARED: $f"
     fail=1
   fi
 done
 
-check "Mautic form references (mauticform / form-generate.js / mautic-form.js)" \
-  'mauticform|form-generate\.js|mautic-form\.js'
+# "mauticform" appears in dead CSS selectors (styling for the deleted form),
+# which are harmless — exclude .css files for this text token only.
+check "Mautic form markup/scripts (mauticform outside CSS)" \
+  'mauticform' --exclude='*.css'
+check "Mautic form script files (form-generate.js / mautic-form.js)" \
+  'form-generate\.js|mautic-form\.js'
 check "external inquiry-form script source (formcs.globalso.com)" \
   'formcs\.globalso\.com'
 check "floating contact sidebar (ul.right_nav)" \
