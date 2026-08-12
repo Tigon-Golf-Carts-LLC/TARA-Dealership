@@ -1,0 +1,812 @@
+<style>
+    /* 1. 给最外层容器强行锁定纵横比，确保 JS 加载前容器高度就固定 */
+.slider-banner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1920 / 1000; /* 与图片比例保持一致 (1.92) */
+  overflow: hidden;
+  background-color: #f5f5f5; /* 可选：未加载出来时的占位背景色 */
+}
+
+/* 2. 在 Swiper 未完成初始化前，防范布局错乱 */
+.slider-banner .swiper-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.slider-banner .swiper-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+/* 3. 强制限制内部 a 标签和 img 撑满 slide 容器 */
+.slider-banner .swiper-slide a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.slider-banner .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 保证图片按比例填满容器不变形 */
+}
+/* 右侧导航 hideBox 显隐过渡 */
+.right_nav .hideBox {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.right_nav .hideBox.show-box {
+  display: block;
+  opacity: 1;
+}
+
+/* 右侧导航 li 平滑位移 (硬件加速) */
+.right_nav li {
+  transition: right 0.2s ease-in-out;
+}
+
+/* 移动端抽屉菜单平滑位移 */
+.mobile-head-item .side-content-wrap {
+  left: -70%;
+  transition: left 0.3s ease-in-out;
+}
+</style>
+
+     <!-- Google Tag Manager (noscript) -->
+
+<!-- End Google Tag Manager (noscript) -->   
+<div class="container">
+    <!-- web_head start -->
+ 
+	    <header id="web-head" class="index-web-head web-head">
+         <section class="head-layer">
+            <div class="layout">
+               <figure class="logo">
+	 <a href="/">			<img width="105" height="72" style="aspect-ratio: 105 / 72;" src="/images/3564.png" alt="Tara Golf Cart – Electric Golf Carts Manufacturer">
+				</a>
+</figure>
+               <nav class="nav-wrap">
+                    <ul class="head-nav">
+                        <li id="menu-item-293" class="menu-item menu-item-type-custom menu-item-object-custom nav-current current_page_item menu-item-293"><a href="/" class='menu-image-title-after'><em>Home</em></a></li>
+<li id="menu-item-1944" class="products_list nav_stop menu-item menu-item-type-custom menu-item-object-custom menu-item-1944"><a class='menu-image-title-after'><em>Vehicles</em></a>
+<ul class="sub-menu">
+	<li id="menu-item-1931" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1931"><a title="Tara T1 Series Electric Golf Carts" href="/t1-series/" class='menu-image-title-after'><em>T1 Series</em></a>
+	<ul class="sub-menu">
+		<li id="menu-item-1509" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1509"><a title="tara harmony golf cart product page" href="/harmony-fleet-golf-cart-product/" class='menu-image-title-after menu-image-not-hovered'><img width="1000" height="1000" src="/images/harmony250626.png" class="menu-image menu-image-title-after" alt="tara-harmony-menu-image" /><em>HARMONY</em></a></li>
+		<li id="menu-item-1803" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1803"><a title="tara spirit pro golf cart product page" href="/spirit-pro-fleet-golf-cart-product/" class='menu-image-title-after menu-image-not-hovered'><img width="1000" height="1000" src="/images/spirit-pro-250626.png" class="menu-image menu-image-title-after" alt="tara-spirit-pro-menu-image" /><em>SPIRIT PRO</em></a></li>
+		<li id="menu-item-1510" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1510"><a title="tara spirit plus golf cart product page" href="/spirit-plus-fleet-golf-cart-product/" class='menu-image-title-after menu-image-not-hovered'><img width="1000" height="1000" src="/images/spirit-plus-250626.png" class="menu-image menu-image-title-after" alt="tara-spirit-plus-menu-image" /><em>SPIRIT PLUS</em></a></li>
+		<li id="menu-item-1566" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1566"><a title="tara roadster 2+2 golf cart product page" href="/roadster-2-2-golf-cart-product/" class='menu-image-title-after menu-image-not-hovered'><img width="1000" height="1000" src="/images/roadster-2+24.png" class="menu-image menu-image-title-after" alt="tara roadster 2+2 golf cart" /><em>ROADSTER  2+2</em></a></li>
+		<li id="menu-item-1587" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1587"><a title="tara explorer 2+2 golf cart product page" href="/explorer-2-2-golf-cart-product/" class='menu-image-title-after menu-image-not-hovered'><img width="1000" height="1000" src="/images/explorer-2+22.png" class="menu-image menu-image-title-after" alt="tara explorer 2+2 golf cart" /><em>EXPLORER 2+2</em></a></li>
+	</ul>
+</li>
+	<li id="menu-item-1930" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1930"><a title="Tara T2 Series Electric Utility Vehicles" href="/t2-series/" class='menu-image-title-after'><em>T2 Series</em></a>
+	<ul class="sub-menu">
+		<li id="menu-item-3477" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3477"><a title="tara turfman 450 utility vehicle product page" href="/turfman-450-utility-vehicle-product/" class='menu-image-title-after menu-image-not-hovered'><img width="1000" height="1000" src="/images/turfman-450.png" class="menu-image menu-image-title-after" alt="turfman 450" /><em>TURFMAN 450</em></a></li>
+		<li id="menu-item-3479" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3479"><a title="tara turfman 700 utility vehicle product page" href="/turfman-700-utility-vehicle-product/" class='menu-image-title-after menu-image-not-hovered'><img width="1000" height="1000" src="/images/turfman-700.png" class="menu-image menu-image-title-after" alt="turfman 700" /><em>TURFMAN 700</em></a></li>
+		<li id="menu-item-3481" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3481"><a title="tara turfman 700 eec utility vehicle product page" href="/turfman-700-eec-utility-vehicle-product/" class='menu-image-title-after menu-image-not-hovered'><img width="1000" height="1000" src="/images/TURFMAN-700-EEC.png" class="menu-image menu-image-title-after" alt="TURFMAN-700-EEC" /><em>TURFMAN 700 EEC</em></a></li>
+		<li id="menu-item-3483" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3483"><a title="tara turfman 1000 utility vehicle product page" href="/turfman-1000-utility-vehicle-product/" class='menu-image-title-after menu-image-not-hovered'><img width="1216" height="1000" src="/images/TURFMAN-1000.png" class="menu-image menu-image-title-after" alt="TURFMAN-1000" /><em>TURFMAN 1000</em></a></li>
+	</ul>
+</li>
+	<li id="menu-item-2654" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2654"><a title="Tara T3 Series Electric Golf Carts" href="/t3-series/" class='menu-image-title-after'><em>T3 Series</em></a>
+	<ul class="sub-menu">
+		<li id="menu-item-2656" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-2656"><a title="tara t3 2+2 golf cart product page" href="/t3-2-2-golf-cart-product/" class='menu-image-title-after menu-image-not-hovered'><img width="500" height="500" src="/images/T3-2+2-250612.png" class="menu-image menu-image-title-after" alt="TARA T3 2+2 GOLF CART" /><em>T3 2+2 &#8211; Modern Electric Golf Cart</em></a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-1313" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1313"><a href="/accessories/" class='menu-image-title-after'><em>Accessories</em></a></li>
+<li id="menu-item-1941" class="products_list products_lists menu-item menu-item-type-custom menu-item-object-custom menu-item-1941"><a class='menu-image-title-after'><em>Support</em></a>
+<ul class="sub-menu">
+	<li id="menu-item-4988" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4988"><a href="/fleet-golf-carts/" class='menu-image-title-after'><em>Solution</em></a></li>
+	<li id="menu-item-1320" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1320"><a href="/maintenance-support/" class='menu-image-title-after'><em>Maintenance Support</em></a></li>
+	<li id="menu-item-1854" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1854"><a href="/technical-document-2/" class='menu-image-title-after'><em>Technical Document</em></a></li>
+	<li id="menu-item-3048" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3048"><a href="/cases/" class='menu-image-title-after'><em>Product Gallery &#038; Customer Cases</em></a></li>
+	<li id="menu-item-3831" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3831"><a href="/faqs/" class='menu-image-title-after'><em>FAQs</em></a></li>
+</ul>
+</li>
+<li id="menu-item-1304" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1304"><a href="/news_catalog/news/" class='menu-image-title-after'><em>Press</em></a></li>
+<li id="menu-item-3037" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3037"><a href="/about-us/" class='menu-image-title-after'><em>About Us</em></a></li>
+<li id="menu-item-1324" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1324"><a href="/contact/" class='menu-image-title-after'><em>Contact</em></a></li>
+                    </ul>
+                </nav>
+               
+               <div class="head-right">
+                  <b id="btn-search" class="btn--search"></b>
+                  <div class="change-language ensemble">
+  <div class="change-language-info">
+    <div class="change-language-title medium-title">
+       <div class="language-flag language-flag-en"><a href="/"><b class="country-flag"></b><span>English</span> </a></div>
+       <b class="language-icon"></b> 
+    </div>
+	<div class="change-language-cont sub-content">
+        <div class="empty"></div>
+    </div>
+  </div>
+</div>
+<!--theme260--> 
+               </div>
+            </div>
+         </section>
+      </header>
+    <!--// web_head end -->   <section class="web_main index_main"> 
+   <!-- banner --> 
+         <section class="slider-banner">
+            <div class="swiper-wrapper">
+                            
+                            <div class="swiper-slide"> <a href="/fleet-golf-carts/"><img fetchpriority="high" width="1920" height="1000" style="aspect-ratio: 1920 / 1000;" src="/images/tara-lithium-golf-cart-fleet.jpg" alt="tara-lithium-golf-cart-fleet"/></a>
+          
+          </div>
+               
+          
+		                
+                            <div class="swiper-slide"> <a href="/contact/"><img class="swiper-lazy" width="1920" height="1000" style="aspect-ratio: 1920 / 1000;"  data-src="/images/tara-global-golf-cart-fleet-solution.jpg" alt="tara-global-golf-cart-fleet-solution"/></a>
+          
+          </div>
+               
+          
+		                
+                            <div class="swiper-slide"> <a href=""><img class="swiper-lazy" width="1920" height="1000" style="aspect-ratio: 1920 / 1000;"  data-src="/images/tara-turfman-golf-course-utility-vehicle.jpg" alt="tara-turfman-golf-course-utility-vehicle"/></a>
+          
+          </div>
+               
+          
+		                
+                            <div class="swiper-slide"> <a href="/spirit-plus-fleet-golf-cart-product/"><img class="swiper-lazy" width="1920" height="1000" style="aspect-ratio: 1920 / 1000;"  data-src="/images/tara-golf-cart-gps-fleet-management.jpg" alt="tara-golf-cart-gps-fleet-management"/></a>
+          
+          </div>
+               
+          
+		                
+                            <div class="swiper-slide"> <a href="/contact/"><img class="swiper-lazy" width="1920" height="1000" style="aspect-ratio: 1920 / 1000;"  data-src="/images/tara-golf-cart-global-dealer-partnership.jpg" alt="tara-golf-cart-global-dealer-partnership"/></a>
+          
+          </div>
+               
+          
+		                
+                            <div class="swiper-slide"> <a href="/explorer-2-2-golf-cart-product/"><img class="swiper-lazy" width="1920" height="1000" style="aspect-ratio: 1920 / 1000;"  data-src="/images/tara-golf-cart-banner-04.png" alt="Explorer 2+2 Lifted Golf Cart – Versatile Personal Ride with Off-Road Tires"/></a>
+          
+          </div>
+               
+          
+		              </div>
+           
+            
+            <div class="slider-swiper-control">
+               <div class="swiper-buttons">
+                  <div class="swiper-button-prev swiper-button-white"><span class="slide-page-box"></span></div>
+                  <div class="swiper-button-next swiper-button-white"><span class="slide-page-box"></span></div>
+               </div>
+               <div class="swiper-pagination swiper-pagination-white"></div>
+            </div>
+         </section>
+
+ 
+
+
+      <!-- adv-layer -->
+         <section class="adv-layer">
+            <div class="layer-bd">
+               <div class="layout">
+                   
+                   <header class="index-title-adv">
+                    <h2 class="index-title">Explore the Tara Lineup</h2>
+                    
+                </header>
+                   
+                   
+                   
+                  <ul class="adv-items flex-row">  
+				                        <li class="adv-item wow fadeInA" data-wow-delay="0" data-wow-duration=".8s">
+                        <figure class="item-inner">
+                           <span class="item-img"><img loading="lazy" width="230" height="230" style="aspect-ratio: 230 / 230;" src="/images/spirit-plusPORTIMAO-BLUE-3.png" alt="Engineered for performance and durability, the T1 series is the trusted choice for modern golf courses." /></span>
+                           <figcaption class="item-info">
+                              <h3 class="item-title">T1 Series – Golf Fleet</h3>
+                              <p class="item-desc">Engineered for performance and durability, the T1 series is the trusted choice for modern golf courses.</p>
+                              <div class="item-more"><a href="/t1-series/" class="sys-btn">SEE MORE</a></div>
+                           </figcaption>
+                        </figure>
+                     </li>
+					                       <li class="adv-item wow fadeInA" data-wow-delay=".1s" data-wow-duration=".8s">
+                        <figure class="item-inner">
+                           <span class="item-img"><img loading="lazy" width="230" height="230" style="aspect-ratio: 230 / 230;" src="/images/turfman700Flamenco-Red2.png" alt="Versatile and tough, the T2 lineup is built to handle maintenance, logistics, and all on-course tasks." /></span>
+                           <figcaption class="item-info">
+                              <h3 class="item-title">T2 Series– Utility</h3>
+                              <p class="item-desc">Versatile and tough, the T2 lineup is built to handle maintenance, logistics, and all on-course tasks.</p>
+                              <div class="item-more"><a href="/t2-series/" class="sys-btn">SEE MORE</a></div>
+                           </figcaption>
+                        </figure>
+                     </li>
+					                       <li class="adv-item wow fadeInA" data-wow-delay=".2s" data-wow-duration=".8s">
+                        <figure class="item-inner">
+                           <span class="item-img"><img loading="lazy" width="230" height="230" style="aspect-ratio: 230 / 230;" src="/images/颜色mineral-white2.png" alt="Stylish, powerful, and refined — the T3 series offers a premium driving experience beyond the course." /></span>
+                           <figcaption class="item-info">
+                              <h3 class="item-title">T3 Series – Personal</h3>
+                              <p class="item-desc">Stylish, powerful, and refined — the T3 series offers a premium driving experience beyond the course.</p>
+                              <div class="item-more"><a href="/t3-series/" class="sys-btn">SEE MORE</a></div>
+                           </figcaption>
+                        </figure>
+                     </li>
+					   
+                     <li class="adv-item wow fadeInA adv-gallery" data-wow-delay=".4s" data-wow-duration=".8s">
+                        <div class="swiper-container">
+                           <ul class="swiper-wrapper adv-gallery-items">
+                                                              <li class="swiper-slide adv-gallery-item"><a href="/t1-series/">
+                                    <img loading="lazy" class="gallery-item-img" src="/images/poster-15.jpg"  alt="/spirit-pro-fleet-golf-cart-product/"/> 
+                                 </a>
+                              </li>
+                              	                                <li class="swiper-slide adv-gallery-item"><a href="/t1-series/">
+                                    <img loading="lazy" class="gallery-item-img" src="/images/poster-26.jpg"  alt="/spirit-plus-fleet-golf-cart-product/"/> 
+                                 </a>
+                              </li>
+                              	                                <li class="swiper-slide adv-gallery-item"><a href="/t1-series/">
+                                    <img loading="lazy" class="gallery-item-img" src="/images/poster-36.jpg"  alt="/roadster-2-2-golf-cart-product/"/> 
+                                 </a>
+                              </li>
+                              	   
+                             
+                           </ul>
+                        </div>
+                        <div class="swiper-control">
+                           <div class="swiper-pagination"></div>
+                           <div class="swiper-buttons">
+                              <div class="swiper-button-prev"></div>
+                              <div class="swiper-button-next"></div>
+                           </div>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </section>
+
+
+
+         <!-- company-intro-layer -->
+         <section class="index-layer company-intro-layer" style="background-image: url(///images/main-bg2.png)">
+            <div class="layer-bd">
+               <div class="layout">
+                  <div class="flex-row">
+                     <!-- swiper -->
+                     <div class="sys-col company-intro-gallery wow fadeInLeftA" data-wow-delay=".1s" data-wow-duration=".8s">
+                        <div class="swiper-container">
+                           <ul class="swiper-wrapper intro-gallery-items">
+						                                  <li class="swiper-slide intro-gallery-item">
+                                 <div class="gallery-item-img"><a href="/about-us/"><img loading="lazy" width="535" height="401" style="aspect-ratio: 535 / 401;" src="/images/factory.jpg" alt="Panorama View of Tara Golf Cart Factory – Advanced Production and Assembly"></a></div>
+                              </li>
+							                               </ul>
+                        </div>
+                     </div>
+                     <div class="sys-col company-intro-cont wow fadeInRightA" data-wow-delay=".1s" data-wow-duration=".8s">
+                        <div class="layer-hd">
+                           <h4 class="hd-subtit">Company Overview</h4>
+                           <h2 class="hd-title">
+                               About Tara Golf Cart                               <span class="tit-bg"><a href="/about-us/">About Tara Golf Cart</a></span>
+                           </h2>
+                           <div class="hd-desc">
+                           <p>For nearly two decades, Tara has been redefining the golf cart experience — combining cutting-edge engineering, luxury design, and sustainable power systems. From famous golf courses to exclusive estates and modern communities, our electric golf carts deliver unmatched reliability, performance, and style.</p>
+<p>Every Tara golf cart is thoughtfully crafted — from energy-efficient lithium systems to integrated fleet solutions tailored for professional golf course operations.</p>
+<p>At Tara, we don’t just build electric golf carts — we build trust, elevate experiences, and drive the future of sustainable mobility.</p>
+                           </div>
+                           <div class="hd-more">
+                              <a href="/about-us/" class="sys-btn">SEE MORE</a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+     
+
+	   <!-- business-layer -->
+         <section class="business-layer"  >
+             <img loading="lazy"  class="bg" src="/images/home-pic-d-012.jpg " alt="">
+            <div class="layer-bd">
+               <div class="layout">
+                   
+                    <header class="index-title-business">
+                    <h2 class="index-title">Sign Up to Be A Tara Dealer</h2>
+                    
+                </header>
+                   
+                  <div class="flex-row">
+                     <div class="sys-col layer-hd layer-hds wow fadeInA" data-wow-delay=".1s" data-wow-dura.8ion="1s">
+                        <h4 class="hd-subtit"></h4>
+                        <h1 class="hd-title">
+                          Tara Electric Golf Carts for Golf Courses                           <span class="tit-bg">Tara Electric Golf Carts for Golf Courses</span>
+                        </h1>
+                        <div class="hd-desc">
+                           Join a community of like-minded people, represent a highly respected golf cart product line and chart your own path to success.                        </div>
+                        <div class="hd-more">
+                           <a href="/contact/" class="sys-btn">BEGIN TODAY</a>
+                        </div>
+                     </div>
+                     <div class="sys-col layer-cont business-slider layer-hd wow fadeInA" data-wow-delay=".2s" data-wow-duration=".8s">
+                        <div class="swiper-container">
+                           <ul class="swiper-wrapper">
+                                
+                              <li class="swiper-slide business-item">
+                                 <div class="item-img"><a href=""><img loading="lazy" width="755" height="755" style="aspect-ratio: 755 / 755;" src="/images/hot-car-green1.png" alt="Green Tara Spirit Plus Golf Cart Built for Golfers">
+                                 <!--<span class="sys-badge">Hot</span>-->
+                                 </a></div>
+                              </li>
+                               
+                              <li class="swiper-slide business-item">
+                                 <div class="item-img"><a href=""><img loading="lazy" width="755" height="755" style="aspect-ratio: 755 / 755;" src="/images/blue4.png" alt="Blue Tara Spirit Plus Golf Cart Designed for Performance and Style">
+                                 <!--<span class="sys-badge">Hot</span>-->
+                                 </a></div>
+                              </li>
+                               
+                              <li class="swiper-slide business-item">
+                                 <div class="item-img"><a href=""><img loading="lazy" width="755" height="755" style="aspect-ratio: 755 / 755;" src="/images/gray1.png" alt="Gray Tara Spirit Plus Golf Cart with Modern Styling and Lithium Power">
+                                 <!--<span class="sys-badge">Hot</span>-->
+                                 </a></div>
+                              </li>
+                               
+                              <li class="swiper-slide business-item">
+                                 <div class="item-img"><a href=""><img loading="lazy" width="755" height="755" style="aspect-ratio: 755 / 755;" src="/images/hot-car-white3.png" alt="White Tara Spirit Plus Golf Cart for Golf Courses and Private Use">
+                                 <!--<span class="sys-badge">Hot</span>-->
+                                 </a></div>
+                              </li>
+                               
+                              <li class="swiper-slide business-item">
+                                 <div class="item-img"><a href=""><img loading="lazy" width="755" height="755" style="aspect-ratio: 755 / 755;" src="/images/beige5.png" alt="Beige Tara Spirit Plus Golf Cart Combining Elegance and Comfort">
+                                 <!--<span class="sys-badge">Hot</span>-->
+                                 </a></div>
+                              </li>
+                               
+                           </ul>
+                        </div>
+                        <div class="swiper-control index-swiper-control">
+                           <div class="swiper-pagination"></div>
+                           <div class="swiper-buttons">
+                              <div class="swiper-button-prev"></div>
+                              <div class="swiper-button-next"></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <ul class="brand-items">
+                      
+                  </ul>
+               </div>
+            </div>
+         </section>
+	   <!-- product-layer -->
+         <section class="product-layer">
+            <div class="layer-bd">
+               <div class="layout">
+                  <div class="flex-row">
+                     <div class="layer-cont product-slider wow fadeInLeftA" data-wow-delay=".1s" data-wow-duration=".8s">
+                        <div class="swiper-container">
+                           <ul class="swiper-wrapper product_items">
+						      
+                              <li class="swiper-slide product_item">
+                                 <figure>
+                                    <div class="features_badge">
+                                       <span class="sys-badge bg-primary">SALE</span>
+                                    </div>
+                                    <span class="item_img">
+                                      <img loading="lazy" width="280" height="280" style="aspect-ratio: 280 / 280;" src="/images/GPS1.png" alt="GPS for tara golf cart"/><a href="/spirit-plus-fleet-golf-cart-product/"></a>
+                                    </span>
+                                    <figcaption>
+                                       <h3 class="item_title"><a href="/spirit-plus-fleet-golf-cart-product/">GPS for tara golf cart</a></h3>
+                                     
+                                       <div class="item_more"><a href="/spirit-plus-fleet-golf-cart-product/" class="sys-btn">See More</a></div>
+                                    </figcaption>
+                                 </figure>
+                              </li>
+							   
+                              <li class="swiper-slide product_item">
+                                 <figure>
+                                    <div class="features_badge">
+                                       <span class="sys-badge bg-primary">SALE</span>
+                                    </div>
+                                    <span class="item_img">
+                                      <img loading="lazy" width="280" height="280" style="aspect-ratio: 280 / 280;" src="/images/GOLF-BAG-HOLDER-ASSEMBLY2.png" alt="Tara Golf Bag Holder"/><a href="/accessories/"></a>
+                                    </span>
+                                    <figcaption>
+                                       <h3 class="item_title"><a href="/accessories/">Tara Golf Bag Holder</a></h3>
+                                     
+                                       <div class="item_more"><a href="/accessories/" class="sys-btn">See More</a></div>
+                                    </figcaption>
+                                 </figure>
+                              </li>
+							   
+                              <li class="swiper-slide product_item">
+                                 <figure>
+                                    <div class="features_badge">
+                                       <span class="sys-badge bg-primary">SALE</span>
+                                    </div>
+                                    <span class="item_img">
+                                      <img loading="lazy" width="280" height="280" style="aspect-ratio: 280 / 280;" src="/images/GOLF-BALL-WASHER.png" alt="Tara Ball Washer"/><a href="/accessories/"></a>
+                                    </span>
+                                    <figcaption>
+                                       <h3 class="item_title"><a href="/accessories/">Tara Ball Washer</a></h3>
+                                     
+                                       <div class="item_more"><a href="/accessories/" class="sys-btn">See More</a></div>
+                                    </figcaption>
+                                 </figure>
+                              </li>
+							   
+                              <li class="swiper-slide product_item">
+                                 <figure>
+                                    <div class="features_badge">
+                                       <span class="sys-badge bg-primary">SALE</span>
+                                    </div>
+                                    <span class="item_img">
+                                      <img loading="lazy" width="280" height="280" style="aspect-ratio: 280 / 280;" src="/images/SAND-BOTTLE2.png" alt="SAND BOTTLE"/><a href="/accessories/"></a>
+                                    </span>
+                                    <figcaption>
+                                       <h3 class="item_title"><a href="/accessories/">SAND BOTTLE</a></h3>
+                                     
+                                       <div class="item_more"><a href="/accessories/" class="sys-btn">See More</a></div>
+                                    </figcaption>
+                                 </figure>
+                              </li>
+							   
+                              <li class="swiper-slide product_item">
+                                 <figure>
+                                    <div class="features_badge">
+                                       <span class="sys-badge bg-primary">SALE</span>
+                                    </div>
+                                    <span class="item_img">
+                                      <img loading="lazy" width="280" height="280" style="aspect-ratio: 280 / 280;" src="/images/COOLER-ASSEMBLY2-1.png" alt="Caddy Master Cooler"/><a href="/accessories/"></a>
+                                    </span>
+                                    <figcaption>
+                                       <h3 class="item_title"><a href="/accessories/">Caddy Master Cooler</a></h3>
+                                     
+                                       <div class="item_more"><a href="/accessories/" class="sys-btn">See More</a></div>
+                                    </figcaption>
+                                 </figure>
+                              </li>
+							                            </ul>
+                        </div>
+                        <div class="swiper-control index-swiper-control">
+                           <div class="swiper-pagination"></div>
+                           <div class="swiper-buttons">
+                              <div class="swiper-button-prev"></div>
+                              <div class="swiper-button-next"></div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="layer-hd wow fadeInRightA" data-wow-delay=".1s" data-wow-duration=".8s">
+                        <h4 class="hd-subtit"></h4>
+                        <h2 class="hd-title">
+                           Golf Cart Accessories - Enhance Your Ride with Tara                           <span class="tit-bg">Golf Cart Accessories - Enhance Your Ride with Tara</span>
+                        </h2>
+                        <div class="hd-desc">
+                            Customize Your Golf Cart with Comprehensive Accessories.                        </div>
+                        <div class="hd-more">
+                           <a href="/accessories/" class="sys-btn">SEE MORE</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+	  
+	  
+	  <!-- blog news -->
+        <section class="gd-layer blog-news-layer">
+            <div class="layout">
+                <header class="index-title-bar">
+                    <h2 class="index-title"><a href="/news_catalog/news/">Latest News from Tara Electric Golf Carts</a></h2>
+                    <p class="title-desc">Stay updated with the latest happenings and insights.</p>
+                </header>
+                <div class="layer-body news_wipper">
+                    <ul class="blog-news-list swiper-wrapper">
+                                          <li class="blog-news-item swiper-slide">
+                            <div class="news-wrap">
+                                                                 <a class="news-img" href="/news/golf-cart-fleet-planning-for-tournaments/"><img loading="lazy" width="355" height="226" style="aspect-ratio: 355 / 226;" src="/images/Golf-Cart-Fleet-for-Golf-Tournaments.jpg" alt="Golf Cart Fleet Planning for Tournaments"></a>
+                                                                 <div class="news-info">
+                                    <div class="news-item-hd">
+                                        <div class="news-date">
+                                            <span class="date-day">12/08</span>
+                                            <span class="date-year">26</span>
+                                        </div>
+                                        <h3 class="news-title">
+                                            <a href="/news/golf-cart-fleet-planning-for-tournaments">Golf Cart Fleet Planning for Tournaments</a>
+                                        </h3>
+                                    </div>
+                                    <div class="news-desc">Tournaments, Corporate Golf Days, and Club Championships often involve a large number of carts used in a short period. Players need golf carts, and tournament staff, course marshals, referees, photography teams, and logistics personnel need to move between different areas. Food and beverage suppl...</div>
+                                </div>
+                            </div>
+                        </li>
+                         	                         <li class="blog-news-item swiper-slide">
+                            <div class="news-wrap">
+                                                                 <a class="news-img" href="/news/what-happens-when-a-course-goes-cart-path-only/"><img loading="lazy" width="355" height="226" style="aspect-ratio: 355 / 226;" src="/images/cart-path-only-golf-course.jpg" alt="What Happens When a Course Goes Cart Path Only?"></a>
+                                                                 <div class="news-info">
+                                    <div class="news-item-hd">
+                                        <div class="news-date">
+                                            <span class="date-day">05/08</span>
+                                            <span class="date-year">26</span>
+                                        </div>
+                                        <h3 class="news-title">
+                                            <a href="/news/what-happens-when-a-course-goes-cart-path-only">What Happens When a Course Goes Cart Path...</a>
+                                        </h3>
+                                    </div>
+                                    <div class="news-desc">When there is continuous rain, frost, or insufficient drainage, a course will implement Cart Path Only. Under this rule, golf carts can still be used, but must travel along designated paths and cannot enter fairways, rough, or temporarily closed areas of the green.
+This rule changes how players m...</div>
+                                </div>
+                            </div>
+                        </li>
+                         	                         <li class="blog-news-item swiper-slide">
+                            <div class="news-wrap">
+                                                                 <a class="news-img" href="/news/when-golf-carts-become-a-revenue-channel/"><img loading="lazy" width="355" height="226" style="aspect-ratio: 355 / 226;" src="/images/golf-cart-revenue-channel.jpg" alt="When Golf Carts Become a Revenue Channel"></a>
+                                                                 <div class="news-info">
+                                    <div class="news-item-hd">
+                                        <div class="news-date">
+                                            <span class="date-day">30/07</span>
+                                            <span class="date-year">26</span>
+                                        </div>
+                                        <h3 class="news-title">
+                                            <a href="/news/when-golf-carts-become-a-revenue-channel">When Golf Carts Become a Revenue Channel</a>
+                                        </h3>
+                                    </div>
+                                    <div class="news-desc">When golf courses purchase golf car fleets, they typically calculate the number of carts, their lifespan, maintenance costs, and rental revenue. However, with the introduction of connected screens and GPS fleet management systems, another value proposition is worth reassessing: a golf car that ac...</div>
+                                </div>
+                            </div>
+                        </li>
+                         	  
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+ </section>
+
+  <!-- web_footer start -->
+    <!-- web-footer start -->
+      <footer class="web-footer"  >
+          <img class="bg" loading="lazy" src="/images/tara-fleet-golf-cart-on-golf-course.png"  alt="">
+         <section class="foot-service">
+            <div class="layout">
+               <div class="foot-items">
+                  <nav class="foot-item wow fadeInUpA" data-wow-delay=".1s" data-wow-duration=".8s">
+                     <div class="foot-item-bd">
+                        <div class="foot-logo">		<img loading="lazy" src="/images/3564.png" alt="Tara Golf Cart – Electric Golf Carts Manufacturer" >
+	 </div>
+                        <address class="foot-contact-list">
+                           <ul>
+						                                 <li class="contact-item">
+                                 <div class="contact-item-bd"><span class="contact-item-value">TARA ELECTRIC VEHICLES</span></div>
+                              </li>
+							  							                                <li class="contact-item">
+                                 <a href="mailto:sales@taragolfcart.com" class="add_email123">
+                                    <div class="contact-item-bd"><span class="contact-item-value">sales@taragolfcart.com</span></div>
+                                 </a>
+                              </li>
+							  							                                <li class="contact-item">
+                                 <div class="contact-item-bd"><span class="contact-item-value">+86 13515056181</span></div>
+                              </li>
+							                             </ul>
+                        </address>
+                     </div>
+                  </nav>
+                  <nav class="foot-item wow fadeInUpA" data-wow-delay=".2s" data-wow-duration=".8s">
+                     <div class="foot-item-hd">
+                        <h3 class="foot-item-title">Products</h3>
+                     </div>
+                     <div class="foot-item-bd">
+                        <ul class="foot-txt-list">
+                          <li id="menu-item-3038" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3038"><a href="/t1-series/" class='menu-image-title-after'><em>Tara T1 Series Electric Golf Carts</em></a></li>
+<li id="menu-item-3039" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3039"><a href="/t2-series/" class='menu-image-title-after'><em>Tara T2 Series Electric Utility Vehicles</em></a></li>
+<li id="menu-item-3040" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3040"><a href="/t3-series/" class='menu-image-title-after'><em>Tara T3 Series Electric Golf Carts</em></a></li>
+                        </ul>
+                     </div>
+                  </nav>
+                  <nav class="foot-item wow fadeInUpA" data-wow-delay=".2s" data-wow-duration=".8s">
+                     <div class="foot-item-hd">
+                        <h3 class="foot-item-title">About Us</h3>
+                     </div>
+                     <div class="foot-item-bd">
+                        <ul class="foot-txt-list">
+                          <li id="menu-item-2025" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2025"><a href="/contact/" class='menu-image-title-after'><em>Contact</em></a></li>
+<li id="menu-item-3041" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3041"><a href="/news_catalog/news/" class='menu-image-title-after'><em>News &#038; Event</em></a></li>
+                        </ul>
+                     </div>
+                  </nav>
+                  <nav class="foot-item wow fadeInUpA" data-wow-delay=".2s" data-wow-duration=".8s">
+                     <div class="foot-item-hd">
+                        <h3 class="foot-item-title">Support</h3>
+                     </div>
+                     <div class="foot-item-bd">
+                        <ul class="foot-txt-list">
+                          <li id="menu-item-5000" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5000"><a href="/fleet-golf-carts/" class='menu-image-title-after'><em>Solution</em></a></li>
+<li id="menu-item-3043" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3043"><a href="/maintenance-support/" class='menu-image-title-after'><em>Maintenance Support</em></a></li>
+<li id="menu-item-3044" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3044"><a href="/technical-document-2/" class='menu-image-title-after'><em>Technical Document</em></a></li>
+<li id="menu-item-3046" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3046"><a href="/cases/" class='menu-image-title-after'><em>Product Gallery &#038; Customer Cases</em></a></li>
+<li id="menu-item-3830" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3830"><a href="/faqs/" class='menu-image-title-after'><em>FAQs</em></a></li>
+                        </ul>
+                     </div>
+                  </nav>
+                  <nav class="foot-item wow fadeInUpA" data-wow-delay=".2s" data-wow-duration=".8s">
+                     <div class="foot-item-hd">
+                        <h3 class="foot-item-title">Additional Information</h3>
+                     </div>
+                     <div class="foot-item-bd">
+                        <ul class="foot-txt-list">
+                          <li id="menu-item-1367" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1367"><a href="/recall-information/" class='menu-image-title-after'><em>Recall Information</em></a></li>
+<li id="menu-item-1368" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1368"><a href="/safety-information/" class='menu-image-title-after'><em>Safety Information</em></a></li>
+<li id="menu-item-1369" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1369"><a href="/emergency-response-guides/" class='menu-image-title-after'><em>Emergency Response Guides</em></a></li>
+                        </ul>
+                     </div>
+                  </nav>
+                  <nav class="foot-item wow fadeInUpA" data-wow-delay=".3s" data-wow-duration=".8s">
+                     <div class="foot-item-hd">
+                        <h3 class="foot-item-title">FOLLOW US</h3>
+                     </div>
+                     <div class="foot-item-bd">
+                   
+                        <ul class="foot-sns">
+                         		<li><a target="_blank" href="https://www.facebook.com/taragolfcart/"><img loading="lazy" src="/images/facebook1.png" alt="Follow Tara Golf Cart on Facebook"></a></li>
+			<li><a target="_blank" href="https://www.linkedin.com/company/taragolfcart"><img loading="lazy" src="/images/Linkedln.png" alt="Connect with Tara Golf Cart on LinkedIn"></a></li>
+			<li><a target="_blank" href="https://www.youtube.com/@taragolfcart"><img loading="lazy" src="/images/youtube1.png" alt="Watch Tara Golf Cart videos on YouTube"></a></li>
+			<li><a target="_blank" href="https://www.instagram.com/taragolfcart/"><img loading="lazy" src="/images/instagram-fill.png" alt="See Tara Golf Cart on Instagram"></a></li>
+			<li><a target="_blank" href="https://x.com/taragolfcart"><img loading="lazy" src="/images/tuite.png" alt="Follow Tara Golf Cart on X (formerly Twitter)"></a></li>
+	                        </ul>
+                        <div class="subscribe-submit">
+                              <a href="/contact/" class="sys-btn button1">SUBSCRIBE</a>
+                           </div>
+                     </div>
+                  </nav>
+                  <!--<nav class="foot-item foot-item-subscribe wow fadeInUpA" data-wow-delay=".4s" data-wow-duration=".8s">-->
+                  <!--   <div class="foot-item-hd">-->
+                  <!--      <h3 class="foot-item-title">CONTACT US</h3>-->
+                  <!--   </div>-->
+                  <!--   <div class="foot-item-bd">-->
+                  <!--      <div class="company-subscribe">-->
+                  <!--         <h4 class="subscribe-title">For inquiries about our products or pricelist, please leave your email to us and we will be in touch within 24 hours.</h4>-->
+                           
+                  <!--      </div>-->
+                  <!--   </div>-->
+                  <!--</nav>-->
+               </div>
+            </div>
+         </section>
+         <section class="foot-bar">
+            
+               <div class="copyright layout">                        © Copyright - 2006-2026 : All Rights Reserved. <!--        <a href="/sitemap.xml">Sitemap</a> - <a href="/">AMP Mobile</a>-->
+<!--<br><a href='https://www.taragolfcart.com/4-seater-golf-cart/' title='4 Seater Golf Cart'>4 Seater Golf Cart</a>, 
+<a href='https://www.taragolfcart.com/top-10-electric-golf-carts/' title='Top 10 Electric Golf Carts'>Top 10 Electric Golf Carts</a>, 
+<a href='https://www.taragolfcart.com/2-seater-golf-cart/' title='2 Seater Golf Cart'>2 Seater Golf Cart</a>, 
+<a href='https://www.taragolfcart.com/tara-golf-cart/' title='Tara Golf Cart'>Tara Golf Cart</a>, 
+<a href='https://www.taragolfcart.com/buy-golfcart/' title='Buy Golfcart'>Buy Golfcart</a>, 
+<a href='https://www.taragolfcart.com/neighborhood-golf-cart/' title='Neighborhood Golf Cart'>Neighborhood Golf Cart</a>, -->
+
+    <div class="dibuwenan"><a href="/privacy-policy/" target="_blank">Privacy Policy</a> | <a href="/terms-and-conditions/" target="_blank">Terms and Conditions</a></div>
+            </div>
+            
+         </section>
+      </footer>
+      <!--// web-footer end -->
+
+         
+   <!--// container end -->
+<!--<aside class="scrollsidebar" id="scrollsidebar">-->
+<!--  <div class="side_content">-->
+<!--    <div class="side_list">-->
+<!--      <header class="hd"><img src="/images/title_pic.png" alt="Online Inquiry"/></header>-->
+<!--      <div class="cont">-->
+<!--        <li><a class="email" href="javascript:" >Send Email</a></li>-->
+<!--        -->
+<!--        -->
+<!--        -->
+<!--        -->
+<!--      </div>-->
+<!--      -->
+<!--      -->
+<!--      <div class="side_title"><a  class="close_btn"><span>x</span></a></div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="show_btn"></div>-->
+<!--</aside>-->
+<div id="whatsapp" class="footer-whatsapp">
+        <a class="footer-anniu" href="javascript:" title="Contact Now">
+        <div id="whatsappMain"></div>
+        </a>
+</div>
+ <ul class="right_nav">
+
+    <li>
+         <div class="iconBox oln_ser"> 
+             <img   src='/images/tel.png'  alt="tel">
+            <h4>Phone</h4>
+         </div>
+         <div class="hideBox">
+            <div class="hb">
+               <h5>Tel</h5>
+               <div class="fonttalk">
+                    <p><a href="tel:865926800621">+86 13515056181</a></p>                </div>
+               <div class="fonttalk">
+                    
+               </div>
+            </div>
+         </div>
+      </li>
+
+    <li>
+         <div class="iconBox oln_ser"> 
+             <img   src='/images/email.png'  alt="email">
+            <h4>E-mail</h4>
+         </div>
+         <div class="hideBox">
+            <div class="hb">
+               <h5>E-mail</h5>
+               <div class="fonttalk">
+                    <p><a href="mailto:sales@taragolfcart.com">sales@taragolfcart.com</a></p>                    <p><a href="mailto:"></a></p>                    
+               </div>
+               <div class="fonttalk">
+                    
+               </div>
+            </div>
+         </div>
+      </li>
+ 
+      
+      
+    <li>
+         <div class="iconBox">
+            <img   src='/images/whatsapp.png'  alt="whatsapp">
+            <h4>WhatsApp</h4>
+         </div>
+         <div class="hideBox">
+            <div class="hb">
+               <h5>WhatsApp</h5>
+                                    <img   src="/images/weixin.png" alt="weixin">
+                            </div>
+
+         </div>
+      </li>
+
+<!--------------TOP按钮------------------>
+    <li>
+         <div class="iconBox top">
+             <img  src='/images/top.png'  alt="return top">
+            <h4>Top</h4>
+         </div>
+    </li>
+
+   </ul>
+
+<div class="inquiry-pop-bd">
+  <div class="inquiry-pop"> <i class="ico-close-pop" onClick="hideMsgPop();"></i> 
+   
+  </div>
+</div>
+</div>
+  <!-- search -->
+   <div class="web-search">
+      <b id="btn-search-close" class="btn--search-close"></b>
+      <div style=" width:100%">
+         <div class="head-search">
+         <form action="/search.php" method="get">
+               <input class="search-ipt" name="s" placeholder="Start Typing..." />
+			   <input type="hidden" name="cat" value="490"/>
+               <input class="search-btn" type="submit" value=""/>
+               <span class="search-attr">Hit enter to search or ESC to close</span>
+            </form>
+         </div>
+      </div>
+   </div>
+ 
+ 
+
+
+
+
+
+
+
+<ul class="prisna-wp-translate-seo" id="prisna-translator-seo"><li class="language-flag language-flag-en"><a href="/" title="English" target="_blank" rel="nofollow"><b class="country-flag"></b><span>English</span></a></li><li class="language-flag language-flag-fr"><a href="http://fr.taragolfcart.com/" title="French" target="_blank" rel="nofollow"><b class="country-flag"></b><span>French</span></a></li><li class="language-flag language-flag-de"><a href="http://de.taragolfcart.com/" title="German" target="_blank" rel="nofollow"><b class="country-flag"></b><span>German</span></a></li><li class="language-flag language-flag-pt"><a href="http://pt.taragolfcart.com/" title="Portuguese" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Portuguese</span></a></li><li class="language-flag language-flag-es"><a href="http://es.taragolfcart.com/" title="Spanish" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Spanish</span></a></li><li class="language-flag language-flag-ru"><a href="http://ru.taragolfcart.com/" title="Russian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Russian</span></a></li><li class="language-flag language-flag-ja"><a href="http://ja.taragolfcart.com/" title="Japanese" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Japanese</span></a></li><li class="language-flag language-flag-ko"><a href="http://ko.taragolfcart.com/" title="Korean" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Korean</span></a></li><li class="language-flag language-flag-ar"><a href="http://ar.taragolfcart.com/" title="Arabic" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Arabic</span></a></li><li class="language-flag language-flag-ga"><a href="http://ga.taragolfcart.com/" title="Irish" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Irish</span></a></li><li class="language-flag language-flag-el"><a href="http://el.taragolfcart.com/" title="Greek" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Greek</span></a></li><li class="language-flag language-flag-tr"><a href="http://tr.taragolfcart.com/" title="Turkish" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Turkish</span></a></li><li class="language-flag language-flag-it"><a href="http://it.taragolfcart.com/" title="Italian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Italian</span></a></li><li class="language-flag language-flag-da"><a href="http://da.taragolfcart.com/" title="Danish" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Danish</span></a></li><li class="language-flag language-flag-ro"><a href="http://ro.taragolfcart.com/" title="Romanian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Romanian</span></a></li><li class="language-flag language-flag-id"><a href="http://id.taragolfcart.com/" title="Indonesian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Indonesian</span></a></li><li class="language-flag language-flag-cs"><a href="http://cs.taragolfcart.com/" title="Czech" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Czech</span></a></li><li class="language-flag language-flag-af"><a href="http://af.taragolfcart.com/" title="Afrikaans" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Afrikaans</span></a></li><li class="language-flag language-flag-sv"><a href="http://sv.taragolfcart.com/" title="Swedish" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Swedish</span></a></li><li class="language-flag language-flag-pl"><a href="http://pl.taragolfcart.com/" title="Polish" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Polish</span></a></li><li class="language-flag language-flag-eu"><a href="http://eu.taragolfcart.com/" title="Basque" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Basque</span></a></li><li class="language-flag language-flag-ca"><a href="http://ca.taragolfcart.com/" title="Catalan" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Catalan</span></a></li><li class="language-flag language-flag-eo"><a href="http://eo.taragolfcart.com/" title="Esperanto" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Esperanto</span></a></li><li class="language-flag language-flag-hi"><a href="http://hi.taragolfcart.com/" title="Hindi" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Hindi</span></a></li><li class="language-flag language-flag-lo"><a href="http://lo.taragolfcart.com/" title="Lao" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Lao</span></a></li><li class="language-flag language-flag-sq"><a href="http://sq.taragolfcart.com/" title="Albanian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Albanian</span></a></li><li class="language-flag language-flag-am"><a href="http://am.taragolfcart.com/" title="Amharic" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Amharic</span></a></li><li class="language-flag language-flag-hy"><a href="http://hy.taragolfcart.com/" title="Armenian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Armenian</span></a></li><li class="language-flag language-flag-az"><a href="http://az.taragolfcart.com/" title="Azerbaijani" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Azerbaijani</span></a></li><li class="language-flag language-flag-be"><a href="http://be.taragolfcart.com/" title="Belarusian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Belarusian</span></a></li><li class="language-flag language-flag-bn"><a href="http://bn.taragolfcart.com/" title="Bengali" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Bengali</span></a></li><li class="language-flag language-flag-bs"><a href="http://bs.taragolfcart.com/" title="Bosnian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Bosnian</span></a></li><li class="language-flag language-flag-bg"><a href="http://bg.taragolfcart.com/" title="Bulgarian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Bulgarian</span></a></li><li class="language-flag language-flag-ceb"><a href="http://ceb.taragolfcart.com/" title="Cebuano" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Cebuano</span></a></li><li class="language-flag language-flag-ny"><a href="http://ny.taragolfcart.com/" title="Chichewa" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Chichewa</span></a></li><li class="language-flag language-flag-co"><a href="http://co.taragolfcart.com/" title="Corsican" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Corsican</span></a></li><li class="language-flag language-flag-hr"><a href="http://hr.taragolfcart.com/" title="Croatian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Croatian</span></a></li><li class="language-flag language-flag-nl"><a href="http://nl.taragolfcart.com/" title="Dutch" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Dutch</span></a></li><li class="language-flag language-flag-et"><a href="http://et.taragolfcart.com/" title="Estonian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Estonian</span></a></li><li class="language-flag language-flag-tl"><a href="http://tl.taragolfcart.com/" title="Filipino" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Filipino</span></a></li><li class="language-flag language-flag-fi"><a href="http://fi.taragolfcart.com/" title="Finnish" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Finnish</span></a></li><li class="language-flag language-flag-fy"><a href="http://fy.taragolfcart.com/" title="Frisian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Frisian</span></a></li><li class="language-flag language-flag-gl"><a href="http://gl.taragolfcart.com/" title="Galician" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Galician</span></a></li><li class="language-flag language-flag-ka"><a href="http://ka.taragolfcart.com/" title="Georgian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Georgian</span></a></li><li class="language-flag language-flag-gu"><a href="http://gu.taragolfcart.com/" title="Gujarati" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Gujarati</span></a></li><li class="language-flag language-flag-ht"><a href="http://ht.taragolfcart.com/" title="Haitian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Haitian</span></a></li><li class="language-flag language-flag-ha"><a href="http://ha.taragolfcart.com/" title="Hausa" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Hausa</span></a></li><li class="language-flag language-flag-haw"><a href="http://haw.taragolfcart.com/" title="Hawaiian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Hawaiian</span></a></li><li class="language-flag language-flag-iw"><a href="http://iw.taragolfcart.com/" title="Hebrew" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Hebrew</span></a></li><li class="language-flag language-flag-hmn"><a href="http://hmn.taragolfcart.com/" title="Hmong" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Hmong</span></a></li><li class="language-flag language-flag-hu"><a href="http://hu.taragolfcart.com/" title="Hungarian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Hungarian</span></a></li><li class="language-flag language-flag-is"><a href="http://is.taragolfcart.com/" title="Icelandic" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Icelandic</span></a></li><li class="language-flag language-flag-ig"><a href="http://ig.taragolfcart.com/" title="Igbo" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Igbo</span></a></li><li class="language-flag language-flag-jw"><a href="http://jw.taragolfcart.com/" title="Javanese" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Javanese</span></a></li><li class="language-flag language-flag-kn"><a href="http://kn.taragolfcart.com/" title="Kannada" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Kannada</span></a></li><li class="language-flag language-flag-kk"><a href="http://kk.taragolfcart.com/" title="Kazakh" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Kazakh</span></a></li><li class="language-flag language-flag-km"><a href="http://km.taragolfcart.com/" title="Khmer" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Khmer</span></a></li><li class="language-flag language-flag-ku"><a href="http://ku.taragolfcart.com/" title="Kurdish" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Kurdish</span></a></li><li class="language-flag language-flag-ky"><a href="http://ky.taragolfcart.com/" title="Kyrgyz" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Kyrgyz</span></a></li><li class="language-flag language-flag-la"><a href="http://la.taragolfcart.com/" title="Latin" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Latin</span></a></li><li class="language-flag language-flag-lv"><a href="http://lv.taragolfcart.com/" title="Latvian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Latvian</span></a></li><li class="language-flag language-flag-lt"><a href="http://lt.taragolfcart.com/" title="Lithuanian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Lithuanian</span></a></li><li class="language-flag language-flag-lb"><a href="http://lb.taragolfcart.com/" title="Luxembou.." target="_blank" rel="nofollow"><b class="country-flag"></b><span>Luxembou..</span></a></li><li class="language-flag language-flag-mk"><a href="http://mk.taragolfcart.com/" title="Macedonian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Macedonian</span></a></li><li class="language-flag language-flag-mg"><a href="http://mg.taragolfcart.com/" title="Malagasy" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Malagasy</span></a></li><li class="language-flag language-flag-ms"><a href="http://ms.taragolfcart.com/" title="Malay" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Malay</span></a></li><li class="language-flag language-flag-ml"><a href="http://ml.taragolfcart.com/" title="Malayalam" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Malayalam</span></a></li><li class="language-flag language-flag-mt"><a href="http://mt.taragolfcart.com/" title="Maltese" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Maltese</span></a></li><li class="language-flag language-flag-mi"><a href="http://mi.taragolfcart.com/" title="Maori" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Maori</span></a></li><li class="language-flag language-flag-mr"><a href="http://mr.taragolfcart.com/" title="Marathi" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Marathi</span></a></li><li class="language-flag language-flag-mn"><a href="http://mn.taragolfcart.com/" title="Mongolian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Mongolian</span></a></li><li class="language-flag language-flag-my"><a href="http://my.taragolfcart.com/" title="Burmese" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Burmese</span></a></li><li class="language-flag language-flag-ne"><a href="http://ne.taragolfcart.com/" title="Nepali" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Nepali</span></a></li><li class="language-flag language-flag-no"><a href="http://no.taragolfcart.com/" title="Norwegian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Norwegian</span></a></li><li class="language-flag language-flag-ps"><a href="http://ps.taragolfcart.com/" title="Pashto" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Pashto</span></a></li><li class="language-flag language-flag-fa"><a href="http://fa.taragolfcart.com/" title="Persian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Persian</span></a></li><li class="language-flag language-flag-pa"><a href="http://pa.taragolfcart.com/" title="Punjabi" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Punjabi</span></a></li><li class="language-flag language-flag-sr"><a href="http://sr.taragolfcart.com/" title="Serbian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Serbian</span></a></li><li class="language-flag language-flag-st"><a href="http://st.taragolfcart.com/" title="Sesotho" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Sesotho</span></a></li><li class="language-flag language-flag-si"><a href="http://si.taragolfcart.com/" title="Sinhala" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Sinhala</span></a></li><li class="language-flag language-flag-sk"><a href="http://sk.taragolfcart.com/" title="Slovak" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Slovak</span></a></li><li class="language-flag language-flag-sl"><a href="http://sl.taragolfcart.com/" title="Slovenian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Slovenian</span></a></li><li class="language-flag language-flag-so"><a href="http://so.taragolfcart.com/" title="Somali" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Somali</span></a></li><li class="language-flag language-flag-sm"><a href="http://sm.taragolfcart.com/" title="Samoan" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Samoan</span></a></li><li class="language-flag language-flag-gd"><a href="http://gd.taragolfcart.com/" title="Scots Gaelic" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Scots Gaelic</span></a></li><li class="language-flag language-flag-sn"><a href="http://sn.taragolfcart.com/" title="Shona" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Shona</span></a></li><li class="language-flag language-flag-sd"><a href="http://sd.taragolfcart.com/" title="Sindhi" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Sindhi</span></a></li><li class="language-flag language-flag-su"><a href="http://su.taragolfcart.com/" title="Sundanese" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Sundanese</span></a></li><li class="language-flag language-flag-sw"><a href="http://sw.taragolfcart.com/" title="Swahili" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Swahili</span></a></li><li class="language-flag language-flag-tg"><a href="http://tg.taragolfcart.com/" title="Tajik" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Tajik</span></a></li><li class="language-flag language-flag-ta"><a href="http://ta.taragolfcart.com/" title="Tamil" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Tamil</span></a></li><li class="language-flag language-flag-te"><a href="http://te.taragolfcart.com/" title="Telugu" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Telugu</span></a></li><li class="language-flag language-flag-th"><a href="http://th.taragolfcart.com/" title="Thai" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Thai</span></a></li><li class="language-flag language-flag-uk"><a href="http://uk.taragolfcart.com/" title="Ukrainian" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Ukrainian</span></a></li><li class="language-flag language-flag-ur"><a href="http://ur.taragolfcart.com/" title="Urdu" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Urdu</span></a></li><li class="language-flag language-flag-uz"><a href="http://uz.taragolfcart.com/" title="Uzbek" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Uzbek</span></a></li><li class="language-flag language-flag-vi"><a href="http://vi.taragolfcart.com/" title="Vietnamese" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Vietnamese</span></a></li><li class="language-flag language-flag-cy"><a href="http://cy.taragolfcart.com/" title="Welsh" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Welsh</span></a></li><li class="language-flag language-flag-xh"><a href="http://xh.taragolfcart.com/" title="Xhosa" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Xhosa</span></a></li><li class="language-flag language-flag-yi"><a href="http://yi.taragolfcart.com/" title="Yiddish" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Yiddish</span></a></li><li class="language-flag language-flag-yo"><a href="http://yo.taragolfcart.com/" title="Yoruba" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Yoruba</span></a></li><li class="language-flag language-flag-zu"><a href="http://zu.taragolfcart.com/" title="Zulu" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Zulu</span></a></li><li class="language-flag language-flag-rw"><a href="http://rw.taragolfcart.com/" title="Kinyarwanda" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Kinyarwanda</span></a></li><li class="language-flag language-flag-tt"><a href="http://tt.taragolfcart.com/" title="Tatar" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Tatar</span></a></li><li class="language-flag language-flag-or"><a href="http://or.taragolfcart.com/" title="Oriya" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Oriya</span></a></li><li class="language-flag language-flag-tk"><a href="http://tk.taragolfcart.com/" title="Turkmen" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Turkmen</span></a></li><li class="language-flag language-flag-ug"><a href="http://ug.taragolfcart.com/" title="Uyghur" target="_blank" rel="nofollow"><b class="country-flag"></b><span>Uyghur</span></a></li></ul><link rel='stylesheet' id='menu-image-css'  href='https://www.taragolfcart.com/wp-content/plugins/menu-image/menu-image.css?ver=1.1' type='text/css' media='all' />
+
+
+
+ 

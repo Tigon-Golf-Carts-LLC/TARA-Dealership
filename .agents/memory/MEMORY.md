@@ -1,0 +1,1 @@
+- [TARA site clone architecture](site-clone-architecture.md) — tara-ev is a static HTML content mirror; edit public/content/*.html, not React components.
