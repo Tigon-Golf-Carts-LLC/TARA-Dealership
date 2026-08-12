@@ -181,3 +181,52 @@
 .product_items .product_item .item_img img {
   mix-blend-mode: multiply; /* lets the white-background product photos sit on the backdrop */
 }
+
+/* Vehicles mega-menu: one even row of 5 items, names under images (desktop only) */
+@media (min-width: 1025px) {
+  .web-head .nav-wrap .head-nav .products_list > .sub-menu > li > .sub-menu {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-evenly !important;
+    align-items: flex-start !important;
+    width: 100vw !important;
+    max-width: none !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 !important;
+    padding: 18px 4vw !important;
+    box-sizing: border-box !important;
+  }
+  .web-head .nav-wrap .head-nav .products_list > .sub-menu > li > .sub-menu > li {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    float: none !important;
+    margin: 0 !important;
+    text-align: center !important;
+  }
+  .web-head .nav-wrap .head-nav .products_list > .sub-menu > li > .sub-menu > li > a {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px;
+    padding: 10px 8px !important;
+  }
+  .web-head .nav-wrap .head-nav .products_list > .sub-menu > li > .sub-menu > li img.menu-image {
+    width: 100% !important;
+    max-width: 240px !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    display: block !important;
+  }
+}
+
+/* Series pages: single Call Now button on product cards */
+.priduct_btn_call {
+  display: inline-block; padding: 10px 26px; border-radius: 4px;
+  background: #cf2e2e !important; color: #fff !important;
+  font-weight: 700; text-transform: uppercase; font-size: 13px;
+  letter-spacing: .5px; text-decoration: none !important;
+  transition: background .2s;
+}
+.priduct_btn_call:hover { background: #a32222 !important; color: #fff !important; }
