@@ -101,6 +101,76 @@ export default function App() {
         };
         document.body.appendChild(siteScript);
 
+        // Site-wide footer (client-requested; original footer was removed).
+        if (!document.getElementById('tara-footer')) {
+          const footer = document.createElement('footer');
+          footer.id = 'tara-footer';
+          footer.innerHTML = `
+            <div class="tf-inner">
+              <div class="tf-col tf-brand">
+                <img src="${BASE}images/tara-nev-logo.png" alt="TARA Neighborhood Electric Vehicles" />
+                <p>TARA Neighborhood Electric Vehicles — sales, service, and support for electric golf carts, NEVs, and utility vehicles.</p>
+                <a class="tf-phone" href="tel:8448443432">&#9742; 844-844-3432</a>
+              </div>
+              <div class="tf-col">
+                <h4>Vehicles</h4>
+                <a href="/t1-series/">T1 Series</a>
+                <a href="/t2-series/">T2 Utility Series</a>
+                <a href="/t3-series/">T3 Series</a>
+                <a href="/fleet-golf-carts/">Fleet Golf Carts</a>
+                <a href="/accessories/">Accessories</a>
+              </div>
+              <div class="tf-col">
+                <h4>Popular Models</h4>
+                <a href="/harmony-fleet-golf-cart-product/">Harmony</a>
+                <a href="/spirit-pro-fleet-golf-cart-product/">Spirit Pro</a>
+                <a href="/spirit-plus-fleet-golf-cart-product/">Spirit Plus</a>
+                <a href="/roadster-2-2-golf-cart-product/">Roadster 2+2</a>
+                <a href="/explorer-2-2-golf-cart-product/">Explorer 2+2</a>
+                <a href="/turfman-700-utility-vehicle-product/">Turfman 700</a>
+                <a href="/t3-2-2-golf-cart-product/">T3 2+2</a>
+              </div>
+              <div class="tf-col">
+                <h4>Support</h4>
+                <a href="/technical-support/">Technical Support</a>
+                <a href="/maintenance-support/">Maintenance</a>
+                <a href="/warranty-terms/">Warranty Terms</a>
+                <a href="/safety-information/">Safety Information</a>
+                <a href="/recall-information/">Recall Information</a>
+                <a href="/emergency-response-guides/">Emergency Guides</a>
+                <a href="/faqs/">FAQs</a>
+              </div>
+              <div class="tf-col">
+                <h4>Company</h4>
+                <a href="/">Home</a>
+                <a href="/about-us/">About Us</a>
+                <a href="/cases/">Customer Cases</a>
+                <a href="/blog/">Blog</a>
+                <a href="/contact/">Contact</a>
+              </div>
+            </div>
+            <div class="tf-bottom">
+              <span>&copy; ${new Date().getFullYear()} TARA Neighborhood Electric Vehicles. All rights reserved.</span>
+              <span class="tf-legal">
+                <a href="/privacy-policy/">Privacy Policy</a>
+                <a href="/terms-and-conditions/">Terms &amp; Conditions</a>
+              </span>
+            </div>`;
+          // Append inside the content container so the footer sits directly
+          // after the page content (JS-injected drawers live at body end).
+          containerRef.current.appendChild(footer);
+        }
+
+        // Site-wide "Call Now" button (dealership phone line).
+        if (!document.getElementById('tara-call-now')) {
+          const call = document.createElement('a');
+          call.id = 'tara-call-now';
+          call.href = 'tel:8448443432';
+          call.innerHTML = '<span class="call-icon">&#9742;</span> Call Now';
+          call.setAttribute('aria-label', 'Call TARA at 844-844-3432');
+          document.body.appendChild(call);
+        }
+
         // Product pages: show one vehicle image per selected color.
         // The original site used a Swiper synced to the color list; the
         // cloned bundle doesn't initialize it, so wire it up directly.

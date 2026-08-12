@@ -1,2 +1,3 @@
 - [TARA site clone architecture](site-clone-architecture.md) — tara-ev is a static HTML content mirror; edit public/content/*.html, not React components.
 - [Client-requested removals](client-requested-removals.md) — inquiry form, floating widgets, footer, press section are deleted; merges have restored them before — re-grep after every merge.
+- [Clone layout quirks](clone-layout-quirks.md) — `.container` was 100vh with overflow (hid injected footer below fold); FAQ/support pages share the product-spec accordion markup.

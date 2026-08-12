@@ -17,3 +17,8 @@ The client explicitly deleted these from the tara-ev site; do NOT restore them, 
 **How to apply:** guard script `artifacts/tara-ev/scripts/verify-removals.sh` (validation step `verify-removals`) now fails when these reappear — run it after merges. It also scans `dist/public` when present, and the production build (`pnpm build`) runs it with `--require-dist`, so publishing is blocked if removed content reappears in build output. Dead `.mauticform*` CSS selectors in `site.css` are harmless and intentionally excluded from the mauticform text check (CSS files only). Manually, grep for `mauticform|form-generate|right_nav|inquiry-pop-bd|footer-whatsapp|web-footer">` before declaring done. `site.css` has `display:none` safeguards for these selectors — keep them.
 
 Also: Press section was replaced by `/blog/` (12 original posts, files `content/blog*.html`); all `/news/`* routes were deleted — don't reintroduce them.
+- Language switcher (div.change-language / "English" dropdown) deleted from all pages Aug 2026; CSS display:none guard in site.css. Re-grep "change-language" after merges.
+- Header "English" flag button (div.language-flag) deleted from all pages; CSS guard added.
+- WARNING: language flags are <li class="language-flag"> inside <ul id="prisna-translator-seo">, NOT divs — balanced-div removal scripts corrupted 648 files once. Match the actual tag.
+- Header search button (<b id="btn-search">) deleted from all pages; CSS guard added.
+- Call Now button (tel:8448443432) is INTENTIONAL: injected site-wide by App.tsx (#tara-call-now) + styled in site.css. Do not remove when sweeping floating widgets. Dealership phone: 844-844-3432.

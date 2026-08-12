@@ -43,3 +43,127 @@
 .pro_color li { cursor: pointer; }
 .pro_color li img { border-radius: 50%; transition: box-shadow .2s ease; }
 .pro_color li.color-active img { box-shadow: 0 0 0 3px #a1c22e; }
+
+/* Language switcher removed at client request */
+.change-language { display: none !important; }
+.language-flag { display: none !important; }
+.btn--search, .search-alert { display: none !important; }
+
+/* Square NEV logo: never distort, in normal or fixed/scrolled header */
+.logo img, .web_head .logo img, .is-fixed .logo img {
+  width: auto !important;
+  height: auto !important;
+  max-height: 54px !important;
+  aspect-ratio: 1 / 1 !important;
+  object-fit: contain !important;
+}
+
+/* ── Mobile header cleanup ─────────────────────────────── */
+@media (max-width: 991px) {
+  /* Hide JS-injected language + search items in the mobile top bar */
+  .mobile-head-item.mobile-head-language,
+  .mobile-head-item.mobile-head-search,
+  .mobile-head-item.mobile-head-currency { display: none !important; }
+
+  /* Compact header bar with a properly sized logo */
+  .head-layer { padding: 6px 0 !important; }
+  .head-layer .layout { display: flex; align-items: center; justify-content: center; min-height: 0 !important; }
+  .logo { margin: 0 !important; padding: 0 !important; }
+  .logo img { max-height: 44px !important; }
+}
+
+/* ── Site-wide Call Now button ─────────────────────────── */
+#tara-call-now {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #a1c22e;
+  color: #111 !important;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.3);
+  text-decoration: none !important;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+#tara-call-now:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+#tara-call-now .call-icon { font-size: 18px; line-height: 1; }
+@media (max-width: 640px) {
+  #tara-call-now { right: 12px; bottom: 12px; padding: 11px 18px; font-size: 15px; }
+}
+
+/* ── Site-wide footer ──────────────────────────────────── */
+#tara-footer {
+  width: 100%;
+  background: #101210;
+  color: #cfd4cc;
+  font-size: 14px;
+  line-height: 1.7;
+  margin-top: 40px;
+}
+#tara-footer .tf-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 24px 32px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 32px;
+}
+#tara-footer .tf-brand { grid-column: span 1; }
+#tara-footer .tf-brand img { width: 64px; height: 64px; object-fit: contain; margin-bottom: 10px; }
+#tara-footer .tf-brand p { color: #9aa196; margin: 0 0 12px; }
+#tara-footer .tf-phone {
+  display: inline-block;
+  color: #a1c22e !important;
+  font-weight: 700;
+  text-decoration: none;
+}
+#tara-footer h4 {
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+}
+#tara-footer .tf-col a {
+  display: block;
+  color: #cfd4cc !important;
+  text-decoration: none;
+  padding: 3px 0;
+  transition: color .15s ease;
+}
+#tara-footer .tf-col a:hover { color: #a1c22e !important; }
+#tara-footer .tf-bottom {
+  border-top: 1px solid #2a2d28;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 18px 24px 80px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  justify-content: space-between;
+  color: #8a9086;
+}
+#tara-footer .tf-legal a { color: #8a9086 !important; text-decoration: none; margin-left: 18px; }
+#tara-footer .tf-legal a:first-child { margin-left: 0; }
+#tara-footer .tf-legal a:hover { color: #a1c22e !important; }
+
+@media (max-width: 1100px) {
+  #tara-footer .tf-inner { grid-template-columns: repeat(4, 1fr); }
+  #tara-footer .tf-brand { grid-column: span 4; }
+}
+@media (max-width: 640px) {
+  #tara-footer .tf-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; padding: 36px 18px 24px; }
+  #tara-footer .tf-brand { grid-column: span 2; }
+  #tara-footer .tf-bottom { padding: 16px 18px 88px; }
+}
+
+/* The cloned .container computes to exactly 100vh (content overflows it),
+   which pushed the injected footer below the fold and left a blank gap.
+   Let it size to its content. */
+.container { height: auto !important; min-height: 0 !important; }
