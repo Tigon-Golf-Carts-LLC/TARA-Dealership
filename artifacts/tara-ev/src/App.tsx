@@ -115,9 +115,9 @@ export default function App() {
               </div>
               <div class="tf-col">
                 <h4>Vehicles</h4>
-                <a href="/t1-series/">T1 Series</a>
-                <a href="/t2-series/">T2 Utility Series</a>
-                <a href="/t3-series/">T3 Series</a>
+                <a href="/t1-series/">T1 Golf Cart Series</a>
+                <a href="/t2-series/">T2 Utility Golf Cart Series</a>
+                <a href="/t3-series/">T3 Street Legal Series</a>
                 <a href="/fleet-golf-carts/">Fleet Golf Carts</a>
                 <a href="/accessories/">Accessories</a>
               </div>
