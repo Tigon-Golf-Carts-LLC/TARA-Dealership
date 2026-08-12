@@ -167,3 +167,6 @@
    which pushed the injected footer below the fold and left a blank gap.
    Let it size to its content. */
 .container { height: auto !important; min-height: 0 !important; }
+
+/* Product hero backdrop: keep the pavement (bottom of image) behind the cart */
+.pro_con { background-size: cover !important; background-position: center bottom !important; }
