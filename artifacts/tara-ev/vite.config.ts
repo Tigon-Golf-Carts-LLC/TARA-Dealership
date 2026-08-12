@@ -27,9 +27,29 @@ if (!basePath) {
   );
 }
 
+// In the deployment build environment REPLIT_DOMAINS holds the production
+// domain(s); in the dev workspace it holds the temporary .replit.dev domain.
+// Social crawlers require an absolute og:image URL, so at production build
+// time we prefix relative og:image/og:url values with the published origin.
+const publishedDomain = process.env.REPLIT_DOMAINS?.split(',')[0]?.trim();
+
+const absoluteOgUrls = () => ({
+  name: 'absolute-og-urls',
+  apply: 'build' as const,
+  transformIndexHtml(html: string) {
+    if (!publishedDomain) return html;
+    const origin = `https://${publishedDomain}`;
+    return html.replace(
+      /(<meta\s+property="og:(?:image|url)"\s+content=")(\/[^"]*)(")/g,
+      (_m, pre, path, post) => `${pre}${origin}${path}${post}`,
+    );
+  },
+});
+
 export default defineConfig({
   base: basePath,
   plugins: [
+    absoluteOgUrls(),
     react(),
     tailwindcss(),
     runtimeErrorOverlay(),
