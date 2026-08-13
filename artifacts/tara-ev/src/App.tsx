@@ -179,7 +179,7 @@ export default function App() {
           footer.innerHTML = `
             <div class="tf-inner">
               <div class="tf-col tf-brand">
-                <img src="${BASE}images/tara-nev-logo.png" alt="TARA Golf Cart Dealership" />
+                <img src="${BASE}images/tara-dealership-logo.png" alt="TARA Golf Cart Dealership" />
                 <p>TARA Golf Cart Dealership — sales, service, and support for electric golf carts, NEVs, and utility vehicles.</p>
                 <p class="tf-disclaimer">We are an independent, authorized dealership selling TARA vehicles. We are not TARA, the manufacturer.</p>
                 <a class="tf-phone" href="tel:8448443432">&#9742; 844-844-3432</a>

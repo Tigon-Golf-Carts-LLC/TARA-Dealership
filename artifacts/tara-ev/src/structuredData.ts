@@ -8,7 +8,7 @@
 
 const SITE_URL = 'https://taradealership.com';
 const SITE_NAME = 'TARA Dealership';
-const LOGO_URL = `${SITE_URL}/images/tara-nev-logo.png`;
+const LOGO_URL = `${SITE_URL}/images/tara-dealership-logo.png`;
 const PHONE = '+1-844-844-3432';
 
 // ---------------------------------------------------------------------------
