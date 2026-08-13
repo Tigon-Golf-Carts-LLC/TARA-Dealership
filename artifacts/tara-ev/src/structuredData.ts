@@ -1,13 +1,13 @@
 /**
- * JSON-LD structured data generator for TARA Electric Vehicles.
+ * JSON-LD structured data generator for TARA Dealership.
  *
  * Produces schema.org markup as a plain object (to be serialised via
  * JSON.stringify).  One schema block is injected into <head> per route
  * navigation; the helper `injectStructuredData` handles the DOM write.
  */
 
-const SITE_URL = 'https://www.taragolfcart.com';
-const SITE_NAME = 'TARA Electric Vehicles';
+const SITE_URL = 'https://taradealership.com';
+const SITE_NAME = 'TARA Dealership';
 const LOGO_URL = `${SITE_URL}/images/tara-nev-logo.png`;
 const PHONE = '+1-844-844-3432';
 
@@ -49,8 +49,8 @@ function buildOrganization() {
       availableLanguage: 'English',
     },
     sameAs: [
-      'https://www.facebook.com/taragolfcart',
-      'https://www.instagram.com/taragolfcart',
+      'https://www.facebook.com/taradealership',
+      'https://www.instagram.com/taradealership',
     ],
   };
 }
@@ -110,7 +110,7 @@ function buildBreadcrumb(path: string, pageTitle: string) {
 /** Strip common site-name suffixes from route titles to get a clean page name. */
 function stripSiteSuffix(title: string): string {
   return title
-    .replace(/\s*[-|]\s*TARA (ELECTRIC VEHICLE(S)?|Neighborhood Electric Vehicles).*$/i, '')
+    .replace(/\s*[-|]\s*TARA (ELECTRIC VEHICLE(S)?|Neighborhood Electric Vehicles|(Golf Cart )?Dealership).*$/i, '')
     .replace(/\s*[-|]\s*TARA$/i, '')
     .trim();
 }

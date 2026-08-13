@@ -1,6 +1,6 @@
-# TARA Electric Vehicles
+# TARA Dealership
 
-Full rebuild (clone) of the client's website taragolfcart.com for TARA Electric Vehicles — all 650 pages with original images and content.
+Full rebuild (clone) of the client's website taradealership.com (rebranded from taragolfcart.com Aug 2026) for TARA Golf Cart Dealership — all 650 pages with original images and content.
 
 ## Run & Operate
 

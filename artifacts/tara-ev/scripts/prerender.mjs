@@ -47,7 +47,7 @@ const origin =
   getArg('--origin') ??
   (process.env.REPLIT_DOMAINS
     ? `https://${process.env.REPLIT_DOMAINS.split(',')[0].trim()}`
-    : 'https://taranev.com');
+    : 'https://taradealership.com');
 
 // ─── Validation ───────────────────────────────────────────────────────────────
 
@@ -122,7 +122,7 @@ function extractOgImage(html) {
 // ─── Per-route HTML builder ───────────────────────────────────────────────────
 
 function buildPageHtml(routePath, routeMeta, contentHtml) {
-  const title = routeMeta.title || 'TARA Neighborhood Electric Vehicles';
+  const title = routeMeta.title || 'TARA Golf Cart Dealership';
   const description = extractDescription(contentHtml);
   const ogImage = extractOgImage(contentHtml);
   const canonicalUrl = `${origin}${routePath}`;
