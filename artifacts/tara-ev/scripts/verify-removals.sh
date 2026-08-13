@@ -65,6 +65,8 @@ check "web footer (<footer class=\"web-footer\">)" \
   '<footer[^>]*class="[^"]*web-footer'
 check "inquiry form section (section.inquiry-form-wrap)" \
   '<section[^>]*class="[^"]*inquiry-form-wrap'
+check "Online Service floating sidebar (aside.scrollsidebar)" \
+  '<aside[^>]*class="[^"]*scrollsidebar'
 
 if [ "$fail" -eq 0 ]; then
   echo "OK: no removed inquiry form, popups, widgets, or footer found"
