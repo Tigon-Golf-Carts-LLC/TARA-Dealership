@@ -51,10 +51,11 @@
   transition: right 0.2s ease-in-out;
 }
 
-/* 移动端抽屉菜单平滑位移 */
+/* 移动端抽屉菜单平滑位移 (opens from the right) */
 .mobile-head-item .side-content-wrap {
-  left: -70%;
-  transition: left 0.3s ease-in-out;
+  left: auto;
+  right: -70%;
+  transition: right 0.3s ease-in-out;
 }
 </style>
 

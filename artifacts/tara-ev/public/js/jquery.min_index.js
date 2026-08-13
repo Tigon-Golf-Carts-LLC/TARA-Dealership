@@ -78,7 +78,7 @@ function mSizeChange() {
               if (!mainContentWrap.classList.contains('show-content-wrap')) {
                 mainContentWrap.classList.add('show-content-wrap');
                 if (sideWrap) {
-                  sideWrap.style.left = '0';
+                  sideWrap.style.left = 'auto'; sideWrap.style.right = '0';
                   if (!sideWrap.querySelector('.mobile-ico-close')) {
                     var closeB = document.createElement('b');
                     closeB.className = 'mobile-ico-close';
@@ -95,7 +95,7 @@ function mSizeChange() {
                   var sMiddle = sItem.querySelector('.middle-content-wrap');
                   if (sMain) sMain.classList.remove('show-content-wrap');
                   if (sSide) {
-                    sSide.style.left = '-70%';
+                    sSide.style.left = 'auto'; sSide.style.right = '-70%';
                     var sClose = sSide.querySelector('.mobile-ico-close');
                     if (sClose) sClose.remove();
                   }
@@ -129,7 +129,7 @@ function mSizeChange() {
         var middleWrap = itemEl.querySelector('.middle-content-wrap');
         if (mainWrap) mainWrap.classList.remove('show-content-wrap');
         if (sideWrap) {
-          sideWrap.style.left = '-70%';
+          sideWrap.style.left = 'auto'; sideWrap.style.right = '-70%';
           var closeB = sideWrap.querySelector('.mobile-ico-close');
           if (closeB) closeB.remove();
         }

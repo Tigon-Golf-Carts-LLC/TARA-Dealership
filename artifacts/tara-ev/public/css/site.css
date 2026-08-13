@@ -545,3 +545,31 @@
 /* Contact callout circles: center the inline SVG icons */
 .fl-callout .fl-icon { display: inline-flex; align-items: center; justify-content: center; }
 .fl-callout .fl-icon svg { display: block; }
+
+/* ── Mobile header fixes (Aug 2026): hamburger on the right, drawer opens from the right, centered logo ── */
+@media only screen and (max-width: 950px) {
+  .mobile-head-item.mobile-head-nav { float: right; }
+  .mobile-head-item .side-content-wrap {
+    left: auto !important;
+    right: -70%;
+    transition: right .3s ease-in-out;
+  }
+  .mobile-ico-close { right: auto; left: -35px; }
+  .web-head { text-align: center; }
+  .web-head .logo,
+  .index-web-head .logo {
+    float: none !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    padding: 10px 0 !important;
+  }
+  .web-head .logo img {
+    height: 48px !important;
+    max-height: 48px !important;
+    width: auto !important;
+    display: inline-block !important;
+  }
+}
