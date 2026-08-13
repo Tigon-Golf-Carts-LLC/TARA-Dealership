@@ -68,7 +68,40 @@ check "inquiry form section (section.inquiry-form-wrap)" \
 check "Online Service floating sidebar (aside.scrollsidebar)" \
   '<aside[^>]*class="[^"]*scrollsidebar'
 
+# --- Old branding guard (TARA Dealership rebrand) ---
+# The brand is TARA Dealership / taradealership.com. Old domains and brand
+# names must never reappear. Scans all of public/ (not just content/) plus
+# src/ and index.html, and dist/public when present. Notes:
+# - grep -I skips binary files: old logo images are task-tracked separately,
+#   and PNG metadata can incidentally contain old-domain strings.
+# - scripts/localize-assets.mjs legitimately references www.taragolfcart.com
+#   in its source-domain regexes; scripts/ is not scanned.
+# - Brand-name checks are case-sensitive: descriptive prose like
+#   "TARA electric vehicles are quiet" is fine; the Title Case brand
+#   "TARA Electric Vehicles" is not.
+brand_scan_dirs=(public/ src/ index.html)
+if [ -d dist/public ]; then
+  brand_scan_dirs+=(dist/public/)
+fi
+
+brand_check() {
+  local label="$1" pattern="$2"
+  shift 2
+  local hits
+  hits=$(grep -rlI "$@" -e "$pattern" "${brand_scan_dirs[@]}" 2>/dev/null | sort -u || true)
+  if [ -n "$hits" ]; then
+    echo "OLD BRANDING REAPPEARED — $label:"
+    echo "$hits" | head -20
+    fail=1
+  fi
+}
+
+brand_check "old domain taragolfcart.com" 'taragolfcart\.com' -iE
+brand_check "old domain taranev.com" 'taranev\.com' -iE
+brand_check "old brand name \"TARA Electric Vehicles\"" 'TARA Electric Vehicles' -F
+brand_check "old brand name \"TARA Neighborhood Electric Vehicles\"" 'TARA Neighborhood Electric Vehicles' -F
+
 if [ "$fail" -eq 0 ]; then
-  echo "OK: no removed inquiry form, popups, widgets, or footer found"
+  echo "OK: no removed inquiry form, popups, widgets, footer, or old branding found"
 fi
 exit $fail
