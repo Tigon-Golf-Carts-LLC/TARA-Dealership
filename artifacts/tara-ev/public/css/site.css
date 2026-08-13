@@ -555,16 +555,19 @@
     transition: right .3s ease-in-out;
   }
   .mobile-ico-close { right: auto; left: -35px; }
-  .web-head { text-align: center; }
+  .web-head { text-align: left; }
   .web-head .logo,
   .index-web-head .logo {
     float: none !important;
-    display: block !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
     width: 100% !important;
     height: auto !important;
-    margin: 0 auto !important;
-    text-align: center !important;
-    padding: 10px 0 !important;
+    margin: 0 !important;
+    text-align: left !important;
+    padding: 10px 15px !important;
+    box-sizing: border-box !important;
   }
   .web-head .logo img {
     height: 48px !important;
