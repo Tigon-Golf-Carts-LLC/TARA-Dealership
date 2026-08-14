@@ -576,3 +576,19 @@
     display: inline-block !important;
   }
 }
+
+/* ── Desktop logo size fix (Aug 2026): the 44px square-logo cap was shrinking the header logo on desktop ── */
+@media only screen and (min-width: 951px) {
+  .web-head .logo img,
+  .nav-wrap .logo img,
+  .logo img {
+    height: 72px !important;
+    max-height: 72px !important;
+    width: auto !important;
+  }
+  .fixed-nav .logo img,
+  .is-fixed .logo img {
+    height: 50px !important;
+    max-height: 50px !important;
+  }
+}
