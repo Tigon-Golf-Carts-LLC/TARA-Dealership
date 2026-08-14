@@ -95,3 +95,20 @@ Sitemap: https://taradealership.com/sitemap.xml
 Sitemap: https://taradealership.com/sitemap-pages.xml
 Sitemap: https://taradealership.com/sitemap-news.xml
 Sitemap: https://taradealership.com/sitemap-images.xml
+Sitemap: https://taradealership.com/image-sitemap.xml
+Sitemap: https://taradealership.com/sitemap-blog.xml
+Sitemap: https://taradealership.com/sitemap-brands.xml
+Sitemap: https://taradealership.com/page-sitemap.xml
+Sitemap: https://taradealership.com/post-sitemap.xml
+Sitemap: https://taradealership.com/category-sitemap.xml
+Sitemap: https://taradealership.com/tag-sitemap.xml
+Sitemap: https://taradealership.com/author-sitemap.xml
+Sitemap: https://taradealership.com/news-sitemap.xml
+Sitemap: https://taradealership.com/mobile-sitemap.xml
+Sitemap: https://taradealership.com/geo-sitemap.xml
+Sitemap: https://taradealership.com/hreflang-sitemap.xml
+Sitemap: https://taradealership.com/xhtml-sitemap.xml
+Sitemap: https://taradealership.com/dynamic-sitemap.xml
+Sitemap: https://taradealership.com/urllist.xml
+
+# Feeds: /rss.xml /atom.xml /feed.xml /podcast.xml /product_feed.xml /google-shopping-feed.xml /local-inventory-feed.xml /api-feed.xml /data.xml

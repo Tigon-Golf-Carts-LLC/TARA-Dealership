@@ -2,14 +2,74 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
     <loc>https://taradealership.com/sitemap-pages.xml</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-14</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://taradealership.com/sitemap-news.xml</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-14</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://taradealership.com/sitemap-images.xml</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-14</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://taradealership.com/image-sitemap.xml</loc>
+    <lastmod>2026-08-14</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://taradealership.com/sitemap-blog.xml</loc>
+    <lastmod>2026-08-14</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://taradealership.com/sitemap-brands.xml</loc>
+    <lastmod>2026-08-14</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://taradealership.com/page-sitemap.xml</loc>
+    <lastmod>2026-08-14</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://taradealership.com/post-sitemap.xml</loc>
+    <lastmod>2026-08-14</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://taradealership.com/category-sitemap.xml</loc>
+    <lastmod>2026-08-14</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://taradealership.com/tag-sitemap.xml</loc>
+    <lastmod>2026-08-14</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://taradealership.com/author-sitemap.xml</loc>
+    <lastmod>2026-08-14</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://taradealership.com/news-sitemap.xml</loc>
+    <lastmod>2026-08-14</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://taradealership.com/mobile-sitemap.xml</loc>
+    <lastmod>2026-08-14</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://taradealership.com/geo-sitemap.xml</loc>
+    <lastmod>2026-08-14</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://taradealership.com/hreflang-sitemap.xml</loc>
+    <lastmod>2026-08-14</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://taradealership.com/xhtml-sitemap.xml</loc>
+    <lastmod>2026-08-14</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://taradealership.com/dynamic-sitemap.xml</loc>
+    <lastmod>2026-08-14</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://taradealership.com/urllist.xml</loc>
+    <lastmod>2026-08-14</lastmod>
   </sitemap>
 </sitemapindex>
