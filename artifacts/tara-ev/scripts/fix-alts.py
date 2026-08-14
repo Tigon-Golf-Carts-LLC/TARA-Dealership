@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
 """Rewrite generic/empty img alt text in public/content/*.html with descriptive,
-model-specific, US-framed alts. Idempotent."""
+model-specific, US-framed alts. Idempotent.
+
+Usage:
+  fix-alts.py           rewrite bad alts in place, report leftovers
+  fix-alts.py --check   audit only (no writes); exit 1 if any fixable or
+                        suspicious alts are found (used by verify-removals.sh)
+"""
 import re, sys, glob, html, os
+
+CHECK_ONLY = "--check" in sys.argv[1:]
 
 CONTENT = os.path.join(os.path.dirname(__file__), "..", "public", "content")
 
@@ -271,7 +279,7 @@ def process_file(path):
         return tag
 
     newtext = IMG_RE.sub(repl, text)
-    if newtext != text:
+    if newtext != text and not CHECK_ONLY:
         with open(path, "w", encoding="utf-8") as f:
             f.write(newtext)
     return changes
@@ -280,7 +288,10 @@ total = 0
 for path in sorted(glob.glob(os.path.join(CONTENT, "*.html"))):
     ch = process_file(path)
     total += len(ch)
-print(f"Total alt updates: {total}")
+if CHECK_ONLY:
+    print(f"Fixable alt regressions: {total}")
+else:
+    print(f"Total alt updates: {total}")
 
 # report remaining suspicious alts
 print("\n=== Remaining suspicious alts ===")
@@ -319,3 +330,8 @@ for path in sorted(glob.glob(os.path.join(CONTENT, "*.html"))):
             susp.setdefault(alt, set()).add(os.path.basename(path))
 for k, v in sorted(susp.items()):
     print(f"  {k!r}  -> {sorted(v)[:4]}{'...' if len(v)>4 else ''}")
+
+if CHECK_ONLY and (total or susp):
+    print(f"\nALT AUDIT FAILED: {total} fixable, {len(susp)} suspicious alt(s). "
+          "Run scripts/fix-alts.py (no --check) to auto-fix, then review leftovers.")
+    sys.exit(1)

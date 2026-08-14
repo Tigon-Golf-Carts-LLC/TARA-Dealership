@@ -4,6 +4,6 @@
 - [Overseas imagery audit](overseas-imagery-audit.md) — overseas photos hide behind opaque filenames; grep alt text and /uploads lightbox hrefs, not just src paths.
 - [api-server stale port 8080](api-server-port.md) — recurring EADDRINUSE; `fuser -k 8080/tcp` then restart the workflow.
 - [Overseas news text audit](overseas-text-audit.md) — US-only framing rule: no overseas or global/export claims in news bodies, card excerpts, or alt text; re-audit after merges.
-- [Image alt conventions](image-alt-conventions.md) — descriptive model-specific alts enforced by scripts/fix-alts.py; re-run after merges, decoratives use alt="" role="presentation".
+- [Image alt conventions](image-alt-conventions.md) — descriptive model-specific alts enforced by scripts/fix-alts.py; verify-removals.sh now runs `fix-alts.py --check` so alt regressions fail the post-merge check automatically.
 - [Dealership rebrand](dealership-rebrand.md) — brand is TARA Dealership / taradealership.com, focus keyword "TARA Golf Cart Dealership"; never reintroduce taragolfcart.com or old brand names; "TARA NEV Roadster" is a product name and stays.
 - [SEO metadata pipeline](seo-metadata-pipeline.md) — titles/descriptions live in public/content/routes.json AND must flow through prerender.mjs + vite dev middleware; editing routes.json alone only changes client-side JS meta.

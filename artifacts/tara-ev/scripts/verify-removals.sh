@@ -101,7 +101,17 @@ brand_check "old domain taranev.com" 'taranev\.com' -iE
 brand_check "old brand name \"TARA Electric Vehicles\"" 'TARA Electric Vehicles' -F
 brand_check "old brand name \"TARA Neighborhood Electric Vehicles\"" 'TARA Neighborhood Electric Vehicles' -F
 
+# --- Image alt-text audit ---
+# Merges have also reintroduced generic/empty alts (e.g. "D7 product_show-1").
+# fix-alts.py --check audits public/content/*.html without writing and exits
+# nonzero if any fixable or suspicious alts are present.
+if ! python3 scripts/fix-alts.py --check; then
+  echo "ALT REGRESSION — generic/empty image alts reappeared in public/content/"
+  echo "Fix with: python3 scripts/fix-alts.py"
+  fail=1
+fi
+
 if [ "$fail" -eq 0 ]; then
-  echo "OK: no removed inquiry form, popups, widgets, footer, or old branding found"
+  echo "OK: no removed inquiry form, popups, widgets, footer, old branding, or alt regressions found"
 fi
 exit $fail
