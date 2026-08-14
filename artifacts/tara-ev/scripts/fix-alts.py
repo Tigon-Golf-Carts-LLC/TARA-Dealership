@@ -3,15 +3,31 @@
 model-specific, US-framed alts. Idempotent.
 
 Usage:
-  fix-alts.py           rewrite bad alts in place, report leftovers
-  fix-alts.py --check   audit only (no writes); exit 1 if any fixable or
-                        suspicious alts are found (used by verify-removals.sh)
+  fix-alts.py                   rewrite bad alts in place, report leftovers
+  fix-alts.py --check           audit only (no writes); exit 1 if any fixable or
+                                suspicious alts are found (used by verify-removals.sh)
+  fix-alts.py --check DIR ...   audit the given directories (recursively) instead
+                                of the default public/content/ — used to audit
+                                built HTML in dist/public as well.
 """
 import re, sys, glob, html, os
 
 CHECK_ONLY = "--check" in sys.argv[1:]
+DIR_ARGS = [a for a in sys.argv[1:] if a != "--check"]
 
 CONTENT = os.path.join(os.path.dirname(__file__), "..", "public", "content")
+
+def html_files():
+    """All HTML files to process, sorted."""
+    if DIR_ARGS:
+        files = []
+        for d in DIR_ARGS:
+            if not os.path.isdir(d):
+                print(f"ERROR: not a directory: {d}", file=sys.stderr)
+                sys.exit(2)
+            files += glob.glob(os.path.join(d, "**", "*.html"), recursive=True)
+        return sorted(set(files))
+    return sorted(glob.glob(os.path.join(CONTENT, "*.html")))
 
 # ---------- helpers ----------
 def titlecase(s):
@@ -285,7 +301,7 @@ def process_file(path):
     return changes
 
 total = 0
-for path in sorted(glob.glob(os.path.join(CONTENT, "*.html"))):
+for path in html_files():
     ch = process_file(path)
     total += len(ch)
 if CHECK_ONLY:
@@ -296,7 +312,7 @@ else:
 # report remaining suspicious alts
 print("\n=== Remaining suspicious alts ===")
 susp = {}
-for path in sorted(glob.glob(os.path.join(CONTENT, "*.html"))):
+for path in html_files():
     with open(path, encoding="utf-8") as f:
         text = f.read()
     for tag in IMG_RE.findall(text):

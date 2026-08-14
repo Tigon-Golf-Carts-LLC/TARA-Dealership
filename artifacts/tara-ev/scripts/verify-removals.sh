@@ -111,6 +111,17 @@ if ! python3 scripts/fix-alts.py --check; then
   fail=1
 fi
 
+# Also audit the production build output when it exists (required with
+# --require-dist), so a build step can't ship generic/empty alts even
+# when the source files are clean.
+if [ -d dist/public ]; then
+  if ! python3 scripts/fix-alts.py --check dist/public; then
+    echo "ALT REGRESSION — generic/empty image alts found in built HTML (dist/public/)"
+    echo "The build step reintroduced bad alts; fix the source or the build, then rebuild."
+    fail=1
+  fi
+fi
+
 if [ "$fail" -eq 0 ]; then
   echo "OK: no removed inquiry form, popups, widgets, footer, old branding, or alt regressions found"
 fi

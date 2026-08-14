@@ -7,4 +7,4 @@ Every meaningful image in tara-ev content pages must carry a descriptive, model-
 
 **Why:** the legacy clone shipped filename-derived alts that hurt image-search ranking and accessibility, and merges have restored old markup before.
 
-**How to apply:** after any merge or content re-import, re-run the alt auditor script in the artifact's scripts directory and resolve anything it flags.
+**How to apply:** after any merge or content re-import, re-run the alt auditor script in the artifact's scripts directory and resolve anything it flags. The auditor also accepts directory arguments to audit built HTML (dist/public), and the post-merge check runs it on both source and build output — a stale dist can fail the check even when source is clean; rebuild to clear it.
