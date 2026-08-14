@@ -248,6 +248,19 @@ function assertSeoMeta(generatedHtml, routePath, routeMeta) {
   if (routeMeta.description && emittedDesc !== routeMeta.description) {
     fail('description does not match curated routes.json description');
   }
+
+  // Copy/branding rules: every curated description must carry the
+  // "TARA Dealership" (or "TARA Golf Cart Dealership") brand, explicit
+  // US framing, and no overseas/global framing or legacy brand names.
+  if (!/TARA (Golf Cart )?Dealership/.test(emittedDesc)) {
+    fail('description lacks "TARA Dealership" branding');
+  }
+  if (!/\bUS\b|U\.S\.|American|United States|nationwide/.test(emittedDesc)) {
+    fail('description lacks explicit US framing (US / American / nationwide)');
+  }
+  if (/overseas|global|worldwide|export|international|taragolfcart/i.test(emittedDesc)) {
+    fail('description contains banned overseas/global framing or legacy brand');
+  }
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
