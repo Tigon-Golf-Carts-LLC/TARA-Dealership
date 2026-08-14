@@ -96,10 +96,12 @@ function injectRouteMeta(
   shellHtml: string,
   routePath: string,
   routeTitle: string,
+  routeDescription: string | undefined,
   contentHtml: string,
   origin: string,
 ): string {
-  const description = extractDescription(contentHtml);
+  // Prefer curated SEO description from routes.json; extraction is a fallback only.
+  const description = routeDescription || extractDescription(contentHtml);
   const ogImage = extractOgImage(contentHtml);
   const canonicalUrl = `${origin}${routePath}`;
   const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `${origin}${ogImage}`;
@@ -137,7 +139,7 @@ function injectRouteMeta(
 
 // ─── Dev middleware: serves per-route pre-rendered HTML ───────────────────────
 
-type RouteMeta = { file: string; title: string; bodyClass: string };
+type RouteMeta = { file: string; title: string; description?: string; bodyClass: string };
 type Routes = Record<string, RouteMeta>;
 
 const spaMetaMiddleware = (): Plugin => ({
@@ -197,6 +199,7 @@ const spaMetaMiddleware = (): Plugin => ({
           shellHtml,
           reqPath,
           meta.title,
+          meta.description,
           contentHtml,
           devOrigin,
         );

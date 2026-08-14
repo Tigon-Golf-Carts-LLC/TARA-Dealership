@@ -1,0 +1,9 @@
+---
+name: SEO metadata pipeline
+description: Where tara-ev page titles/meta descriptions come from and what to keep in sync
+---
+Titles and meta descriptions for all routes are curated in `artifacts/tara-ev/public/content/routes.json`. Three consumers must stay in sync: client-side (`src/App.tsx`), build prerenderer (`scripts/prerender.mjs`), and dev middleware (`vite.config.ts`). Prerender + dev middleware prefer `routeMeta.description` with HTML extraction as fallback only.
+
+**Why:** a review rejected an edit that changed routes.json only — static HTML crawlers receive kept old extracted, ellipsis-truncated descriptions.
+
+**How to apply:** the build (`pnpm run build` with PORT set) runs `assertSeoMeta` on all generated pages: exact title/description match to routes.json, nonempty, ≤160 chars, no trailing ellipsis. Description conventions: unique branded title with TARA, explicit US framing, no overseas/global/export terms, never the banned old brand phrases (verify-removals.sh greps routes.json too). Dev middleware only rewrites requests with `Accept: text/html` — curl needs that header when testing.

@@ -123,7 +123,8 @@ function extractOgImage(html) {
 
 function buildPageHtml(routePath, routeMeta, contentHtml) {
   const title = routeMeta.title || 'TARA Golf Cart Dealership';
-  const description = extractDescription(contentHtml);
+  // Prefer curated SEO description from routes.json; extraction is a fallback only.
+  const description = routeMeta.description || extractDescription(contentHtml);
   const ogImage = extractOgImage(contentHtml);
   const canonicalUrl = `${origin}${routePath}`;
   const absoluteOgImage = ogImage.startsWith('http')
@@ -209,6 +210,46 @@ function assertJsAssetPresent(generatedHtml, routePath) {
   }
 }
 
+/**
+ * Verify the generated HTML carries the exact curated <title> and meta
+ * description from routes.json, that the description is nonempty, at most
+ * 160 characters, and not ellipsis-truncated.  Exits non-zero on failure.
+ */
+function assertSeoMeta(generatedHtml, routePath, routeMeta) {
+  const fail = (msg) => {
+    console.error(`[prerender] SEO ASSERTION FAILED for "${routePath}": ${msg}`);
+    process.exit(1);
+  };
+  const unesc = (s) =>
+    s
+      .replace(/&quot;/g, '"')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, '&');
+
+  const titleMatch = generatedHtml.match(/<title>([^<]*)<\/title>/);
+  if (!titleMatch) fail('no <title> tag in generated HTML');
+  const emittedTitle = unesc(titleMatch[1]);
+  const expectedTitle = routeMeta.title || 'TARA Golf Cart Dealership';
+  if (emittedTitle !== expectedTitle) {
+    fail(`title mismatch: emitted "${emittedTitle}" vs routes.json "${expectedTitle}"`);
+  }
+
+  const descMatch = generatedHtml.match(
+    /<meta\s+name="description"\s+content="([^"]*)"/i,
+  );
+  if (!descMatch) fail('no meta description in generated HTML');
+  const emittedDesc = unesc(descMatch[1]);
+  if (!emittedDesc) fail('empty meta description');
+  if (emittedDesc.length > 160) {
+    fail(`description is ${emittedDesc.length} chars (max 160)`);
+  }
+  if (/(\.\.\.|…)\s*$/.test(emittedDesc)) fail('description ends with ellipsis (truncated)');
+  if (routeMeta.description && emittedDesc !== routeMeta.description) {
+    fail('description does not match curated routes.json description');
+  }
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -258,6 +299,9 @@ async function main() {
     if (canAssert) {
       assertJsAssetPresent(pageHtml, routePath);
     }
+
+    // Validate emitted SEO metadata matches routes.json and is well-formed.
+    assertSeoMeta(pageHtml, routePath, routeMeta);
 
     // Write output: "/" → outDir/index.html, "/about-us/" → outDir/about-us/index.html
     const slug = routePath === '/' ? '' : routePath.replace(/^\/|\/$/g, '');
