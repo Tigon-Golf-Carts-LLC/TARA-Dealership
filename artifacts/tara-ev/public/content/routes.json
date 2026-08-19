@@ -3,24 +3,28 @@
     "bodyClass": "",
     "description": "TARA Golf Cart Dealership — electric golf carts, NEVs, and utility vehicles for golf courses, resorts, and communities across the US.",
     "file": "home.html",
+    "ogImage": "/images/hero-black-golf-cart-course.webp",
     "title": "TARA Neighborhood Electric Golf Carts & NEVs for Golf Courses | TARA Dealership"
   },
   "/about-us/": {
     "bodyClass": "",
     "description": "Learn about TARA Golf Cart Dealership — your authorized US dealer for electric golf carts, NEVs, and utility vehicles for golf courses and communities.",
     "file": "about-us.html",
+    "ogImage": "/images/hero-resort-evening-cart.webp",
     "title": "About TARA Golf Cart Dealership"
   },
   "/accessories/": {
     "bodyClass": "",
     "description": "Shop TARA electric golf cart accessories across the US, from seats and covers to wheels and enclosures. Available at TARA Dealership.",
     "file": "accessories.html",
+    "ogImage": "/images/ext/4e87a4e6-GOLF-BAG-HOLDER-ASSEMBLY2.png",
     "title": "Accessories for TARA Neighborhood Electric Golf Carts | TARA Dealership"
   },
   "/blog/": {
     "bodyClass": "",
     "description": "The TARA Golf Cart Dealership blog offers expert tips for US golf courses, fleet management advice, and guides for electric carts nationwide.",
     "file": "blog.html",
+    "ogImage": "/images/hero-mountain-course-cart.webp",
     "title": "Blog | TARA Golf Cart Dealership"
   },
   "/blog/choosing-right-tara/": {
@@ -99,24 +103,28 @@
     "bodyClass": "",
     "description": "See how US golf courses, resorts, and communities put TARA electric vehicles to work. Read real customer cases from TARA Dealership.",
     "file": "cases.html",
+    "ogImage": "/images/banner-01.webp",
     "title": "Customer Cases | TARA Golf Cart Dealership"
   },
   "/contact/": {
     "bodyClass": "",
     "description": "Contact TARA Golf Cart Dealership for sales and support across the US. Call 844-844-3432 for prompt service from our nationwide team.",
     "file": "contact.html",
+    "ogImage": "/images/banner-02.webp",
     "title": "Contact TARA Golf Cart Dealership"
   },
   "/emergency-response-guides/": {
     "bodyClass": "",
     "description": "Download TARA emergency response guides that help first responders in the US work safely around our electric carts. TARA Dealership.",
     "file": "emergency-response-guides.html",
+    "ogImage": "/images/ext/58f4bf3c-911.jpg",
     "title": "Emergency Response Guides | TARA Golf Cart Dealership"
   },
   "/explorer-2-2-golf-cart-product/": {
     "bodyClass": "",
     "description": "The TARA Explorer 2+2 is a 4-seat electric cart built for US resorts and communities. View features at your trusted TARA Golf Cart Dealership.",
     "file": "explorer-2-2-golf-cart-product.html",
+    "ogImage": "/images/Explorer-2+2-banner11.webp",
     "title": "Explorer 2+2 Electric Golf Cart | TARA Golf Cart Dealership"
   },
   "/explorer-2-2-product/": {
@@ -126,36 +134,42 @@
     "bodyClass": "",
     "description": "Find answers to FAQs about TARA electric golf carts in the US, including charging, maintenance, and nationwide dealer support. Ask TARA Dealership.",
     "file": "faqs.html",
+    "ogImage": "/images/ext/b97088d4-5bef7f49.png",
     "title": "FAQs & Support | TARA Golf Cart Dealership"
   },
   "/financing/": {
     "bodyClass": "",
     "description": "Finance your TARA golf cart with 0% APR options and same-day approval. Apply online for nationwide US lending support at TARA Dealership.",
     "file": "financing.html",
+    "ogImage": "/images/hero-cream-golf-cart-lake.webp",
     "title": "Golf Cart Financing - Low Monthly Payments - TARA Golf Cart Dealership"
   },
   "/fleet-golf-carts/": {
     "bodyClass": "",
     "description": "TARA fleet golf carts are built for US golf courses and large properties. Explore the Harmony and Spirit models at TARA Golf Cart Dealership.",
     "file": "fleet-golf-carts.html",
+    "ogImage": "/images/banner-02.webp",
     "title": "Fleet Golf Cart Solutions | TARA Golf Cart Dealership"
   },
   "/harmony-fleet-golf-cart-product/": {
     "bodyClass": "",
     "description": "The TARA Harmony is a quiet, dependable 2-seat fleet cart built for premium US golf courses. Available at TARA Dealership.",
     "file": "harmony-fleet-golf-cart-product.html",
+    "ogImage": "/images/Harmony-no-light-banner1.webp",
     "title": "Harmony Fleet Golf Cart | TARA Golf Cart Dealership"
   },
   "/harmony-product/": {
     "bodyClass": "",
     "description": "The TARA Harmony electric golf cart offers quiet handling for US resorts and courses. View all specs and colors from TARA Golf Cart Dealership.",
     "file": "harmony-product.html",
+    "ogImage": "/images/Harmony-no-light-banner1.webp",
     "title": "Harmony Electric Golf Cart | TARA Golf Cart Dealership"
   },
   "/horizon-4-golf-cart-product/": {
     "bodyClass": "",
     "description": "The TARA Horizon 4 seats 4 in comfort. Perfect for US golf courses and residential communities. Explore features at TARA Golf Cart Dealership.",
     "file": "horizon-4-golf-cart-product.html",
+    "ogImage": "/images/banner014.webp",
     "title": "Horizon 4 Electric Golf Cart | TARA Golf Cart Dealership"
   },
   "/horizon-4-product/": {
@@ -165,6 +179,7 @@
     "bodyClass": "",
     "description": "The TARA Horizon 6 seats 6, ideal for US resort shuttles. View specs and color options at your local TARA Golf Cart Dealership.",
     "file": "horizon-6-golf-cart-product.html",
+    "ogImage": "/images/banner-011.webp",
     "title": "Horizon 6 Electric Golf Cart | TARA Golf Cart Dealership"
   },
   "/horizon-6-product/": {
@@ -174,6 +189,7 @@
     "bodyClass": "",
     "description": "The TARA Lander 4 is a rugged 4-seat electric utility cart for tough US terrain. View specs and options at TARA Golf Cart Dealership.",
     "file": "lander-4-golf-cart-product.html",
+    "ogImage": "/images/banner013.webp",
     "title": "Lander 4 Electric Golf Cart | TARA Golf Cart Dealership"
   },
   "/lander-4-product/": {
@@ -183,6 +199,7 @@
     "bodyClass": "",
     "description": "The TARA Lander 6 carries 6 passengers across rugged US terrain. Perfect for large parks and resorts. View specs at TARA Golf Cart Dealership.",
     "file": "lander-6-golf-cart-product.html",
+    "ogImage": "/images/banner-01.webp",
     "title": "Lander 6 Electric Golf Cart | TARA Golf Cart Dealership"
   },
   "/lander-6-product/": {
@@ -195,6 +212,7 @@
     "bodyClass": "",
     "description": "Find TARA maintenance guides, service schedules, and support for US golf cart owners, all in one place at TARA Dealership.",
     "file": "maintenance-support.html",
+    "ogImage": "/images/ext/aff3fe50-car-service-260518.png",
     "title": "Maintenance & Support | TARA Golf Cart Dealership"
   },
   "/news/2-passenger-golf-carts-golf-course-carts/": {
@@ -3129,48 +3147,56 @@
     "bodyClass": "",
     "description": "Read the TARA Golf Cart Dealership privacy policy. We protect your personal data for all customers across the US in compliance with American law.",
     "file": "privacy-policy.html",
+    "ogImage": "/images/hero-black-golf-cart-course.webp",
     "title": "Privacy Policy | TARA Golf Cart Dealership"
   },
   "/rambler-2-product/": {
     "bodyClass": "",
     "description": "The TARA Rambler 2 is a stylish 2-seat electric cart perfect for US residents and neighborhoods. Shop it at TARA Dealership.",
     "file": "rambler-2-product.html",
+    "ogImage": "/images/spirit-pro-banner1.webp",
     "title": "TARA Rambler 2 Electric Golf Cart | TARA Golf Cart Dealership"
   },
   "/rambler-se2-product/": {
     "bodyClass": "",
     "description": "The TARA Rambler SE2 is a premium 2-seat electric golf cart for US residents. View specs and colors at TARA Dealership.",
     "file": "rambler-se2-product.html",
+    "ogImage": "/images/Harmony-no-light-banner1.webp",
     "title": "TARA Rambler SE2 Electric Golf Cart | TARA Golf Cart Dealership"
   },
   "/recall-information/": {
     "bodyClass": "",
     "description": "View important TARA vehicle recall notices and safety updates for US owners at TARA Dealership.",
     "file": "recall-information.html",
+    "ogImage": "/images/hero-black-golf-cart-course.webp",
     "title": "Recall Information | TARA Golf Cart Dealership"
   },
   "/roadster-2-2-golf-cart-product/": {
     "bodyClass": "",
     "description": "The TARA Roadster 2+2 is a sporty 4-passenger cart for US resorts and communities. View specs at TARA Dealership.",
     "file": "roadster-2-2-golf-cart-product.html",
+    "ogImage": "/images/Roadster-2+2-banner13.webp",
     "title": "Roadster 2+2 Golf Cart | TARA Golf Cart Dealership"
   },
   "/roadster-2-2-product/": {
     "bodyClass": "",
     "description": "The TARA Roadster 2+2 seats 4 passengers for use in US communities and resorts. View specs and colors at TARA Dealership.",
     "file": "roadster-2-2-product.html",
+    "ogImage": "/images/Roadster-2+2-banner1.webp",
     "title": "Roadster 2+2 Electric Cart – Specs & Colors | TARA Golf Cart Dealership"
   },
   "/safety-information/": {
     "bodyClass": "",
     "description": "Essential safety guidelines for operating your TARA golf cart in the US. Read the tips at TARA Dealership.",
     "file": "safety-information.html",
+    "ogImage": "/images/ext/8364d1a0-banner-043.jpg",
     "title": "Safety Information | TARA Golf Cart Dealership"
   },
   "/spirit-plus-fleet-golf-cart-product/": {
     "bodyClass": "",
     "description": "The TARA Spirit Plus delivers premium comfort and reliability to US golf course fleets. View it at TARA Dealership.",
     "file": "spirit-plus-fleet-golf-cart-product.html",
+    "ogImage": "/images/spirit-plus-banner16.webp",
     "title": "Spirit Plus Fleet Golf Cart | TARA Golf Cart Dealership"
   },
   "/spirit-plus-product/": {
@@ -3180,36 +3206,42 @@
     "bodyClass": "",
     "description": "The TARA Spirit Pro is built for high-volume US golf fleets that demand durability and uptime. View it at TARA Dealership.",
     "file": "spirit-pro-fleet-golf-cart-product.html",
+    "ogImage": "/images/spirit-pro-banner14.webp",
     "title": "Spirit Pro Fleet Golf Cart | TARA Golf Cart Dealership"
   },
   "/spirit-pro-product/": {
     "bodyClass": "",
     "description": "The TARA Spirit Pro electric golf cart delivers top performance on US fairways. View specs and colors at TARA Dealership.",
     "file": "spirit-pro-product.html",
+    "ogImage": "/images/spirit-pro-banner1.webp",
     "title": "Spirit Pro Electric Golf Cart | TARA Golf Cart Dealership"
   },
   "/t1-series/": {
     "bodyClass": "",
     "description": "Explore the TARA T1 series, purpose-built fleet carts for professional US golf courses. View the lineup at TARA Dealership.",
     "file": "t1-series.html",
+    "ogImage": "/images/Tara-Spirit-Plus-2-Seater-Fleet-Golf-Cart-PORTIMAO-BLUE-.webp",
     "title": "TARA T1 Golf Cart Series – Fleet Carts | TARA Golf Cart Dealership"
   },
   "/t2-series/": {
     "bodyClass": "",
     "description": "The T2 series from TARA Dealership delivers rugged electric utility vehicles for US resorts, large properties, and golf courses.",
     "file": "t2-series.html",
+    "ogImage": "/images/turfman700arctic-gray1.webp",
     "title": "TARA T2 Utility Series – Electric Utility Vehicles | TARA Golf Cart Dealership"
   },
   "/t3-2-2-golf-cart-product/": {
     "bodyClass": "",
     "description": "The TARA T3 2+2 is a street-legal NEV for US gated communities and resorts. View specs and colors at TARA Dealership.",
     "file": "t3-2-2-golf-cart-product.html",
+    "ogImage": "/images/2+2-banner1-tara1.webp",
     "title": "T3 2+2 Street Legal Golf Cart | TARA Golf Cart Dealership"
   },
   "/t3-2-2-lifted-golf-cart-product/": {
     "bodyClass": "",
     "description": "The TARA T3 2+2 Lifted is built for varied US terrain and rougher trails. View specs and colors at TARA Dealership.",
     "file": "t3-2-2-lifted-golf-cart-product.html",
+    "ogImage": "/images/2+2-banner1-tara_.webp",
     "title": "T3 2+2 Lifted Golf Cart | TARA Golf Cart Dealership"
   },
   "/t3-2-2-lifted-product/": {
@@ -3228,6 +3260,7 @@
     "bodyClass": "",
     "description": "TARA T3 street-legal NEVs bring reliable transportation to US gated communities and resorts. Explore the series at TARA Dealership.",
     "file": "t3-series.html",
+    "ogImage": "/images/2+2-banner1-tara.webp",
     "title": "TARA T3 Street Legal Series – NEVs | TARA Golf Cart Dealership"
   },
   "/techncal-support/": {
@@ -3237,42 +3270,49 @@
     "bodyClass": "",
     "description": "Download technical manuals and spec sheets for TARA golf carts in the US at TARA Dealership.",
     "file": "technical-document-2.html",
+    "ogImage": "/images/ext/dddca3b2-TARA-Golf-Cart-Technical-Document.png",
     "title": "Technical Documents | TARA Golf Cart Dealership"
   },
   "/technical-support/": {
     "bodyClass": "",
     "description": "Need TARA technical support in the US? Access troubleshooting guides and docs to keep your carts running at TARA Dealership.",
     "file": "technical-support.html",
+    "ogImage": "/images/ext/b97088d4-5bef7f49.png",
     "title": "Technical Support | TARA Golf Cart Dealership"
   },
   "/terms-and-conditions/": {
     "bodyClass": "",
     "description": "Read the TARA Golf Cart Dealership terms and conditions, governing the purchase and use of our products by customers across the United States.",
     "file": "terms-and-conditions.html",
+    "ogImage": "/images/hero-black-golf-cart-course.webp",
     "title": "Terms and Conditions | TARA Golf Cart Dealership"
   },
   "/turfman-1000-utility-vehicle-product/": {
     "bodyClass": "",
     "description": "The TARA Turfman 1000 is heavy-duty electric utility built for large US golf courses. View specs at TARA Dealership.",
     "file": "turfman-1000-utility-vehicle-product.html",
+    "ogImage": "/images/turfman-700-banner11.webp",
     "title": "Turfman 1000 Utility Vehicle | TARA Golf Cart Dealership"
   },
   "/turfman-450-utility-vehicle-product/": {
     "bodyClass": "",
     "description": "The TARA Turfman 450 is the everyday utility choice for US groundskeepers. View specs and colors at TARA Dealership.",
     "file": "turfman-450-utility-vehicle-product.html",
+    "ogImage": "/images/turfman-450-banner1.webp",
     "title": "Turfman 450 Utility Vehicle | TARA Golf Cart Dealership"
   },
   "/turfman-700-eec-utility-vehicle-product/": {
     "bodyClass": "",
     "description": "The TARA Turfman 700 EEC is street-legal for US golf courses needing on-road transport. View specs at TARA Dealership.",
     "file": "turfman-700-eec-utility-vehicle-product.html",
+    "ogImage": "/images/turfman-700-eec-banner11.webp",
     "title": "Turfman 700 EEC Utility Vehicle | TARA Golf Cart Dealership"
   },
   "/turfman-700-utility-vehicle-product/": {
     "bodyClass": "",
     "description": "The TARA Turfman 700 handles large payloads for US resorts and golf courses. View specs and colors at TARA Dealership.",
     "file": "turfman-700-utility-vehicle-product.html",
+    "ogImage": "/images/turfman-700-banner1.webp",
     "title": "Turfman 700 Utility Vehicle | TARA Golf Cart Dealership"
   },
   "/varranty-terms/": {
@@ -3282,24 +3322,28 @@
     "bodyClass": "",
     "description": "The TARA Vogue 2+2 is a stylish 4-seat personal electric golf cart for US residents. View it at TARA Dealership.",
     "file": "vogue-2-2-product.html",
+    "ogImage": "/images/Roadster-2+2-banner1.webp",
     "title": "TARA Vogue 2+2 Electric Golf Cart | TARA Golf Cart Dealership"
   },
   "/vogue-2-product/": {
     "bodyClass": "",
     "description": "The TARA Vogue 2 is a sleek 2-seat personal golf cart, ideal for US personal use and premium resorts. Shop it at TARA Dealership.",
     "file": "vogue-2-product.html",
+    "ogImage": "/images/spirit-plus-banner1.webp",
     "title": "TARA Vogue 2 Electric Golf Cart | TARA Golf Cart Dealership"
   },
   "/vogue-se2-product/": {
     "bodyClass": "",
     "description": "The TARA Vogue SE2 is a premium 2-seat electric cart for US golf courses. View specs and colors at TARA Golf Cart Dealership, your premier US source.",
     "file": "vogue-se2-product.html",
+    "ogImage": "/images/Harmony-light-banner1.webp",
     "title": "TARA Vogue SE2 Electric Golf Cart | TARA Golf Cart Dealership"
   },
   "/warranty-terms/": {
     "bodyClass": "",
     "description": "Review the TARA Golf Cart Dealership warranty terms. We provide comprehensive coverage for electric carts across the US for your total peace of mind.",
     "file": "warranty-terms.html",
+    "ogImage": "/images/T3-2+2.webp",
     "title": "Warranty Terms | TARA Golf Cart Dealership"
   }
 }

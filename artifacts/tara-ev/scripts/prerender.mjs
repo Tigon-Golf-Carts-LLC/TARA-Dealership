@@ -125,7 +125,8 @@ function buildPageHtml(routePath, routeMeta, contentHtml) {
   const title = routeMeta.title || 'TARA Golf Cart Dealership';
   // Prefer curated SEO description from routes.json; extraction is a fallback only.
   const description = routeMeta.description || extractDescription(contentHtml);
-  const ogImage = extractOgImage(contentHtml);
+  // Prefer curated ogImage from routes.json; auto-extraction is a fallback only.
+  const ogImage = routeMeta.ogImage || extractOgImage(contentHtml);
   const canonicalUrl = `${origin}${routePath}`;
   const absoluteOgImage = ogImage.startsWith('http')
     ? ogImage
@@ -161,6 +162,12 @@ function buildPageHtml(routePath, routeMeta, contentHtml) {
   html = html.replace(
     /<meta\s+property="og:image"[^>]*\/?>/i,
     `<meta property="og:image" content="${absoluteOgImage}" />`,
+  );
+
+  // Replace generic twitter:image so X cards use the same curated image
+  html = html.replace(
+    /<meta\s+name="twitter:image"[^>]*\/?>/i,
+    `<meta name="twitter:image" content="${absoluteOgImage}" />`,
   );
 
   // Inject canonical + og:url before </head>
@@ -260,6 +267,41 @@ function assertSeoMeta(generatedHtml, routePath, routeMeta) {
   }
   if (/overseas|global|worldwide|export|international|taragolfcart/i.test(emittedDesc)) {
     fail('description contains banned overseas/global framing or legacy brand');
+  }
+
+  // og:image: if routes.json curates one, the emitted tag must carry it and
+  // the referenced file must exist under public/ so shares never 404.
+  const ogMatch = generatedHtml.match(
+    /<meta\s+property="og:image"\s+content="([^"]*)"/i,
+  );
+  if (!ogMatch) fail('no og:image meta in generated HTML');
+  const emittedOg = unesc(ogMatch[1]);
+  // Every non-article route must have a curated ogImage; the extractor
+  // fallback often picks a shared mega-menu thumbnail, which is only
+  // tolerated for the (yet-uncurated) blog/news article pages.
+  const isArticle = /^\/(blog|news)\/.+/.test(routePath);
+  if (!isArticle && !routeMeta.ogImage) {
+    fail('non-article route is missing a curated ogImage in routes.json');
+  }
+  const twMatch = generatedHtml.match(
+    /<meta\s+name="twitter:image"\s+content="([^"]*)"/i,
+  );
+  if (!twMatch) fail('no twitter:image meta in generated HTML');
+  if (unesc(twMatch[1]) !== emittedOg) {
+    fail(
+      `twitter:image ("${unesc(twMatch[1])}") does not match og:image ("${emittedOg}")`,
+    );
+  }
+  if (routeMeta.ogImage) {
+    if (!emittedOg.endsWith(routeMeta.ogImage)) {
+      fail(
+        `og:image mismatch: emitted "${emittedOg}" vs curated "${routeMeta.ogImage}"`,
+      );
+    }
+    const ogFile = path.join(artifactDir, 'public', routeMeta.ogImage.replace(/^\//, ''));
+    if (!fs.existsSync(ogFile)) {
+      fail(`curated ogImage file does not exist: ${routeMeta.ogImage}`);
+    }
   }
 }
 

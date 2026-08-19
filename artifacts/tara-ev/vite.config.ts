@@ -99,10 +99,12 @@ function injectRouteMeta(
   routeDescription: string | undefined,
   contentHtml: string,
   origin: string,
+  routeOgImage?: string,
 ): string {
   // Prefer curated SEO description from routes.json; extraction is a fallback only.
   const description = routeDescription || extractDescription(contentHtml);
-  const ogImage = extractOgImage(contentHtml);
+  // Prefer curated ogImage from routes.json; auto-extraction is a fallback only.
+  const ogImage = routeOgImage || extractOgImage(contentHtml);
   const canonicalUrl = `${origin}${routePath}`;
   const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `${origin}${ogImage}`;
 
@@ -124,6 +126,10 @@ function injectRouteMeta(
     /<meta\s+property="og:image"[^>]*\/?>/i,
     `<meta property="og:image" content="${absoluteOgImage}" />`,
   );
+  html = html.replace(
+    /<meta\s+name="twitter:image"[^>]*\/?>/i,
+    `<meta name="twitter:image" content="${absoluteOgImage}" />`,
+  );
   const canonicalBlock = [
     `  <link rel="canonical" href="${canonicalUrl}" />`,
     `  <meta property="og:url" content="${canonicalUrl}" />`,
@@ -139,7 +145,13 @@ function injectRouteMeta(
 
 // ─── Dev middleware: serves per-route pre-rendered HTML ───────────────────────
 
-type RouteMeta = { file: string; title: string; description?: string; bodyClass: string };
+type RouteMeta = {
+  file: string;
+  title: string;
+  description?: string;
+  ogImage?: string;
+  bodyClass: string;
+};
 type Routes = Record<string, RouteMeta>;
 
 const spaMetaMiddleware = (): Plugin => ({
@@ -202,6 +214,7 @@ const spaMetaMiddleware = (): Plugin => ({
           meta.description,
           contentHtml,
           devOrigin,
+          meta.ogImage,
         );
 
         res.setHeader('Content-Type', 'text/html; charset=utf-8');
