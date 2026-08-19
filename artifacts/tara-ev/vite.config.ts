@@ -7,6 +7,7 @@ import { defineConfig } from 'vite';
 import type { Plugin, ViteDevServer } from 'vite';
 
 import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
+import { getLocalOgImageDimensions, resolveOgImage } from './scripts/og-image.mjs';
 
 const rawPort = process.env.PORT;
 
@@ -82,14 +83,10 @@ function extractDescription(html: string): string {
   return fallback.length > 158 ? fallback.slice(0, 157) + '…' : fallback;
 }
 
-function extractOgImage(html: string): string {
-  const SKIP = /logo|favicon|menu-image|icon/i;
-  for (const m of html.matchAll(/src=["']([^"']+\.(?:webp|jpg|jpeg|png))["']/gi)) {
-    const src = m[1];
-    if (SKIP.test(src)) continue;
-    if (src.startsWith('/images/') || src.startsWith('/uploads/')) return src;
-  }
-  return '/images/og-image.png';
+function upsertMeta(html: string, matcher: RegExp, tag: string): string {
+  return matcher.test(html)
+    ? html.replace(matcher, tag)
+    : html.replace('</head>', `  ${tag}\n</head>`);
 }
 
 function injectRouteMeta(
@@ -103,10 +100,13 @@ function injectRouteMeta(
 ): string {
   // Prefer curated SEO description from routes.json; extraction is a fallback only.
   const description = routeDescription || extractDescription(contentHtml);
-  // Prefer curated ogImage from routes.json; auto-extraction is a fallback only.
-  const ogImage = routeOgImage || extractOgImage(contentHtml);
+  // Curated images take priority. Automatic selection skips undersized page
+  // images and falls back to a compliant site-wide image for large previews.
+  const publicDir = path.resolve(import.meta.dirname, 'public');
+  const ogImage = resolveOgImage(routeOgImage, contentHtml, publicDir);
   const canonicalUrl = `${origin}${routePath}`;
   const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `${origin}${ogImage}`;
+  const ogImageDimensions = getLocalOgImageDimensions(ogImage, publicDir);
 
   let html = shellHtml;
   html = html.replace(/<title>[^<]*<\/title>/, `<title>${escHtml(routeTitle)}</title>`);
@@ -125,6 +125,23 @@ function injectRouteMeta(
   html = html.replace(
     /<meta\s+property="og:image"[^>]*\/?>/i,
     `<meta property="og:image" content="${absoluteOgImage}" />`,
+  );
+  if (ogImageDimensions) {
+    html = upsertMeta(
+      html,
+      /<meta\s+property="og:image:width"[^>]*\/?>/i,
+      `<meta property="og:image:width" content="${ogImageDimensions.width}" />`,
+    );
+    html = upsertMeta(
+      html,
+      /<meta\s+property="og:image:height"[^>]*\/?>/i,
+      `<meta property="og:image:height" content="${ogImageDimensions.height}" />`,
+    );
+  }
+  html = upsertMeta(
+    html,
+    /<meta\s+name="twitter:card"[^>]*\/?>/i,
+    '<meta name="twitter:card" content="summary_large_image" />',
   );
   html = html.replace(
     /<meta\s+name="twitter:image"[^>]*\/?>/i,

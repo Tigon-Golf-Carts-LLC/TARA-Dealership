@@ -27,9 +27,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readImageDimensions } from './image-dimensions.mjs';
+import { getLocalOgImageDimensions, resolveOgImage } from './og-image.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const artifactDir = path.resolve(__dirname, '..');
+const publicDir = path.join(artifactDir, 'public');
 
 // ─── CLI args ─────────────────────────────────────────────────────────────────
 
@@ -105,18 +108,10 @@ function extractDescription(html) {
   return fallback.length > 158 ? fallback.slice(0, 157) + '…' : fallback;
 }
 
-/**
- * Return the first product/hero image found in the content HTML,
- * skipping logos, menu thumbnails, and icons.
- */
-function extractOgImage(html) {
-  const SKIP = /logo|favicon|menu-image|icon/i;
-  for (const m of html.matchAll(/src=["']([^"']+\.(?:webp|jpg|jpeg|png))["']/gi)) {
-    const src = m[1];
-    if (SKIP.test(src)) continue;
-    if (src.startsWith('/images/') || src.startsWith('/uploads/')) return src;
-  }
-  return '/images/og-image.png';
+function upsertMeta(html, matcher, tag) {
+  return matcher.test(html)
+    ? html.replace(matcher, tag)
+    : html.replace('</head>', `  ${tag}\n</head>`);
 }
 
 // ─── Per-route HTML builder ───────────────────────────────────────────────────
@@ -125,12 +120,14 @@ function buildPageHtml(routePath, routeMeta, contentHtml) {
   const title = routeMeta.title || 'TARA Golf Cart Dealership';
   // Prefer curated SEO description from routes.json; extraction is a fallback only.
   const description = routeMeta.description || extractDescription(contentHtml);
-  // Prefer curated ogImage from routes.json; auto-extraction is a fallback only.
-  const ogImage = routeMeta.ogImage || extractOgImage(contentHtml);
+  // Curated images take priority. Automatic selection skips undersized page
+  // images and falls back to a compliant site-wide image for large previews.
+  const ogImage = resolveOgImage(routeMeta.ogImage, contentHtml, publicDir);
   const canonicalUrl = `${origin}${routePath}`;
   const absoluteOgImage = ogImage.startsWith('http')
     ? ogImage
     : `${origin}${ogImage}`;
+  const ogImageDimensions = getLocalOgImageDimensions(ogImage, publicDir);
 
   let html = shellHtml;
 
@@ -162,6 +159,25 @@ function buildPageHtml(routePath, routeMeta, contentHtml) {
   html = html.replace(
     /<meta\s+property="og:image"[^>]*\/?>/i,
     `<meta property="og:image" content="${absoluteOgImage}" />`,
+  );
+
+  if (ogImageDimensions) {
+    html = upsertMeta(
+      html,
+      /<meta\s+property="og:image:width"[^>]*\/?>/i,
+      `<meta property="og:image:width" content="${ogImageDimensions.width}" />`,
+    );
+    html = upsertMeta(
+      html,
+      /<meta\s+property="og:image:height"[^>]*\/?>/i,
+      `<meta property="og:image:height" content="${ogImageDimensions.height}" />`,
+    );
+  }
+
+  html = upsertMeta(
+    html,
+    /<meta\s+name="twitter:card"[^>]*\/?>/i,
+    '<meta name="twitter:card" content="summary_large_image" />',
   );
 
   // Replace generic twitter:image so X cards use the same curated image
@@ -292,6 +308,12 @@ function assertSeoMeta(generatedHtml, routePath, routeMeta) {
       `twitter:image ("${unesc(twMatch[1])}") does not match og:image ("${emittedOg}")`,
     );
   }
+  const twitterCardMatch = generatedHtml.match(
+    /<meta\s+name="twitter:card"\s+content="([^"]*)"/i,
+  );
+  if (!twitterCardMatch || twitterCardMatch[1] !== 'summary_large_image') {
+    fail('twitter:card is not "summary_large_image"');
+  }
   if (routeMeta.ogImage) {
     if (!emittedOg.endsWith(routeMeta.ogImage)) {
       fail(
@@ -301,6 +323,19 @@ function assertSeoMeta(generatedHtml, routePath, routeMeta) {
     const ogFile = path.join(artifactDir, 'public', routeMeta.ogImage.replace(/^\//, ''));
     if (!fs.existsSync(ogFile)) {
       fail(`curated ogImage file does not exist: ${routeMeta.ogImage}`);
+    }
+    const expectedDimensions = readImageDimensions(ogFile);
+    const emittedWidth = generatedHtml.match(
+      /<meta\s+property="og:image:width"\s+content="(\d+)"/i,
+    );
+    const emittedHeight = generatedHtml.match(
+      /<meta\s+property="og:image:height"\s+content="(\d+)"/i,
+    );
+    if (!emittedWidth || Number(emittedWidth[1]) !== expectedDimensions.width) {
+      fail(`og:image:width does not match image width ${expectedDimensions.width}`);
+    }
+    if (!emittedHeight || Number(emittedHeight[1]) !== expectedDimensions.height) {
+      fail(`og:image:height does not match image height ${expectedDimensions.height}`);
     }
   }
 }

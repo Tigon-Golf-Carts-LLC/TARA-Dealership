@@ -17,7 +17,7 @@
     "bodyClass": "",
     "description": "Shop TARA electric golf cart accessories across the US, from seats and covers to wheels and enclosures. Available at TARA Dealership.",
     "file": "accessories.html",
-    "ogImage": "/images/ext/4e87a4e6-GOLF-BAG-HOLDER-ASSEMBLY2.png",
+    "ogImage": "/images/ext/8fd55554-COOLER-ASSEMBLY2.png",
     "title": "Accessories for TARA Neighborhood Electric Golf Carts | TARA Dealership"
   },
   "/blog/": {
@@ -134,7 +134,7 @@
     "bodyClass": "",
     "description": "Find answers to FAQs about TARA electric golf carts in the US, including charging, maintenance, and nationwide dealer support. Ask TARA Dealership.",
     "file": "faqs.html",
-    "ogImage": "/images/ext/b97088d4-5bef7f49.png",
+    "ogImage": "/images/hero-black-golf-cart-course.webp",
     "title": "FAQs & Support | TARA Golf Cart Dealership"
   },
   "/financing/": {
@@ -3220,14 +3220,14 @@
     "bodyClass": "",
     "description": "Explore the TARA T1 series, purpose-built fleet carts for professional US golf courses. View the lineup at TARA Dealership.",
     "file": "t1-series.html",
-    "ogImage": "/images/Tara-Spirit-Plus-2-Seater-Fleet-Golf-Cart-PORTIMAO-BLUE-.webp",
+    "ogImage": "/images/spirit-plus-banner1.webp",
     "title": "TARA T1 Golf Cart Series – Fleet Carts | TARA Golf Cart Dealership"
   },
   "/t2-series/": {
     "bodyClass": "",
     "description": "The T2 series from TARA Dealership delivers rugged electric utility vehicles for US resorts, large properties, and golf courses.",
     "file": "t2-series.html",
-    "ogImage": "/images/turfman700arctic-gray1.webp",
+    "ogImage": "/images/turfman-700-banner1.webp",
     "title": "TARA T2 Utility Series – Electric Utility Vehicles | TARA Golf Cart Dealership"
   },
   "/t3-2-2-golf-cart-product/": {
@@ -3270,14 +3270,14 @@
     "bodyClass": "",
     "description": "Download technical manuals and spec sheets for TARA golf carts in the US at TARA Dealership.",
     "file": "technical-document-2.html",
-    "ogImage": "/images/ext/dddca3b2-TARA-Golf-Cart-Technical-Document.png",
+    "ogImage": "/images/hero-black-golf-cart-course.webp",
     "title": "Technical Documents | TARA Golf Cart Dealership"
   },
   "/technical-support/": {
     "bodyClass": "",
     "description": "Need TARA technical support in the US? Access troubleshooting guides and docs to keep your carts running at TARA Dealership.",
     "file": "technical-support.html",
-    "ogImage": "/images/ext/b97088d4-5bef7f49.png",
+    "ogImage": "/images/hero-black-golf-cart-course.webp",
     "title": "Technical Support | TARA Golf Cart Dealership"
   },
   "/terms-and-conditions/": {
@@ -3343,7 +3343,7 @@
     "bodyClass": "",
     "description": "Review the TARA Golf Cart Dealership warranty terms. We provide comprehensive coverage for electric carts across the US for your total peace of mind.",
     "file": "warranty-terms.html",
-    "ogImage": "/images/T3-2+2.webp",
+    "ogImage": "/images/hero-black-golf-cart-course.webp",
     "title": "Warranty Terms | TARA Golf Cart Dealership"
   }
 }

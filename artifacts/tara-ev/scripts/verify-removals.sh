@@ -101,6 +101,14 @@ brand_check "old domain taranev.com" 'taranev\.com' -iE
 brand_check "old brand name \"TARA Electric Vehicles\"" 'TARA Electric Vehicles' -F
 brand_check "old brand name \"TARA Neighborhood Electric Vehicles\"" 'TARA Neighborhood Electric Vehicles' -F
 
+# --- Shared-link image audit ---
+# Facebook and LinkedIn recommend at least 1200x630 for large link previews.
+# This also exceeds X's 300x157 minimum for summary_large_image cards.
+if ! node scripts/verify-og-images.mjs; then
+  echo "SOCIAL IMAGE REGRESSION — curated ogImage entries must be at least 1200x630"
+  fail=1
+fi
+
 # --- Image alt-text audit ---
 # Merges have also reintroduced generic/empty alts (e.g. "D7 product_show-1").
 # fix-alts.py --check audits public/content/*.html without writing and exits
@@ -123,6 +131,6 @@ if [ -d dist/public ]; then
 fi
 
 if [ "$fail" -eq 0 ]; then
-  echo "OK: no removed inquiry form, popups, widgets, footer, old branding, or alt regressions found"
+  echo "OK: no removed content, old branding, social image, or alt regressions found"
 fi
 exit $fail
