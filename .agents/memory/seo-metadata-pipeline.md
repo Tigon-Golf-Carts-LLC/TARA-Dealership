@@ -14,4 +14,4 @@ Titles and meta descriptions for all routes are curated in `artifacts/tara-ev/pu
 
 **Copy rules enforced at build:** assertSeoMeta in prerender.mjs now also requires every curated description to contain "TARA Dealership"/"TARA Golf Cart Dealership", explicit US framing (US/American/nationwide), and no overseas/global/legacy-brand terms — copy edits violating these fail `pnpm run build`.
 
-**Social share images:** every non-article route must have a curated per-route share image (`ogImage` in routes.json) — auto-extraction is only tolerated for blog/news article pages because the "first image" heuristic usually grabs the shared mega-menu thumbnail. Any social image change must land in both meta-injection paths (build prerender and dev middleware) and in both the Open Graph and Twitter tags, since X ignores og:image when twitter:image exists.
+**Social share images:** every route must have a curated local `ogImage` in routes.json. Blog/news mappings are derived from article bodies because whole-page extraction grabs shared navigation thumbnails. Keep Open Graph and Twitter images identical in both build prerendering and dev middleware.

@@ -119,6 +119,14 @@ if ! python3 scripts/fix-alts.py --check; then
   fail=1
 fi
 
+# Blog/news share images are derived from article bodies and stored in
+# routes.json. Fail if a merge drops or stales any of those mappings.
+if ! node scripts/derive-article-og-images.mjs --check; then
+  echo "ARTICLE SHARE IMAGE REGRESSION — routes.json is missing derived ogImage metadata"
+  echo "Fix with: node scripts/derive-article-og-images.mjs"
+  fail=1
+fi
+
 # Also audit the production build output when it exists (required with
 # --require-dist), so a build step can't ship generic/empty alts even
 # when the source files are clean.

@@ -292,12 +292,16 @@ function assertSeoMeta(generatedHtml, routePath, routeMeta) {
   );
   if (!ogMatch) fail('no og:image meta in generated HTML');
   const emittedOg = unesc(ogMatch[1]);
-  // Every non-article route must have a curated ogImage; the extractor
-  // fallback often picks a shared mega-menu thumbnail, which is only
-  // tolerated for the (yet-uncurated) blog/news article pages.
+  // Every route must have a curated ogImage. Blog/news metadata is derived
+  // from each article body ahead of the build so shared navigation images
+  // can never become an article's social preview.
   const isArticle = /^\/(blog|news)\/.+/.test(routePath);
-  if (!isArticle && !routeMeta.ogImage) {
-    fail('non-article route is missing a curated ogImage in routes.json');
+  if (!routeMeta.ogImage) {
+    fail(
+      isArticle
+        ? 'blog/news route is missing a derived ogImage in routes.json'
+        : 'non-article route is missing a curated ogImage in routes.json',
+    );
   }
   const twMatch = generatedHtml.match(
     /<meta\s+name="twitter:image"\s+content="([^"]*)"/i,
