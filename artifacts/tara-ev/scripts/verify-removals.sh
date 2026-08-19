@@ -104,6 +104,11 @@ brand_check "old brand name \"TARA Neighborhood Electric Vehicles\"" 'TARA Neigh
 # --- Shared-link image audit ---
 # Facebook and LinkedIn recommend at least 1200x630 for large link previews.
 # This also exceeds X's 300x157 minimum for summary_large_image cards.
+if ! node scripts/social-og-images.mjs --check; then
+  echo "SOCIAL IMAGE MAPPING REGRESSION — generated social images or source mappings are stale"
+  echo "Fix with: node scripts/social-og-images.mjs"
+  fail=1
+fi
 if ! node scripts/verify-og-images.mjs; then
   echo "SOCIAL IMAGE REGRESSION — curated ogImage entries must be at least 1200x630"
   fail=1

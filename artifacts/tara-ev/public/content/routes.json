@@ -1,10 +1,10 @@
 {
   "/": {
     "bodyClass": "",
-    "description": "TARA Golf Cart Dealership — electric golf carts, NEVs, and utility vehicles for golf courses, resorts, and communities across the US.",
+    "description": "lithium-powered electric golf carts. Find a local TARA Dealership near you today.",
     "file": "home.html",
-    "ogImage": "/images/hero-black-golf-cart-course.webp",
-    "title": "TARA Neighborhood Electric Golf Carts & NEVs for Golf Courses | TARA Dealership"
+    "ogImage": "/images/og-image.png",
+    "title": "TARA Dealership"
   },
   "/about-us/": {
     "bodyClass": "",
@@ -24,28 +24,32 @@
     "bodyClass": "",
     "description": "The TARA Golf Cart Dealership blog offers expert tips for US golf courses, fleet management advice, and guides for electric carts nationwide.",
     "file": "blog.html",
-    "ogImage": "/images/spirit-pro-250626.webp",
+    "ogImage": "/images/og/8a83044b75a0d1ab.jpg",
+    "ogImageSource": "/images/spirit-pro-250626.webp",
     "title": "Blog | TARA Golf Cart Dealership"
   },
   "/blog/choosing-right-tara/": {
     "bodyClass": "",
     "description": "Need a TARA electric cart in the US? This buyer's guide covers our full lineup, from fleet carts to street-legal NEVs. Shop TARA Dealership.",
     "file": "blog__choosing-right-tara.html",
-    "ogImage": "/images/颜色mineral-white2.webp",
+    "ogImage": "/images/og/d3d5604807d9e29c.jpg",
+    "ogImageSource": "/images/颜色mineral-white2.webp",
     "title": "Choosing the Right TARA: A Buyer's Guide to the Lineup | TARA Golf Cart Dealership"
   },
   "/blog/explorer-2-2-adventure/": {
     "bodyClass": "",
     "description": "Explore the TARA Explorer 2+2 electric golf cart: 4-passenger seating and versatile styling for US courses and communities. Shop TARA Dealership.",
     "file": "blog__explorer-2-2-adventure.html",
-    "ogImage": "/images/explorer-2+2.webp",
+    "ogImage": "/images/og/a944c18022cb5202.jpg",
+    "ogImageSource": "/images/explorer-2+2.webp",
     "title": "Explorer 2+2: Where the Cart Path Ends | TARA Golf Cart Dealership"
   },
   "/blog/harmony-quiet-performance/": {
     "bodyClass": "",
     "description": "The TARA Harmony delivers quiet performance for US golf courses and communities. Learn more from your local TARA Golf Cart Dealership experts.",
     "file": "blog__harmony-quiet-performance.html",
-    "ogImage": "/images/harmony250626.webp",
+    "ogImage": "/images/og/9ef9e0f6c2498ad3.jpg",
+    "ogImageSource": "/images/harmony250626.webp",
     "title": "HARMONY: Quiet Performance for Premium Courses | TARA Golf Cart Dealership"
   },
   "/blog/lithium-battery-advantage/": {
@@ -59,56 +63,64 @@
     "bodyClass": "",
     "description": "The TARA Roadster 2+2 offers 4-seat versatility for US resorts and communities. Discover this popular electric golf cart from TARA Dealerships.",
     "file": "blog__roadster-2-2-versatility.html",
-    "ogImage": "/images/roadster-2+2.webp",
+    "ogImage": "/images/og/c94021b37e928e75.jpg",
+    "ogImageSource": "/images/roadster-2+2.webp",
     "title": "Roadster 2+2: One Cart, Four Seats, Endless Uses | TARA Golf Cart Dealership"
   },
   "/blog/spirit-plus-player-comfort/": {
     "bodyClass": "",
     "description": "See how the TARA Spirit Plus improves player comfort on US golf courses with superior seating and ride quality from TARA Golf Cart Dealership.",
     "file": "blog__spirit-plus-player-comfort.html",
-    "ogImage": "/images/spirit-plus-250626.webp",
+    "ogImage": "/images/og/cc0756cc0e991fda.jpg",
+    "ogImageSource": "/images/spirit-plus-250626.webp",
     "title": "Spirit Plus: Player Comfort as a Fleet Standard | TARA Golf Cart Dealership"
   },
   "/blog/spirit-pro-fleet-choice/": {
     "bodyClass": "",
     "description": "Why US golf courses choose the TARA Spirit Pro fleet golf cart: durability, low maintenance, and rider comfort. Insights from TARA Golf Cart Dealership.",
     "file": "blog__spirit-pro-fleet-choice.html",
-    "ogImage": "/images/spirit-pro-250626.webp",
+    "ogImage": "/images/og/8a83044b75a0d1ab.jpg",
+    "ogImageSource": "/images/spirit-pro-250626.webp",
     "title": "Why the Spirit Pro Is Built for Golf Course Fleets | TARA Golf Cart Dealership"
   },
   "/blog/t3-2-2-personal-luxury/": {
     "bodyClass": "",
     "description": "The TARA T3 2+2 street-legal NEV brings comfort and premium style to US gated communities and resorts. Available at TARA Dealership.",
     "file": "blog__t3-2-2-personal-luxury.html",
-    "ogImage": "/images/T3-2+2.webp",
+    "ogImage": "/images/og/01614ccfda8a3769.jpg",
+    "ogImageSource": "/images/T3-2+2.webp",
     "title": "T3 2+2: Personal Transport with a Premium Feel | TARA Golf Cart Dealership"
   },
   "/blog/t3-lifted-capability/": {
     "bodyClass": "",
     "description": "Discover the TARA T3 2+2 Lifted NEV, built with extra ground clearance and the same refined ride for US communities. Shop TARA Dealership.",
     "file": "blog__t3-lifted-capability.html",
-    "ogImage": "/images/T3-2+2-Lifted-tara.webp",
+    "ogImage": "/images/og/e6af44a472b8c7ef.jpg",
+    "ogImageSource": "/images/T3-2+2-Lifted-tara.webp",
     "title": "T3 2+2 Lifted: Extra Clearance, Same Refinement | TARA Golf Cart Dealership"
   },
   "/blog/turfman-1000-heavy-duty/": {
     "bodyClass": "",
     "description": "Meet the TARA Turfman 1000, a heavy-duty electric utility vehicle for demanding property work across the US. View specs from TARA Dealerships.",
     "file": "blog__turfman-1000-heavy-duty.html",
-    "ogImage": "/images/turfman700Flamenco-Red2.webp",
+    "ogImage": "/images/og/c5fb4d55e07e370d.jpg",
+    "ogImageSource": "/images/turfman700Flamenco-Red2.webp",
     "title": "Turfman 1000: Heavy-Duty Electric Utility | TARA Golf Cart Dealership"
   },
   "/blog/turfman-450-groundskeeping/": {
     "bodyClass": "",
     "description": "The TARA Turfman 450 supports groundskeeping crews at US golf courses. Get payload, range, and daily use tips from TARA Golf Cart Dealership.",
     "file": "blog__turfman-450-groundskeeping.html",
-    "ogImage": "/images/turfman700Flamenco-Red2.webp",
+    "ogImage": "/images/og/c5fb4d55e07e370d.jpg",
+    "ogImageSource": "/images/turfman700Flamenco-Red2.webp",
     "title": "Turfman 450: The Groundskeeper's Everyday Partner | TARA Golf Cart Dealership"
   },
   "/blog/turfman-700-workhorse/": {
     "bodyClass": "",
     "description": "The TARA Turfman 700 is a reliable electric workhorse with big payload for US golf courses and large properties. Shop TARA Dealership.",
     "file": "blog__turfman-700-workhorse.html",
-    "ogImage": "/images/turfman700Flamenco-Red2.webp",
+    "ogImage": "/images/og/c5fb4d55e07e370d.jpg",
+    "ogImageSource": "/images/turfman700Flamenco-Red2.webp",
     "title": "Turfman 700: More Payload for Bigger Properties | TARA Golf Cart Dealership"
   },
   "/cases/": {
@@ -1043,7 +1055,8 @@
     "bodyClass": "",
     "description": "Elevate your game with the TARA Spirit Plus, built for maximum comfort on US golf courses. Available at TARA Dealership.",
     "file": "news__elevate-your-golfing-experience-tara-spirit-plus.html",
-    "ogImage": "/images/ext/d602ad4e-_____20240814102943.png",
+    "ogImage": "/images/og/c86ded1333689f84.jpg",
+    "ogImageSource": "/images/ext/d602ad4e-_____20240814102943.png",
     "title": "Built for Maximum Comfort - TARA Golf Cart Dealership"
   },
   "/news/empowering-golf-course-sustainability-with-electric-fleet-innovation/": {
@@ -1274,7 +1287,8 @@
     "bodyClass": "",
     "description": "Compare gas vs electric performance for golf courses and retirement communities in the US with TARA Golf Cart Dealership.",
     "file": "news__gas-vs-electric-golf-cart-comparing-performance-and-efficiency.html",
-    "ogImage": "/images/ext/ec2e0b8f-Tarazhu.jpg",
+    "ogImage": "/images/og/ebbd58a4b4e0c248.jpg",
+    "ogImageSource": "/images/ext/ec2e0b8f-Tarazhu.jpg",
     "title": "Gas Vs Electric Golf Cart Comparing Performance And Efficiency - TARA Golf Cart Dealership"
   },
   "/news/golf-bag-cart-a-convenient-and-comfortable-choice-for-golf/": {
@@ -1680,7 +1694,8 @@
     "bodyClass": "",
     "description": "Enjoy the season with TARA Golf Cart Dealership. Discover why our golf carts are the perfect companions for fall outings across the US.",
     "file": "news__golf-cart-the-perfect-companion-for-fall-outings.html",
-    "ogImage": "/images/The-Perfect-Companion-for-Fall-Outings-11.webp",
+    "ogImage": "/images/og/72006e5cc4c0d7bb.jpg",
+    "ogImageSource": "/images/The-Perfect-Companion-for-Fall-Outings-11.webp",
     "title": "Golf Cart The Perfect Companion For Fall Outings - TARA Golf Cart Dealership"
   },
   "/news/golf-cart-tires-your-complete-guide-to-choosing-maintaining-and-upgrading/": {
@@ -1743,7 +1758,8 @@
     "bodyClass": "",
     "description": "Why is a windshield important? TARA Golf Cart Dealership provides a guide to choosing and maintaining windshields for US golf carts.",
     "file": "news__golf-cart-windshield-a-comprehensive-guide.html",
-    "ogImage": "/images/ext/3434e6ba-TARA-Golf-Cart-with-Clear-Windshield.jpg",
+    "ogImage": "/images/og/fda2242a0e8f7864.jpg",
+    "ogImageSource": "/images/ext/3434e6ba-TARA-Golf-Cart-with-Clear-Windshield.jpg",
     "title": "Why is a golf cart windshield so important? - TARA Golf Cart Dealership"
   },
   "/news/golf-cart-with-lift-golf-cart-upgrade-solutions/": {
@@ -1785,7 +1801,8 @@
     "bodyClass": "",
     "description": "Professional golf carts are vital for top-tier US country clubs. Trust TARA Golf Cart Dealership for reliable fleet solutions across the US.",
     "file": "news__golf-carts-for-country-clubs.html",
-    "ogImage": "/images/ext/6164758f-Golf-Cart-for-Country-Clubs.jpg",
+    "ogImage": "/images/og/d2e8896be35049e6.jpg",
+    "ogImageSource": "/images/ext/6164758f-Golf-Cart-for-Country-Clubs.jpg",
     "title": "I. Why Do Country Clubs Need Professional Golf Carts? - TARA Golf Cart Dealership"
   },
   "/news/golf-carts-for-rent/": {
@@ -2121,7 +2138,8 @@
     "bodyClass": "",
     "description": "Proper storage extends your golf cart's life. Get expert off-season tips for US owners from TARA Dealership.",
     "file": "news__how-to-properly-store-a-golf-cart.html",
-    "ogImage": "/images/ext/7840f540-TARAZHU.jpg",
+    "ogImage": "/images/og/6c101f589113427e.jpg",
+    "ogImageSource": "/images/ext/7840f540-TARAZHU.jpg",
     "title": "How To Properly Store A Golf Cart - TARA Golf Cart Dealership"
   },
   "/news/how-to-reduce-golf-cart-downtime-in-peak-season/": {
@@ -2345,7 +2363,8 @@
     "bodyClass": "",
     "description": "From private estates to US golf courses, TARA Dealership luxury golf carts balance elegance and comfort for modern living.",
     "file": "news__luxury-golf-cart.html",
-    "ogImage": "/images/ext/a7d7f990-Luxury-Golf-Cart-by-Tara.jpg",
+    "ogImage": "/images/og/662adaff507ad6d1.jpg",
+    "ogImageSource": "/images/ext/a7d7f990-Luxury-Golf-Cart-by-Tara.jpg",
     "title": "Ⅰ. The Unique Value of Luxury Golf Carts - TARA Golf Cart Dealership"
   },
   "/news/map-golf-courses/": {
@@ -2457,7 +2476,8 @@
     "bodyClass": "",
     "description": "See how golf carts have revolutionized the sport across US courses. Available at TARA Dealership.",
     "file": "news__navigating-the-greens-how-golf-carts-have-revolutionized-the-sports-world.html",
-    "ogImage": "/images/ext/368de526-How-Golf-Carts-Have-Revolutionized-the-Sports-World-1.jpg",
+    "ogImage": "/images/og/8ba2d1d309b3e85c.jpg",
+    "ogImageSource": "/images/ext/368de526-How-Golf-Carts-Have-Revolutionized-the-Sports-World-1.jpg",
     "title": "Navigating The Greens How Golf Carts Have Revolutionized The Sports World - TARA Golf Cart Dealership"
   },
   "/news/neighborhood-electric-vehicles/": {
@@ -2940,7 +2960,8 @@
     "bodyClass": "",
     "description": "Reclaim your joy with golf cart therapy. TARA Golf Cart Dealership highlights how cruising US golf courses can improve your mental well-being.",
     "file": "news__reclaiming-joy-fighting-depression-with-golf-cart-therapy.html",
-    "ogImage": "/images/ext/144b317a-Tarazhu1.jpg",
+    "ogImage": "/images/og/6510ea4f407c51f4.jpg",
+    "ogImageSource": "/images/ext/144b317a-Tarazhu1.jpg",
     "title": "Reclaiming Joy Fighting Depression With Golf Cart Therapy - TARA Golf Cart Dealership"
   },
   "/news/reflecting-on-2024-a-transformative-year-for-the-golf-cart-industry-and-what-to-expect-in-2025/": {
@@ -3556,7 +3577,8 @@
     "bodyClass": "",
     "description": "Understand the core components of an electric golf cart, from battery to motor and controller. Learn more at TARA Dealership in the US.",
     "file": "news__what-are-the-components-of-an-electric-golf-cart.html",
-    "ogImage": "/images/ext/e045d99d-TARA3zhu.jpg",
+    "ogImage": "/images/og/b902365888ff90da.jpg",
+    "ogImageSource": "/images/ext/e045d99d-TARA3zhu.jpg",
     "title": "What Are The Components Of An Electric Golf Cart - TARA Golf Cart Dealership"
   },
   "/news/what-golf-courses-look-for-when-choosing-a-golf-cart-supplier/": {

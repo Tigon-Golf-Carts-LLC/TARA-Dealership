@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isLargeOgImage, socialDerivativePath } from './og-image.mjs';
 
 const artifactDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const publicDir = path.join(artifactDir, 'public');
@@ -33,6 +34,12 @@ const publicImages = [
 const localImageByBasename = new Map(
   publicImages.map((imagePath) => [path.basename(imagePath).toLowerCase(), imagePath]),
 );
+
+function socialPreviewImage(sourceImage) {
+  return isLargeOgImage(sourceImage, publicDir)
+    ? sourceImage
+    : socialDerivativePath(sourceImage, publicDir);
+}
 
 function contentFor(routePath, routeMeta) {
   if (!routeMeta.file) {
@@ -110,23 +117,24 @@ for (const [routePath, routeMeta] of Object.entries(routes)) {
   if (!blogNewsRoutePattern.test(routePath)) continue;
 
   const contentHtml = contentFor(routePath, routeMeta);
-  let ogImage = articleImageByRoute.get(routePath);
+  let sourceImage = articleImageByRoute.get(routePath);
 
-  if (!ogImage) {
+  if (!sourceImage) {
     const firstLinkedArticle = contentHtml.match(
       /<li\b[^>]*class=["'][^"']*\bblog-item\b[^"']*["'][\s\S]*?href=["'](\/(?:blog|news)\/[^"']+)/i,
     )?.[1];
-    ogImage = firstLinkedArticle
+    sourceImage = firstLinkedArticle
       ? articleImageByRoute.get(firstLinkedArticle)
-      : routeMeta.ogImage;
+      : (routeMeta.ogImageSource ?? routeMeta.ogImage);
   }
 
-  if (!ogImage) {
+  if (!sourceImage) {
     throw new Error(
       `Could not derive an ogImage for blog/news route "${routePath}"`,
     );
   }
 
+  const ogImage = socialPreviewImage(sourceImage);
   const ogFile = path.join(publicDir, ogImage.replace(/^\//, ''));
   if (!fs.existsSync(ogFile)) {
     throw new Error(`Derived ogImage does not exist for "${routePath}": ${ogImage}`);
@@ -136,6 +144,11 @@ for (const [routePath, routeMeta] of Object.entries(routes)) {
   if (routeMeta.ogImage !== ogImage) changed++;
 
   const { title, ...metaBeforeTitle } = routeMeta;
+  if (ogImage === sourceImage) {
+    delete metaBeforeTitle.ogImageSource;
+  } else {
+    metaBeforeTitle.ogImageSource = sourceImage;
+  }
   routes[routePath] = { ...metaBeforeTitle, ogImage, title };
 }
 

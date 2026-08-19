@@ -44,17 +44,15 @@ const DEV_REDIRECTS: Record<string, string> = {
   '/mainitenance-support/': '/maintenance-support/',
   '/techncal-support/': '/technical-support/',
 };
-const publishedDomain = process.env.REPLIT_DOMAINS?.split(',')[0]?.trim();
+const productionOrigin = 'https://taradealership.com';
 
 const absoluteOgUrls = () => ({
   name: 'absolute-og-urls',
   apply: 'build' as const,
   transformIndexHtml(html: string) {
-    if (!publishedDomain) return html;
-    const origin = `https://${publishedDomain}`;
     return html.replace(
       /(<meta\s+property="og:(?:image|url)"\s+content=")(\/[^"]*)(")/g,
-      (_m, pre, path, post) => `${pre}${origin}${path}${post}`,
+      (_m, pre, path, post) => `${pre}${productionOrigin}${path}${post}`,
     );
   },
 });
@@ -107,24 +105,64 @@ function injectRouteMeta(
   const canonicalUrl = `${origin}${routePath}`;
   const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `${origin}${ogImage}`;
   const ogImageDimensions = getLocalOgImageDimensions(ogImage, publicDir);
+  const ogType = /^\/(blog|news)\/.+/.test(routePath) ? 'article' : 'website';
 
   let html = shellHtml;
   html = html.replace(/<title>[^<]*<\/title>/, `<title>${escHtml(routeTitle)}</title>`);
-  html = html.replace(
+  html = upsertMeta(
+    html,
+    /<meta\s+name="title"[^>]*\/?>/i,
+    `<meta name="title" content="${escHtml(routeTitle)}" />`,
+  );
+  html = upsertMeta(
+    html,
     /<meta\s+name="description"[^>]*\/?>/i,
     `<meta name="description" content="${escHtml(description)}" />`,
   );
-  html = html.replace(
+  html = upsertMeta(
+    html,
+    /<meta\s+name="image"[^>]*\/?>/i,
+    `<meta name="image" content="${absoluteOgImage}" />`,
+  );
+  html = upsertMeta(
+    html,
+    /<meta\s+itemprop="name"[^>]*\/?>/i,
+    `<meta itemprop="name" content="${escHtml(routeTitle)}" />`,
+  );
+  html = upsertMeta(
+    html,
+    /<meta\s+itemprop="description"[^>]*\/?>/i,
+    `<meta itemprop="description" content="${escHtml(description)}" />`,
+  );
+  html = upsertMeta(
+    html,
+    /<meta\s+itemprop="image"[^>]*\/?>/i,
+    `<meta itemprop="image" content="${absoluteOgImage}" />`,
+  );
+  html = upsertMeta(
+    html,
+    /<meta\s+property="og:type"[^>]*\/?>/i,
+    `<meta property="og:type" content="${ogType}" />`,
+  );
+  html = upsertMeta(
+    html,
     /<meta\s+property="og:title"[^>]*\/?>/i,
     `<meta property="og:title" content="${escHtml(routeTitle)}" />`,
   );
-  html = html.replace(
+  html = upsertMeta(
+    html,
     /<meta\s+property="og:description"[^>]*\/?>/i,
     `<meta property="og:description" content="${escHtml(description)}" />`,
   );
-  html = html.replace(
+  html = upsertMeta(
+    html,
     /<meta\s+property="og:image"[^>]*\/?>/i,
     `<meta property="og:image" content="${absoluteOgImage}" />`,
+  );
+  html = upsertMeta(
+    html,
+    /<meta\s+property="og:image:alt"[^>]*\/?>/i,
+    `<meta property="og:image:alt" content="${escHtml(routeTitle)}" />`,
   );
   if (ogImageDimensions) {
     html = upsertMeta(
@@ -143,15 +181,36 @@ function injectRouteMeta(
     /<meta\s+name="twitter:card"[^>]*\/?>/i,
     '<meta name="twitter:card" content="summary_large_image" />',
   );
-  html = html.replace(
+  html = upsertMeta(
+    html,
+    /<meta\s+name="twitter:title"[^>]*\/?>/i,
+    `<meta name="twitter:title" content="${escHtml(routeTitle)}" />`,
+  );
+  html = upsertMeta(
+    html,
+    /<meta\s+name="twitter:description"[^>]*\/?>/i,
+    `<meta name="twitter:description" content="${escHtml(description)}" />`,
+  );
+  html = upsertMeta(
+    html,
     /<meta\s+name="twitter:image"[^>]*\/?>/i,
     `<meta name="twitter:image" content="${absoluteOgImage}" />`,
   );
-  const canonicalBlock = [
-    `  <link rel="canonical" href="${canonicalUrl}" />`,
-    `  <meta property="og:url" content="${canonicalUrl}" />`,
-  ].join('\n');
-  html = html.replace('</head>', `${canonicalBlock}\n</head>`);
+  html = upsertMeta(
+    html,
+    /<meta\s+name="twitter:image:alt"[^>]*\/?>/i,
+    `<meta name="twitter:image:alt" content="${escHtml(routeTitle)}" />`,
+  );
+  html = upsertMeta(
+    html,
+    /<link\s+rel="canonical"[^>]*\/?>/i,
+    `<link rel="canonical" href="${canonicalUrl}" />`,
+  );
+  html = upsertMeta(
+    html,
+    /<meta\s+property="og:url"[^>]*\/?>/i,
+    `<meta property="og:url" content="${canonicalUrl}" />`,
+  );
   // Embed page content for crawlers
   html = html.replace(
     '<div id="root"></div>',
@@ -258,9 +317,7 @@ const prerenderPlugin = (): Plugin => ({
     // Use the *built* index.html as the shell so generated pages reference
     // Vite's hashed /assets/index-*.js bundles, not the TS source entry.
     const shellHtml = path.join(outDir, 'index.html');
-    const originArg = publishedDomain
-      ? `https://${publishedDomain}`
-      : 'https://taranev.com';
+    const originArg = productionOrigin;
     // Let execFileSync throw on non-zero exit — this propagates prerender
     // failures as a build error so broken output is never silently shipped.
     execFileSync(

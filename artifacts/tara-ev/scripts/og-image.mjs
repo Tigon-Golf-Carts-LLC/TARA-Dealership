@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { readImageDimensions } from './image-dimensions.mjs';
@@ -22,6 +23,24 @@ export function isLargeOgImage(ogImage, publicDir) {
       dimensions.width >= MIN_OG_IMAGE_WIDTH &&
       dimensions.height >= MIN_OG_IMAGE_HEIGHT,
   );
+}
+
+export function socialDerivativePath(sourceImage, publicDir) {
+  const sourcePath = path.resolve(publicDir, `.${sourceImage}`);
+  if (
+    !sourcePath.startsWith(`${publicDir}${path.sep}`) ||
+    !fs.existsSync(sourcePath)
+  ) {
+    throw new Error(`social image source does not exist: ${sourceImage}`);
+  }
+  const id = crypto
+    .createHash('sha256')
+    .update(sourceImage)
+    .update('\0')
+    .update(fs.readFileSync(sourcePath))
+    .digest('hex')
+    .slice(0, 16);
+  return `/images/og/${id}.jpg`;
 }
 
 export function extractOgImage(contentHtml, publicDir) {

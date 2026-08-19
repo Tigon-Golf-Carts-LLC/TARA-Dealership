@@ -14,4 +14,16 @@ Titles and meta descriptions for all routes are curated in `artifacts/tara-ev/pu
 
 **Copy rules enforced at build:** assertSeoMeta in prerender.mjs now also requires every curated description to contain "TARA Dealership"/"TARA Golf Cart Dealership", explicit US framing (US/American/nationwide), and no overseas/global/legacy-brand terms — copy edits violating these fail `pnpm run build`.
 
-**Social share images:** every route must have a curated local `ogImage` in routes.json. Blog/news mappings are derived from article bodies because whole-page extraction grabs shared navigation thumbnails. Keep Open Graph and Twitter images identical in both build prerendering and dev middleware.
+**Homepage exception:** keep the homepage title exactly `TARA Dealership`, its client-approved description exactly `lithium-powered electric golf carts. Find a local TARA Dealership near you today.`, and its social image as the 1200×630 site icon. It is intentionally exempt from the usual explicit-US-description rule.
+
+**Why:** the client approved these values verbatim; normalizing them to the other route conventions would override that decision.
+
+**How to apply:** update all three metadata consumers together and retain the exact homepage assertion in the production build.
+
+**Social share images:** every route must have a curated local `ogImage` in routes.json. Blog/news mappings are derived from article bodies because whole-page extraction grabs shared navigation thumbnails. Keep Open Graph, Twitter, generic image, and itemprop image metadata identical. Undersized originals use content-addressed 1200×630 derivatives so replacing a source image cannot silently leave a stale card.
+
+**Production URL rule:** static canonical and social URLs always use `https://taradealership.com`; never derive them from `REPLIT_DOMAINS`.
+
+**Why:** Replit domain environment variables describe development routing and are not a reliable source for the public custom domain.
+
+**How to apply:** keep production origin explicit in prerender/build code while dev middleware may use the request origin for preview requests.

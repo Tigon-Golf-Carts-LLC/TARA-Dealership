@@ -47,10 +47,7 @@ const shellHtmlPath =
 const outDir =
   getArg('--outDir') ?? path.join(artifactDir, 'dist', 'public');
 const origin =
-  getArg('--origin') ??
-  (process.env.REPLIT_DOMAINS
-    ? `https://${process.env.REPLIT_DOMAINS.split(',')[0].trim()}`
-    : 'https://taradealership.com');
+  getArg('--origin') ?? 'https://taradealership.com';
 
 // ─── Validation ───────────────────────────────────────────────────────────────
 
@@ -128,6 +125,7 @@ function buildPageHtml(routePath, routeMeta, contentHtml) {
     ? ogImage
     : `${origin}${ogImage}`;
   const ogImageDimensions = getLocalOgImageDimensions(ogImage, publicDir);
+  const ogType = /^\/(blog|news)\/.+/.test(routePath) ? 'article' : 'website';
 
   let html = shellHtml;
 
@@ -137,28 +135,60 @@ function buildPageHtml(routePath, routeMeta, contentHtml) {
     `<title>${escHtml(title)}</title>`,
   );
 
-  // Replace generic meta description
-  html = html.replace(
+  html = upsertMeta(
+    html,
+    /<meta\s+name="title"[^>]*\/?>/i,
+    `<meta name="title" content="${escHtml(title)}" />`,
+  );
+  html = upsertMeta(
+    html,
     /<meta\s+name="description"[^>]*\/?>/i,
     `<meta name="description" content="${escHtml(description)}" />`,
   );
-
-  // Replace generic og:title
-  html = html.replace(
+  html = upsertMeta(
+    html,
+    /<meta\s+name="image"[^>]*\/?>/i,
+    `<meta name="image" content="${absoluteOgImage}" />`,
+  );
+  html = upsertMeta(
+    html,
+    /<meta\s+itemprop="name"[^>]*\/?>/i,
+    `<meta itemprop="name" content="${escHtml(title)}" />`,
+  );
+  html = upsertMeta(
+    html,
+    /<meta\s+itemprop="description"[^>]*\/?>/i,
+    `<meta itemprop="description" content="${escHtml(description)}" />`,
+  );
+  html = upsertMeta(
+    html,
+    /<meta\s+itemprop="image"[^>]*\/?>/i,
+    `<meta itemprop="image" content="${absoluteOgImage}" />`,
+  );
+  html = upsertMeta(
+    html,
+    /<meta\s+property="og:type"[^>]*\/?>/i,
+    `<meta property="og:type" content="${ogType}" />`,
+  );
+  html = upsertMeta(
+    html,
     /<meta\s+property="og:title"[^>]*\/?>/i,
     `<meta property="og:title" content="${escHtml(title)}" />`,
   );
-
-  // Replace generic og:description
-  html = html.replace(
+  html = upsertMeta(
+    html,
     /<meta\s+property="og:description"[^>]*\/?>/i,
     `<meta property="og:description" content="${escHtml(description)}" />`,
   );
-
-  // Replace generic og:image
-  html = html.replace(
+  html = upsertMeta(
+    html,
     /<meta\s+property="og:image"[^>]*\/?>/i,
     `<meta property="og:image" content="${absoluteOgImage}" />`,
+  );
+  html = upsertMeta(
+    html,
+    /<meta\s+property="og:image:alt"[^>]*\/?>/i,
+    `<meta property="og:image:alt" content="${escHtml(title)}" />`,
   );
 
   if (ogImageDimensions) {
@@ -179,19 +209,36 @@ function buildPageHtml(routePath, routeMeta, contentHtml) {
     /<meta\s+name="twitter:card"[^>]*\/?>/i,
     '<meta name="twitter:card" content="summary_large_image" />',
   );
-
-  // Replace generic twitter:image so X cards use the same curated image
-  html = html.replace(
+  html = upsertMeta(
+    html,
+    /<meta\s+name="twitter:title"[^>]*\/?>/i,
+    `<meta name="twitter:title" content="${escHtml(title)}" />`,
+  );
+  html = upsertMeta(
+    html,
+    /<meta\s+name="twitter:description"[^>]*\/?>/i,
+    `<meta name="twitter:description" content="${escHtml(description)}" />`,
+  );
+  html = upsertMeta(
+    html,
     /<meta\s+name="twitter:image"[^>]*\/?>/i,
     `<meta name="twitter:image" content="${absoluteOgImage}" />`,
   );
-
-  // Inject canonical + og:url before </head>
-  const canonicalBlock = [
-    `  <link rel="canonical" href="${canonicalUrl}" />`,
-    `  <meta property="og:url" content="${canonicalUrl}" />`,
-  ].join('\n');
-  html = html.replace('</head>', `${canonicalBlock}\n</head>`);
+  html = upsertMeta(
+    html,
+    /<meta\s+name="twitter:image:alt"[^>]*\/?>/i,
+    `<meta name="twitter:image:alt" content="${escHtml(title)}" />`,
+  );
+  html = upsertMeta(
+    html,
+    /<link\s+rel="canonical"[^>]*\/?>/i,
+    `<link rel="canonical" href="${canonicalUrl}" />`,
+  );
+  html = upsertMeta(
+    html,
+    /<meta\s+property="og:url"[^>]*\/?>/i,
+    `<meta property="og:url" content="${canonicalUrl}" />`,
+  );
 
   // Embed page content inside #root so crawlers that don't execute JS
   // still see the full page content, headings, product specs, and links.
@@ -249,6 +296,19 @@ function assertSeoMeta(generatedHtml, routePath, routeMeta) {
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')
       .replace(/&amp;/g, '&');
+  const readMeta = (attribute, value) => {
+    const match = generatedHtml.match(
+      new RegExp(`<meta\\s+${attribute}="${value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"\\s+content="([^"]*)"`, 'i'),
+    );
+    return match ? unesc(match[1]) : null;
+  };
+  const assertMetaEquals = (attribute, value, expected) => {
+    const actual = readMeta(attribute, value);
+    if (actual === null) fail(`no ${attribute}="${value}" meta in generated HTML`);
+    if (actual !== expected) {
+      fail(`${value} mismatch: emitted "${actual}" vs expected "${expected}"`);
+    }
+  };
 
   const titleMatch = generatedHtml.match(/<title>([^<]*)<\/title>/);
   if (!titleMatch) fail('no <title> tag in generated HTML');
@@ -271,15 +331,44 @@ function assertSeoMeta(generatedHtml, routePath, routeMeta) {
   if (routeMeta.description && emittedDesc !== routeMeta.description) {
     fail('description does not match curated routes.json description');
   }
+  const canonicalMatches = [
+    ...generatedHtml.matchAll(
+      /<link\s+rel="canonical"\s+href="([^"]*)"[^>]*\/?>/gi,
+    ),
+  ];
+  if (canonicalMatches.length !== 1) {
+    fail(`expected exactly one canonical link, found ${canonicalMatches.length}`);
+  }
+  const expectedCanonical = `${origin}${routePath}`;
+  if (canonicalMatches[0][1] !== expectedCanonical) {
+    fail(
+      `canonical mismatch: emitted "${canonicalMatches[0][1]}" vs expected "${expectedCanonical}"`,
+    );
+  }
 
   // Copy/branding rules: every curated description must carry the
   // "TARA Dealership" (or "TARA Golf Cart Dealership") brand, explicit
   // US framing, and no overseas/global framing or legacy brand names.
-  if (!/TARA (Golf Cart )?Dealership/.test(emittedDesc)) {
-    fail('description lacks "TARA Dealership" branding');
-  }
-  if (!/\bUS\b|U\.S\.|American|United States|nationwide/.test(emittedDesc)) {
-    fail('description lacks explicit US framing (US / American / nationwide)');
+  if (routePath === '/') {
+    if (emittedTitle !== 'TARA Dealership') {
+      fail('homepage title must be exactly "TARA Dealership"');
+    }
+    if (
+      emittedDesc !==
+      'lithium-powered electric golf carts. Find a local TARA Dealership near you today.'
+    ) {
+      fail('homepage description does not match the client-approved copy');
+    }
+    if (routeMeta.ogImage !== '/images/og-image.png') {
+      fail('homepage ogImage must use the TARA Dealership social icon');
+    }
+  } else {
+    if (!/TARA (Golf Cart )?Dealership/.test(emittedDesc)) {
+      fail('description lacks "TARA Dealership" branding');
+    }
+    if (!/\bUS\b|U\.S\.|American|United States|nationwide/.test(emittedDesc)) {
+      fail('description lacks explicit US framing (US / American / nationwide)');
+    }
   }
   if (/overseas|global|worldwide|export|international|taragolfcart/i.test(emittedDesc)) {
     fail('description contains banned overseas/global framing or legacy brand');
@@ -292,6 +381,21 @@ function assertSeoMeta(generatedHtml, routePath, routeMeta) {
   );
   if (!ogMatch) fail('no og:image meta in generated HTML');
   const emittedOg = unesc(ogMatch[1]);
+  const expectedOgType = /^\/(blog|news)\/.+/.test(routePath)
+    ? 'article'
+    : 'website';
+  assertMetaEquals('name', 'title', expectedTitle);
+  assertMetaEquals('name', 'image', emittedOg);
+  assertMetaEquals('itemprop', 'name', expectedTitle);
+  assertMetaEquals('itemprop', 'description', emittedDesc);
+  assertMetaEquals('itemprop', 'image', emittedOg);
+  assertMetaEquals('property', 'og:type', expectedOgType);
+  assertMetaEquals('property', 'og:title', expectedTitle);
+  assertMetaEquals('property', 'og:description', emittedDesc);
+  assertMetaEquals('property', 'og:image:alt', expectedTitle);
+  assertMetaEquals('name', 'twitter:title', expectedTitle);
+  assertMetaEquals('name', 'twitter:description', emittedDesc);
+  assertMetaEquals('name', 'twitter:image:alt', expectedTitle);
   // Every route must have a curated ogImage. Blog/news metadata is derived
   // from each article body ahead of the build so shared navigation images
   // can never become an article's social preview.
@@ -359,6 +463,34 @@ async function main() {
   }
 
   const routes = JSON.parse(fs.readFileSync(routesPath, 'utf8'));
+  const seenTitles = new Map();
+  const seenDescriptions = new Map();
+  for (const [routePath, routeMeta] of Object.entries(routes)) {
+    if (routeMeta.redirect || !routeMeta.file) continue;
+    if (!routeMeta.title?.trim()) {
+      throw new Error(`[prerender] ${routePath} is missing a curated title`);
+    }
+    if (!routeMeta.description?.trim()) {
+      throw new Error(`[prerender] ${routePath} is missing a curated description`);
+    }
+    if (!routeMeta.ogImage?.trim()) {
+      throw new Error(`[prerender] ${routePath} is missing a curated ogImage`);
+    }
+    const priorTitle = seenTitles.get(routeMeta.title);
+    if (priorTitle) {
+      throw new Error(
+        `[prerender] duplicate title on ${priorTitle} and ${routePath}: "${routeMeta.title}"`,
+      );
+    }
+    const priorDescription = seenDescriptions.get(routeMeta.description);
+    if (priorDescription) {
+      throw new Error(
+        `[prerender] duplicate description on ${priorDescription} and ${routePath}`,
+      );
+    }
+    seenTitles.set(routeMeta.title, routePath);
+    seenDescriptions.set(routeMeta.description, routePath);
+  }
 
   // Determine if the built assets directory exists so we can run the
   // JS-asset assertion (it won't exist in unit-test / dry-run contexts).
