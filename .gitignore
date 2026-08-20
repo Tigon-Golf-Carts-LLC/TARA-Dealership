@@ -44,6 +44,10 @@ Thumbs.db
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 
-# Replit
 .cache/
 .local/
+
+# Build-generated site assets — derived from assets-src/ and content-src/ by
+# `npm run build`, so they are never committed.
+/client/public/images/
+/client/public/data/

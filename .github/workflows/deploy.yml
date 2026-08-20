@@ -1,0 +1,90 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# ─── Deployment target ────────────────────────────────────────────────────────
+# Change these two values and nothing else when the hosting target changes.
+#
+#   SITE_DOMAIN  bare domain used for canonical URLs, OG tags and sitemaps.
+#                Custom domain      → taradealership.com
+#                User/org site      → <user>.github.io
+#                Project site       → <user>.github.io
+#
+#   BASE_PATH    path the site is served from.
+#                Custom domain or <user>.github.io  → /
+#                Project site                       → /<repo-name>/
+env:
+  SITE_DOMAIN: taradealership.com
+  BASE_PATH: /
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one Pages deployment at a time; queue rather than cancel so a deploy
+# already in flight is never left half-applied.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Image derivatives are content-hashed, so an unchanged photo is never
+      # re-encoded. Without this the image pass costs ~6 minutes every run.
+      - name: Restore optimized image cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            .cache
+            client/public/images
+          key: images-${{ hashFiles('assets-src/images/**', 'script/optimize-assets.ts') }}
+          restore-keys: |
+            images-
+
+      - name: Fetch build-time data snapshot
+        env:
+          # Only set these if you point fetch-data at a remote content API.
+          # Secrets are read by the build script and never reach the bundle.
+          CONTENT_API_URL: ${{ vars.CONTENT_API_URL }}
+          CONTENT_API_KEY: ${{ secrets.CONTENT_API_KEY }}
+        run: npm run fetch-data
+
+      - name: Build static site
+        run: npm run build:site
+
+      - name: Verify build output
+        run: npm run verify
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

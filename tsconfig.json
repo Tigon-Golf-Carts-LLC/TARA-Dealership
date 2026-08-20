@@ -1,16 +1,33 @@
 {
-  "extends": "./tsconfig.base.json",
-  "compileOnSave": false,
-  "files": [],
-  "references": [
-    {
-      "path": "./lib/db"
-    },
-    {
-      "path": "./lib/api-client-react"
-    },
-    {
-      "path": "./lib/api-zod"
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": false,
+    "types": ["node", "vite/client"],
+    "paths": {
+      "@shared/*": ["./shared/*"]
     }
+  },
+  "include": [
+    "client/src/App.tsx",
+    "client/src/main.tsx",
+    "client/src/structuredData.ts",
+    "client/src/search.ts",
+    "client/src/siteChrome.ts",
+    "script/**/*.ts",
+    "shared/**/*.ts",
+    "types/**/*.d.ts",
+    "vite.config.ts"
   ]
 }

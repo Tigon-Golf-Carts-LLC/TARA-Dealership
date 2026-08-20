@@ -1,0 +1,186 @@
+/*
+ * Styles for the parts of the site that exist only in the static build:
+ * the contact CTA (which replaced the server-backed inquiry form) and the
+ * client-side search page (which replaced the old server-side search).
+ */
+
+/* ── Contact CTA ─────────────────────────────────────────────────────────── */
+
+#tara-contact-cta {
+  background: #101210;
+  color: #fff;
+  padding: 56px 20px;
+  text-align: center;
+}
+
+#tara-contact-cta .tcc-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+#tara-contact-cta .tcc-title {
+  font-size: 30px;
+  line-height: 1.2;
+  margin: 0 0 12px;
+  color: #fff;
+}
+
+#tara-contact-cta .tcc-sub {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 26px;
+  color: #cfd2cf;
+}
+
+#tara-contact-cta .tcc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+#tara-contact-cta .tcc-button {
+  display: inline-block;
+  padding: 14px 26px;
+  border: 1px solid #e8b34b;
+  border-radius: 4px;
+  color: #e8b34b;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#tara-contact-cta .tcc-button:hover,
+#tara-contact-cta .tcc-button:focus-visible {
+  background: #e8b34b;
+  color: #101210;
+}
+
+#tara-contact-cta .tcc-button-primary {
+  background: #e8b34b;
+  color: #101210;
+}
+
+#tara-contact-cta .tcc-button-primary:hover,
+#tara-contact-cta .tcc-button-primary:focus-visible {
+  background: #fff;
+  border-color: #fff;
+}
+
+/* ── Search page ─────────────────────────────────────────────────────────── */
+
+.tara-search {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.tara-search h1 {
+  font-size: 32px;
+  margin: 0 0 24px;
+}
+
+.tara-search-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.tara-search-form input[type='search'] {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid #cfd2cf;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.tara-search-form button {
+  padding: 12px 24px;
+  border: 0;
+  border-radius: 4px;
+  background: #101210;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tara-search-count,
+.tara-search-empty,
+.tara-search-loading {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+.tara-search-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tara-search-list li {
+  padding: 18px 0;
+  border-top: 1px solid #e6e6e6;
+}
+
+.tara-search-list a {
+  font-size: 18px;
+  font-weight: 600;
+  color: #101210;
+  text-decoration: none;
+}
+
+.tara-search-list a:hover,
+.tara-search-list a:focus-visible {
+  text-decoration: underline;
+}
+
+.tara-search-list p {
+  margin: 6px 0 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #555;
+}
+
+.tara-notfound {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Footer email link matches the existing footer phone link. */
+#tara-footer .tf-email {
+  display: block;
+  margin-top: 6px;
+}
+
+@media (max-width: 640px) {
+  #tara-contact-cta .tcc-title {
+    font-size: 24px;
+  }
+
+  .tara-search-form {
+    flex-wrap: wrap;
+  }
+
+  .tara-search-form button {
+    width: 100%;
+  }
+}
