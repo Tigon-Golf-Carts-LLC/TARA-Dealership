@@ -1,19 +1,40 @@
 {
-  "name": "workspace",
-  "version": "0.0.0",
+  "name": "tara-dealership",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "TARA Dealership — 100% static website built with Vite and deployed to GitHub Pages.",
   "license": "MIT",
   "scripts": {
-    "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
-    "build": "pnpm run typecheck && pnpm -r --if-present run build",
-    "typecheck:libs": "tsc --build",
-    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
+    "dev": "vite",
+    "build": "npm run fetch-data && npm run generate-seo && npm run optimize-assets && vite build && npm run prerender",
+    "build:site": "npm run generate-seo && npm run optimize-assets && vite build && npm run prerender",
+    "preview": "vite preview",
+    "fetch-data": "tsx script/fetch-data.ts",
+    "generate-seo": "tsx script/generate-seo.ts",
+    "optimize-assets": "tsx script/optimize-assets.ts",
+    "prerender": "tsx script/prerender.ts",
+    "verify": "tsx script/verify-dist.ts",
+    "typecheck": "tsc --noEmit"
   },
-  "private": true,
   "dependencies": {
-    "@replit/connectors-sdk": "^0.4.1"
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
-    "prettier": "^3.9.6",
-    "typescript": "~5.9.3"
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.0.4",
+    "html-minifier-terser": "^7.2.0",
+    "sharp": "^0.34.5",
+    "svgo": "^3.3.2",
+    "tsx": "^4.21.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.2",
+    "wawoff2": "^2.0.1"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

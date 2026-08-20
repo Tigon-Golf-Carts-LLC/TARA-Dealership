@@ -1,0 +1,46 @@
+# TARA Dealership — robots.txt
+# All legitimate crawlers are welcome.
+
+User-agent: *
+Allow: /
+
+# The client-side search page has no indexable content of its own.
+Disallow: /search/
+
+# Build-time snapshots. Every page here is already served as real HTML at
+# its own URL, so indexing these would only create duplicate content.
+Disallow: /content/
+Disallow: /data/
+
+# AI crawlers — welcome for discovery and recommendations
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: CCBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+User-agent: Amazonbot
+Allow: /
+
+Sitemap: https://taradealership.com/sitemap-pages.xml
+Sitemap: https://taradealership.com/sitemap-products.xml
+Sitemap: https://taradealership.com/sitemap-blog.xml
+Sitemap: https://taradealership.com/sitemap-news.xml
+Sitemap: https://taradealership.com/sitemap-images.xml
+Sitemap: https://taradealership.com/sitemap.xml

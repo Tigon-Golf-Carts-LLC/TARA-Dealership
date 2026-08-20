@@ -1,0 +1,38 @@
+{
+  "name": "TARA Dealership",
+  "short_name": "TARA Dealership",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#101210",
+  "theme_color": "#101210",
+  "description": "TARA Dealership. Your Local TARA Golf Cart Dealership.",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
